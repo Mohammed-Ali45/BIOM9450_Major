@@ -32,7 +32,13 @@
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about.php">About</a></li>
                     <li><a href="database.php">Database</a></li>
-                    <li><a href="login.php">Login</a></li>
+                    <li><div class="dropdown">
+                        <a class="dropbtn">Login</a>
+                        <div class="dropdown-content">
+                            <a href="login-p.php">Patient</a>
+                            <a href="login-r.php">Staff</a>
+                        </div>
+                    </div></li>
                 </ul>
             </nav>
         </div>
