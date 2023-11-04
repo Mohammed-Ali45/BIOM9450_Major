@@ -1,0 +1,199 @@
+/* setting up basic stuff i.e background and margin */
+body {
+    margin: 0;
+    background: #F0F2F3;
+    font-weight: 300;
+}
+
+/* inputting font from google */
+*, *::before, *::after{
+    font-family: 'Poppins', sans-serif;
+}
+
+/* to make font easier to read */
+p { font-size:large; }
+
+/* keeping a 20% margin on both sides for body text */
+.container {
+    width: 80%;
+    margin: 0 auto;
+} 
+
+/* for the navigation bar only */
+.container1 {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+} 
+
+header {
+    background: #003366;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo {
+    float: left;
+} 
+
+label.logo{
+    color: #444;
+    font-size: 30px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 80px;
+    font-weight: bold;
+
+}
+
+/* nav bar stuff */
+nav ul {
+    float:right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 70px;
+     padding-top: 20px; 
+}
+
+nav ul li a {
+    color: #F0F2F3;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 13px;
+    border-radius: 3px;
+}
+/* nav button animations */
+nav a:hover {
+    color: #D6A419;
+}
+
+/* setting up the cards to be only in a column */
+.card-single {
+    display: column;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); 
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+    .card-single {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+/* Style the counter cards */
+.card {
+    padding-top: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    background-color: #ffffff;
+    border: none;
+  }
+
+  .card-header {
+    font-size:1.5rem;
+    text-align: center;
+    margin-bottom:.5rem;
+    font-weight: bold;
+}
+
+.card-body {
+    font-size: 1rem;
+}
+
+.card-body ul {
+    font-size: 1rem;
+}
+
+.card-footer {
+    margin-top:1rem;
+}
+
+
+/* making specific cards for forms so that colour and size are different */
+.card1 {
+    padding-top: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    background-color: #ffffff;
+    border-radius:1rem;
+    border: none;
+    font-size: large;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+/* styling the field boxes to appropriately fit the cards and changing bg colour */
+  input[type=text] {
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    align-items: center;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  input[type=email] {
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  input[type=password] {
+    width: 95%;
+    padding: 15px;
+    margin: 5px 0 20px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  /* styling the error messages */
+.input-control {
+    display: flex;
+    flex-direction: column;
+}
+
+/* styling the input elements inside input control container */
+ .input-control input {
+    border: 2px solid #f1f1f1;
+	border-radius: 4px;
+	display: block;
+	font-size: 12px;
+	padding: 10px;
+} 
+
+/* styling when clicked */
+.input-control input:focus {
+    outline: 0;
+}
+/* success border colour */
+.input-control.success input {
+    border-color: #09c372;
+}
+/* error border colour */
+.input-control.error input {
+    border-color: #ff3860;
+}
+/* error mesage */
+.input-control .error {
+    color: #ff3860;
+    font-size: small;
+}
