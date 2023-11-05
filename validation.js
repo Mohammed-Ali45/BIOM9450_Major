@@ -93,7 +93,7 @@ form.addEventListener('submit', l => {
     validatePassword();
     validateRid();
 
-    if (document.querySelectorAll('.success').length === 3) { //ensuring 6 sucessful fields are met
+    if (document.querySelectorAll('.success').length === 3) { //ensuring 3 sucessful fields are met
         // submit the form
         form.submit();
     } 
