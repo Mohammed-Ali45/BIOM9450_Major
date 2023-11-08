@@ -3,7 +3,7 @@
 ?>
 
 <div class="card-single">
-    <div class="card">
+    <div class="card1">
         <div class="card-header">Researcher Login</div>
         <div class="card-body">
             <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post" >

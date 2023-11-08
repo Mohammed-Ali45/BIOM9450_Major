@@ -3,7 +3,7 @@
 ?>
 
 <div class="card-single">
-    <div class="card">
+    <div class="card1">
         <div class="card-header">Patient Login</div>
         <div class="card-body">
             <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post" >
@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-footer">
                     <input type="reset" button class="btn btn-outline" value="Clear"> <!--clears all input fields-->
-                    <input type="submit" button class="btn" value="Login"> <!--submit button-->
+                    <input type="submit" button class="btn" value="Login" name="submit"> <!--submit button-->
                 </div>
                 <p>Don't have an account? <a href="signup.php">Sign up here!</a></p>
             </form>
