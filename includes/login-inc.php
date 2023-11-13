@@ -21,11 +21,16 @@ if(isset($_POST["submit"])) {
     }
 
     if (empty($email) || empty($password) || ($uidExists == false)) { //checking for empty inputs and matching users information
-        header('location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php');
+        header('location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help');
         exit;
-    }else{ //if correct will redirect to the index page
-       header('location: http://engpwws005/z5259813$/BIOM9450_Major/index.php');
-       exit;
+    }else{ //if correct will redirect to the home page
+        // Fetch data from the result set
+        $row = odbc_fetch_row($exists);
+        //set name in session
+        // $_SESSION['usersName'] = $row['usersName'];
+        $_SESSION['hello'] = $email;
+        header('location: http://engpwws005/z5259813$/BIOM9450_Major/patient.php');
+        exit;
     }
 }
 else {

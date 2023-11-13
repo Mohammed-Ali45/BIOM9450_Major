@@ -1,6 +1,9 @@
 <?php
     include_once 'header.php'
 ?>
+<?php
+    include_once 'index.php'
+?>
 
 <div class="card-single">
     <div class="card1">
