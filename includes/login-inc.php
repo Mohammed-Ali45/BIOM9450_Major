@@ -24,11 +24,8 @@ if(isset($_POST["submit"])) {
         header('location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help');
         exit;
     }else{ //if correct will redirect to the home page
-        // Fetch data from the result set
-        $row = odbc_fetch_row($exists);
-        //set name in session
-        // $_SESSION['usersName'] = $row['usersName'];
-        $_SESSION['hello'] = $email;
+        //storing email of the user in the session variable
+        $_SESSION['email'] = $email;
         header('location: http://engpwws005/z5259813$/BIOM9450_Major/patient.php');
         exit;
     }

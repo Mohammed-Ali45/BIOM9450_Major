@@ -2,7 +2,7 @@
 
 session_start();
 //check if the user is logged in
-if (isset($_SESSION['hello'])) {
+if (isset($_SESSION['email'])) {
     ?>
 
     <?php
@@ -27,7 +27,7 @@ if (isset($_SESSION['hello'])) {
         </header>
 
         <div class="container">
-            <h1>Hello, <?php echo $_SESSION['hello']; ?></h1>;
+            <h1>Hello, <?php echo $_SESSION['user_name']; ?></h1>
 
     <?php
         include_once 'footer.php'
