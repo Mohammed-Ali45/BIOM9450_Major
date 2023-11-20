@@ -235,3 +235,72 @@ nav a:hover {
     color: #ff3860;
     font-size: small;
 }
+
+/* two uneven columns styling */
+
+*{
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 25%;
+}
+
+.right {
+  width: 75%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* styling the table */
+ /* table {
+  width: 90%;
+  border-collapse: collapse;
+  border: 1px solid #a5a5a5;
+  margin: 0 auto;
+  background-color: #ffffff;
+} */
+
+.tablestyle {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+.tablestyle td {
+  padding: 15px;
+  text-align: left;
+}
+.tablestyle th {
+  padding: 15px;
+  text-align: center;
+}
+
+
+.tablestyle th {
+  background-color: #003366;
+  color: #fff;
+}
+
+.tablestyle tr:nth-child(even) {
+  background: linear-gradient(to right, #ecf0f1, #bdc3c7);
+}
+
+.tablestyle tr:nth-child(odd) {
+  background: linear-gradient(to right, #71B1C5, #3498db);
+  color: #fff;
+}
+
+
+  

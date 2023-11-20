@@ -32,7 +32,7 @@ if (isset($_SESSION['email'])) {
                 <div class = "card">
                     <div class="row">
                         <div class="column left">
-                            <img src = "images/stock.jpg" alt="profile photo" width="220" height="300">
+                            <img src = "images/stock.jpg" alt="profile photo" width="200" height="200">
                         </div>
                         <div class="column right">
                             <table class="tablestyle">
@@ -59,41 +59,17 @@ if (isset($_SESSION['email'])) {
                                     <td>Phone No.:</td>
                                     <td><?php echo $_SESSION['username']; ?> ffewfewfewfewfwfwewfewfe</td>
                                 </tr>
+                                <tr>
+                                    <td>Age:</td>
+                                    <td>90</td>
+                                </tr>
+                                <tr>
+                                    <td>Country:</td>
+                                    <td>Australia</td>
+                                </tr>
                             </table>
                         </div>
                     </div>
-                    <table class="tablestyle" style="width:100%">
-                        <tr>
-                            <th colspan="2">Diagnosis</th>
-                        </tr>
-                        <tr>
-                            <td>Cancer Type</td>
-                            <td>Breast Cancer</td>
-                        </tr>
-                        <tr>
-                            <td>Potential Impact</td>
-                            <td>Consequences jojfieowjfeiowjfeoij</td>
-                        </tr>
-                    </table>
-                    <h1>Mutational Profile</h1>
-                    <table class="tablestyle">
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                    </table>
                 </div>
             </div>
 

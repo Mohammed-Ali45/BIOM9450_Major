@@ -26,7 +26,7 @@
     <div class="container">
         <div class="card-single">
             <div class = "card">
-                <h1>hello</h1>
+                <h1>About page</h1>
             </div>
         </div>
 <?php
