@@ -1,4 +1,4 @@
- <?php
+<?php
 
 session_start();
 //check if the user is logged in
@@ -18,7 +18,7 @@ if (isset($_SESSION['email'])) {
                 <img src = "images/snail.jpg" alt="logo" class="logo" width="70" height="70">
                 <nav>
                     <ul>
-                        <li><a href="patient.php">Mutations</a></li>
+                        <li><a href="researcher.php">Mutations</a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
@@ -48,41 +48,23 @@ if (isset($_SESSION['email'])) {
                         </tr>
                     </table>
                     <h1>Mutational Profile</h1>
-                    <form>
-                        <!-- search bar -->
-                        <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
-                        <!-- category filter -->
-                        <select id="category" style="width:100%">
-                            <option value="0" selected hidden>Select Category</option>
-                            <option value="1">Mutation ID</option>
-                            <option value="2">Gene Involved</option>
-                            <option value="3">Location</option>
-                            <option value ="4">Potential Impact</option>
-                        </select>
-                    </form>
                     <table class="tablestyle">
-                        <thead>
-                            <tr>
-                                <th style="width:15%">Mutation ID</th>
-                                <th>Gene Involved</th>
-                                <th>Location</th>
-                                <th>Potential Impact</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>    
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                            </tr>
-                            <tr>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                            </tr>
-                        </tbody>
+                        <tr>
+                            <td>Mutation ID:</td>
+                            <td>Cancer type</td>
+                        </tr>
+                        <tr>    
+                            <td>Gene Involved:</td>
+                            <td>Cancer type</td>
+                        </tr>
+                        <tr>
+                            <td>Mutation ID:</td>
+                            <td>Cancer type</td>
+                        </tr>
+                        <tr>
+                            <td>Mutation ID:</td>
+                            <td>Cancer type</td>
+                        </tr>
                     </table>
                 </div>
             </div>
