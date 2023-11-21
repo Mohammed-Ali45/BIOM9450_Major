@@ -98,3 +98,35 @@ form.addEventListener('submit', l => {
         form.submit();
     } 
  });
+
+//for the search and filter function
+//getting the references
+var searchbar = document.getElementById('searchbar');
+var category = document.getElementById('category');
+var tbody = document.getElementById('tbody1');
+var originaltabledata = tbody.innerHTML;
+
+//search function
+function Search() {
+    tbody.innerHTML = originaltabledata;
+    let rows = tbody.children; //all of the table row tags
+
+    if(searchbar.value.length < 1 || category.value == 0){
+        return;
+    }
+
+    let filteredrows = '';
+    let catno = Number(category.value) -1;
+    let searchtext = searchbar.value.toLowerCase();
+
+    for (let i=0; i < rows.length; i++){
+        const currentrowtext = rows[i].children[catno].innerText.toLowerCase(); //assigning current tr's td according to the category selected
+
+        if(currentrowtext.indexOf(searchtext) > -1){
+            filteredrows += rows[i].outerHTML; //current tr
+        }
+    }
+    tbody.innerHTML = filteredrows;
+}
+
+searchbar.addEventListener('input', Search);

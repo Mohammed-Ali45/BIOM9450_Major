@@ -52,7 +52,7 @@ if (isset($_SESSION['email'])) {
                         <!-- search bar -->
                         <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
                         <!-- category filter -->
-                        <select id="category" style="width:100%">
+                        <select id="category" style="width:100%" >
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Mutation ID</option>
                             <option value="2">Gene Involved</option>
@@ -60,7 +60,7 @@ if (isset($_SESSION['email'])) {
                             <option value ="4">Potential Impact</option>
                         </select>
                     </form>
-                    <table class="tablestyle">
+                    <table class="tablestyle" id="tbl1">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
@@ -69,7 +69,7 @@ if (isset($_SESSION['email'])) {
                                 <th>Potential Impact</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody1">
                             <tr>    
                                 <td>Test</td>
                                 <td>Test</td>
@@ -86,7 +86,7 @@ if (isset($_SESSION['email'])) {
                     </table>
                 </div>
             </div>
-
+    
     <?php
         include_once 'footer.php'
     ?>
@@ -94,10 +94,9 @@ if (isset($_SESSION['email'])) {
 
 }else{
 
-    header("Location: index.php");
+    header("Location: index.php"); 
 
     exit();
 
 }
-?>
-    
+?>   
