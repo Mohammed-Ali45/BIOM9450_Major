@@ -1,0 +1,94 @@
+<!-- this is a test html file for when something doesnt work in my other files use this -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--setting up file-->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--linking css files-->
+    <link rel="resetsheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <!--linking js file-->
+    <script defer src="validation.js"></script>
+    
+    <!--inputting fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <title>Cancerictive</title>
+
+</head>
+
+<body>
+    <form>
+        <!-- search bar -->
+        <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+        <!-- category filter -->
+        <select id="category" style="width:100%" >
+            <option value="0" selected hidden>Select Category</option>
+            <option value="1">Mutation ID</option>
+            <option value="2">Gene Involved</option>
+            <option value="3">Location</option>
+            <option value="4">Potential Impact</option>
+        </select>
+    </form>
+    <table class="tablestyle" id="tbl1">
+        <thead>
+            <tr>
+                <th style="width:15%">Mutation ID</th>
+                <th>Gene Involved</th>
+                <th>Location</th>
+                <th>Potential Impact</th>
+            </tr>
+        </thead>
+        <tbody id="tbody1">
+            <tr>    
+                <td>Test</td>
+                <td>Test</td>
+                <td>Test</td>
+                <td>Test</td>
+            </tr>
+            <tr>
+                <td>Hello</td>
+                <td>Hello</td>
+                <td>Hello</td>
+                <td>Hello</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        //getting the references
+        var searchbar = document.getElementById('searchbar');
+        var category = document.getElementById('category');
+        var tbody = document.getElementById('tbody1');
+        var orignaltabledata = tbody.innerHTML;
+
+        //search function
+        function Search() {
+            tbody.innerHTML = orignaltabledata;
+            let rows = tbody.children; //all of the table tows tags
+
+            if(searchbar.value.length < 1 || category.value == '0') {
+                return; //do not filter if you have no inputs
+            }
+
+            let filteredrows = '';
+            let catno = Number(category.value) -1; //index of array starts from 0
+            let searchtext = searchbar.value.toLowerCase();
+
+            for (let i = 0; i < rows.length; i++) {
+                const currentrowtext = rows[i].children[catno].innerText.toLowerCase(); //assigning tr's table cell according to the category selected
+                if(currentrowtext.indexOf(searchtext) > -1){ //if text is found will return index and will return filtered row
+                    filteredrows += rows[i].outerHTML //current row
+                }
+            }
+            tbody.innerHTML = filteredrows; //filtered data will go into the tbody
+        }
+        searchbar.addEventListener('input', Search);
+    </script>
+</body>
+
+</html>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <!--linking js file-->
     <script defer src="validation.js"></script>
+    <script defer src="functions.js"></script>
     
     <!--inputting fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
