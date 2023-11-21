@@ -7,7 +7,7 @@ if (isset($_SESSION['email'])) {
     $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
     //grabbing data from the patient table (change the titles when databse is updated)
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
-        include_once 'header.php'
+    include_once 'header.php'
     
     ?>
 
