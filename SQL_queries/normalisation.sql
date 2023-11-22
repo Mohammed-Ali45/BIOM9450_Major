@@ -172,3 +172,56 @@ FROM
         ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
     )
     INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID];
+
+
+
+/* Normalisation of patient and staff data starts here
+
+
+
+
+
+
+
+*/
+/* Building the users table. Null column StaffID was added temporarily to 
+Patient and null column PatientID was added to Staff to faciliate the proper
+union */
+SELECT
+    *
+INTO
+    Users
+FROM
+    (
+        SELECT
+            Email,
+            PatientID,
+            StaffID
+        FROM
+            Patient
+        UNION ALL
+        SELECT
+            Email,
+            PatientID,
+            StaffID
+        FROM
+            Staff
+    );
+
+
+
+/* Adds PatientID in Users as a FK for PatientID in Patient table */
+ALTER TABLE Users
+ADD CONSTRAINT FK_PatientID_Users FOREIGN KEY (PatientID) REFERENCES Patient (PatientID);
+
+
+
+/* Adds StaffID in Users as a FK for StaffID in Staff table */
+ALTER TABLE Users
+ADD CONSTRAINT FK_StaffID_Users FOREIGN KEY (StaffID) REFERENCES Staff (StaffID);
+
+
+
+/* Adds icgc_specimen_id as a FK for icgc_specimen_id in specimens table */
+ALTER TABLE Patient
+ADD CONSTRAINT FK_patient_specimenid_specimens FOREIGN KEY (icgc_specimen_id) REFERENCES Specimens (icgc_specimen_id);

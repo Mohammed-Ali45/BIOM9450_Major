@@ -18,7 +18,7 @@ if (isset($_POST["submit"])) {
     //initialize uid = false
     $uidExists = false;
 
-    $sql = "SELECT * FROM users WHERE usersEmail = '$email' AND usersPwd = '$password' ";
+    $sql = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
 
     $exists = odbc_exec($conn, $sql);
 
@@ -27,19 +27,22 @@ if (isset($_POST["submit"])) {
     }
 
     if (empty($email) || empty($password) || ($uidExists == false)) { //checking for empty inputs and matching users information
-        header('location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help');
+        //header('location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help');
+        header('location: ../login-p.php?error=help');
         exit;
     } else { //if correct will redirect to the home page
         $exists = odbc_exec($conn, $sql);
         $row = odbc_fetch_array($exists);
 
         //storing email of the user in the session variable
-        $_SESSION['username'] = $row['usersName'];
-        $_SESSION['email'] = $row['usersEmail'];
-        header('location: http://engpwws005/z5259813$/BIOM9450_Major/patient.php');
+        //$_SESSION['username'] = $row['usersName'];
+        $_SESSION['email'] = $row['Email'];
+        //header('location: http://engpwws005/z5259813$/BIOM9450_Major/patient.php');
+        header('location: ../patient.php');
         exit;
     }
 } else {
-    header("location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help");
+    //header("location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help");
+    header("location: ../login-p.php?error=help");
     exit();
 }
