@@ -10,15 +10,16 @@ if (isset($_POST["submit"])) {
     1 of the 3 code blocks below should be uncommented according to who is currently running */
 
     //Victoria
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    
 
     //Moey
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //initialize uid = false
     $uidExists = false;
 
-    $sql = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
+    $sql = "SELECT * FROM Users WHERE Email = '$email' AND Passwords = '$password' ";
 
     $exists = odbc_exec($conn, $sql);
 
@@ -37,12 +38,13 @@ if (isset($_POST["submit"])) {
         //storing email of the user in the session variable
         //$_SESSION['username'] = $row['usersName'];
         $_SESSION['email'] = $row['Email'];
+        $_SESSION['patientID'] = $row['PatientID'];
         //header('location: http://engpwws005/z5259813$/BIOM9450_Major/patient.php');
         header('location: ../patient.php');
         exit;
     }
 } else {
-    //header("location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=help");
+    //header("location: http://engpwws005/z5259813$/BIOM9450_Major/login-p.php?error=helppls");
     header("location: ../login-p.php?error=help");
     exit();
 }

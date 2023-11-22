@@ -6,12 +6,15 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 
     // Victoria's db connection
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
+    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
 
     //Moey's db connection
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
     //grabbing data from the patient table (change the titles when databse is updated)
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
+    $exists = odbc_exec($conn, $sql);
+    $row = odbc_fetch_array($exists);
+
     include_once 'header.php'
 
         ?>
@@ -25,7 +28,7 @@ if (isset($_SESSION['email'])) {
                     <ul>
                         <li><a href="patient.php">Mutations</a></li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
+                        <li><a href="includes/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
                 </nav>
             </div>
@@ -41,7 +44,7 @@ if (isset($_SESSION['email'])) {
                         </tr>
                         <tr>
                             <td>Cancer Type</td>
-                            <td>Breast Cancer</td>
+                            <td><?php echo $row['FirstName']; ?></td>
                         </tr>
                         <tr>
                             <td>Potential Impact</td>

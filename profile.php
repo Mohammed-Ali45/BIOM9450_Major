@@ -7,6 +7,8 @@ if (isset($_SESSION['email'])) {
     $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
     //grabbing data from the patient table (change the titles when databse is updated)
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
+    $exists = odbc_exec($conn, $sql);
+    $row = odbc_fetch_array($exists);
         include_once 'header.php'
     
     ?>
@@ -32,7 +34,7 @@ if (isset($_SESSION['email'])) {
                 <div class = "card">
                     <div class="row">
                         <div class="column left">
-                            <img src = "images/stock.jpg" alt="profile photo" width="200" height="200">
+                        <img src = "patient-photo/<?php echo $row['PatientID']?>.jpg" alt="profile photo" width="200" height="200">
                         </div>
                         <div class="column right">
                             <table class="tablestyle">
@@ -41,31 +43,31 @@ if (isset($_SESSION['email'])) {
                                 </tr>
                                 <tr>
                                     <td>First Name:</td>
-                                    <td><?php echo $_SESSION['username']; ?> ffewfewfewfewfwfwewfewfe</td>
+                                    <td><?php echo $row['FirstName']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
-                                    <td><?php echo $_SESSION['username']; ?> ffewfewfewfewfwfwewfewfe</td>
+                                    <td><?php echo $row['LastName']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Email:</td>
-                                    <td><?php echo $_SESSION['email']; ?> ffewfewfewfewfwfwewfewfe</td>
+                                    <td><?php echo $row['Email']; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Address:</td>
-                                    <td><?php echo $_SESSION['username']; ?> ffewfewfewfewfwfwewfewfe</td>
+                                    <td>Address:</td> <!--fix the spacing here pls -->
+                                    <td><?php echo $row['StreetNumber']; echo $row['StreetName']; echo $row['City']; echo $row['Postcode']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Phone No.:</td>
-                                    <td><?php echo $_SESSION['username']; ?> ffewfewfewfewfwfwewfewfe</td>
+                                    <td><?php echo $row['PhoneNo']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Age:</td>
-                                    <td>90</td>
+                                    <td><?php echo $row['age']; ?></td>
                                 </tr>
                                 <tr>
                                     <td>Country:</td>
-                                    <td>Australia</td>
+                                    <td><?php echo $row['country']; ?></td>
                                 </tr>
                             </table>
                         </div>
