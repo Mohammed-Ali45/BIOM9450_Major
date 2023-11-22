@@ -55,9 +55,9 @@ if (isset($_SESSION['email'])) {
                         <select id="category" style="width:100%" >
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Mutation ID</option>
-                            <option value="2">Gene Involved</option>
-                            <option value="3">Location</option>
-                            <option value ="4">Potential Impact</option>
+                            <option value="2">Chromosome</option>
+                            <option value="3">Genes</option>
+                            <option value ="4">Location</option>
                         </select>
                     </form>
                     <table class="tablestyle" id="tbl1">

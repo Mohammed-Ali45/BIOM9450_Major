@@ -18,7 +18,7 @@ if (isset($_SESSION['email'])) {
                 <img src = "images/snail.jpg" alt="logo" class="logo" width="70" height="70">
                 <nav>
                     <ul>
-                        <li><a href="researcher.php">Mutations</a></li>
+                        <li><a href="researcher.php">Database</a></li>
                         <li><a href="profile.php">Profile</a></li>
                         <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
@@ -30,41 +30,47 @@ if (isset($_SESSION['email'])) {
         <div class="container">
             <div class="card-single">
                 <div class = "card">
-                    <table class="tablestyle">
-                        <tr>
-                            <th colspan="2">Diagnosis</th>
-                        </tr>
-                        <tr>
-                            <td>Cancer Type</td>
-                            <td>Breast Cancer</td>
-                        </tr>
-                        <tr>
-                            <td>Potential Impact</td>
-                            <td>Consequences jojfieowjfeiowjfeoij</td>
-                        </tr>
-                        <tr>
-                            <td>Treatment Plan</td>
-                            <td>Antibiotics, Chemotherapy</td>
-                        </tr>
-                    </table>
-                    <h1>Mutational Profile</h1>
-                    <table class="tablestyle">
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>    
-                            <td>Gene Involved:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
-                        <tr>
-                            <td>Mutation ID:</td>
-                            <td>Cancer type</td>
-                        </tr>
+                <h1>Patient Database</h1>
+                    <form>
+                        <!-- search bar -->
+                        <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+                        <!-- category filter -->
+                        <select id="category" style="width:100%" >
+                            <option value="0" selected hidden>Select Category</option>
+                            <option value="1">Mutation ID</option>
+                            <option value="2">Chromosome</option>
+                            <option value="3">Genes</option>
+                            <option value ="4">Location</option>
+                            <option value ="5">Patient ID</option>
+                        </select>
+                    </form>
+                    <button id="newpatient">Add a new patient</button>
+                    <table class="tablestyle" id="tbl1">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">Patient ID</th>
+                                <th style="width:15%">Mutation ID</th>
+                                <th>Chromosome</th>
+                                <th>Genes</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody1">
+                            <tr>    
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                                <td>Test</td>
+                            </tr>
+                            <tr>
+                                <td>Hello</td>
+                                <td>Hello</td>
+                                <td>Hello</td>
+                                <td>Hello</td>
+                                <td>Hello</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

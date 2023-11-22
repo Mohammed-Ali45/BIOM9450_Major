@@ -27,3 +27,10 @@ function Search() {
     tbody.innerHTML = filteredrows; //filtered data will go into the tbody
 }
 searchbar.addEventListener('input', Search);
+
+//register button
+// JavaScript code to handle the button click event
+document.getElementById('newpatient').addEventListener('click', function() {
+    // Redirect to a new page (replace 'new-page.html' with the desired URL)
+    window.location.href = 'patient.php';
+});
