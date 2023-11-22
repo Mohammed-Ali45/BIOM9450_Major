@@ -73,7 +73,7 @@ Mutation table
 Since mutation_type is transitively dependent on mutationID, it cannot be
 included in the mutation table*/
 ALTER TABLE Mutation
-ADD CONSTRAINT FK_toANDfromAllele FOREIGN KEY (mutated_from_allele, mutated_to_allele) REFERENCES Mutation (mutated_from_allele, mutated_to_allele);
+ADD CONSTRAINT FK_toANDfromAllele FOREIGN KEY (mutated_from_allele, mutated_to_allele) REFERENCES MutationType (mutated_from_allele, mutated_to_allele);
 
 
 
