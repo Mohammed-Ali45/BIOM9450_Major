@@ -23,14 +23,10 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="card-single">
+    <div class="flex-container">
+         <div class="card-single">
             <div class = "card">
-            .card{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            
                 <h1>Contact Information</h1>
                 <ul>
             <li>Email: <a href="mailto:info@cancerictive.com">info@cancerictive.com</a></li>

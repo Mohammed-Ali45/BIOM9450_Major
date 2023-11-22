@@ -311,5 +311,8 @@ nav a:hover {
   color: #fff;
 }
 
+.flex-container{display: flex;justify-content: space-around;background:#fff;}
+
+
 
   
