@@ -23,10 +23,16 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="card-single">
+    <div class="flex-container">
+         <div class="card-single">
             <div class = "card">
-                <h1>hellohi</h1>
+            
+                <h1>Contact Information</h1>
+                <ul>
+            <li>Email: <a href="mailto:info@cancerictive.com">info@cancerictive.com</a></li>
+            <li>Phone: <a href="tel:+61468417010">+61 468417010</a></li>
+            <li>Address: <a href="https://www.google.com/maps?q=University+of+New+South+Wales">University of New South Wales</a></li>
+        </ul>
             </div>
         </div>
 <?php
