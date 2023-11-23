@@ -4,7 +4,15 @@ session_start();
 //check if the user is logged in
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
+
+    //establish a connection, uncomment your own connection and comment out the other persons
+    //Victoria
+    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    
+    //Moey
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+
     //grabbing data from the patient table (change the titles when databse is updated)
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
     $exists = odbc_exec($conn, $sql);

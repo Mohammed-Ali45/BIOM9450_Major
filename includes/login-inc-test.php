@@ -10,7 +10,8 @@ if (isset($_POST["submit"])) {
     1 of the 2 code blocks below should be uncommented according to who is currently running */
 
     //Victoria
-    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
@@ -19,18 +20,18 @@ if (isset($_POST["submit"])) {
     $userExists = false;
 
     //Looks for and retrieves rowdata in db that matches inputted email & password
-    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
-
+    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Passwords = '$password' ";
+    
     //Executes above query
     $user_data = odbc_exec($conn, $user_data_query);
     $user_email = odbc_result($user_data, "Email");
-
+    
     //Retrieves PatientID and StaffID fields from row containing user data
     $patientID = odbc_result($user_data, 'PatientID');
     $staffID = odbc_result($user_data, 'StaffID');
 
     //checks if above query managed to find match
-    if (odbc_fetch_row($user_data)) {
+    if (odbc_fetch_row($user_data,1)) {
         $userExists = true;
     } 
 
