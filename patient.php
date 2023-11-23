@@ -11,6 +11,11 @@ if (isset($_SESSION['email'])) {
 
     //Moey's db connection
     $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+
+
+
+
+
     //grabbing data from the patient table
     $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
     $patient_data = odbc_exec($conn, $patient_data_query);
