@@ -11,29 +11,29 @@ if (isset($_POST["submit"])) {
 
     //Victoria
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //Only true when inputted email and password match with a user in db
     $userExists = false;
 
     //Looks for and retrieves rowdata in db that matches inputted email & password
-    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Passwords = '$password' ";
-    
+    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
+
     //Executes above query
     $user_data = odbc_exec($conn, $user_data_query);
     $user_email = odbc_result($user_data, "Email");
-    
+
     //Retrieves PatientID and StaffID fields from row containing user data
     $patientID = odbc_result($user_data, 'PatientID');
     $staffID = odbc_result($user_data, 'StaffID');
 
     //checks if above query managed to find match
-    if (odbc_fetch_row($user_data,1)) {
+    if (odbc_fetch_row($user_data, 1)) {
         $userExists = true;
-    } 
+    }
 
 
     /* Decides where to redirect user.
@@ -55,8 +55,6 @@ if (isset($_POST["submit"])) {
         exit;
 
     } elseif (is_null($patientID) === true && is_null($staffID) === false) {
-        $user_data = odbc_exec($conn, $user_data_query);
-        $row_data = odbc_fetch_array($user_data);
 
         //Query to retrieve occupation of staff, redirect accordingly
         $staff_query = "SELECT
@@ -67,7 +65,14 @@ if (isset($_POST["submit"])) {
             Staff.Occupation
         FROM
             Staff
-            INNER JOIN Users ON Staff.[StaffID] = Users.[StaffID]; ";
+            INNER JOIN Users ON Staff.[StaffID] = Users.[StaffID]
+        WHERE
+            Users.Email = '$email'
+            AND Users.Password = '$password';  ";
+
+
+        $staff_data = odbc_exec($conn, $staff_query);
+        $row_data = odbc_fetch_array($staff_data);
 
         $occupation = odbc_result(odbc_exec($conn, $staff_query), "Occupation");
 
