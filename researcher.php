@@ -4,10 +4,18 @@ session_start();
 //check if the user is logged in
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
+    // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    //grabbing data from the patient table (change the titles when databse is updated)
-    $sql = "SELECT * FROM Patient WHERE Email = '$email'";
-        include_once 'header.php'
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+
+    //Moey's db connection
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //grabbing patient table
+    $patient_sql = "SELECT Patient.[PatientID], Patient.[FirstName], Patient.[LastName], Patient.[icgc_specimen_id] FROM Patient;";
+    $patient_table = odbc_exec($conn, $patient_sql);
+    $patient_data = odbc_fetch_array($patient_table);
+    
+    include_once 'header.php'
     
     ?>
 
@@ -37,11 +45,10 @@ if (isset($_SESSION['email'])) {
                         <!-- category filter -->
                         <select id="category" style="width:100%" >
                             <option value="0" selected hidden>Select Category</option>
-                            <option value="1">Mutation ID</option>
-                            <option value="2">Chromosome</option>
-                            <option value="3">Genes</option>
-                            <option value ="4">Location</option>
-                            <option value ="5">Patient ID</option>
+                            <option value="1">Patient ID</option>
+                            <option value="2">ICGC Specimen ID</option>
+                            <option value="3">First Name</option>
+                            <option value="4">Last Name</option>
                         </select>
                     </form>
                     <button id="newpatient">Add a new patient</button>
@@ -49,27 +56,22 @@ if (isset($_SESSION['email'])) {
                         <thead>
                             <tr>
                                 <th style="width:15%">Patient ID</th>
-                                <th style="width:15%">Mutation ID</th>
-                                <th>Chromosome</th>
-                                <th>Genes</th>
-                                <th>Location</th>
+                                <th>ICGC Specimen ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                             </tr>
                         </thead>
                         <tbody id="tbody1">
-                            <tr>    
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                            </tr>
-                            <tr>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                            </tr>
+                            <?php
+                                while ($patient_data = odbc_fetch_array($patient_table)) {
+                                    echo '<tr>';
+                                    echo '<td>' . $patient_data['PatientID'] . '</td>'; echo ' ';
+                                    echo '<td>' . $patient_data['icgc_specimen_id'] . '</td>';
+                                    echo '<td>' . $patient_data['FirstName'] . '</td>';
+                                    echo '<td>' . $patient_data['LastName'] . '</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>

@@ -55,9 +55,79 @@
         echo $row['Cancer type'] . "<br>";
     }
 
-    // Close the database connection
-    odbc_close($conn);
 
+    $sql = "SELECT
+            Mutation.mutationID,
+            Mutation.gene_affected,
+            Mutation.chromosome,
+            MutationConsequences.consequence_type,
+            SpecimenMutations.icgc_specimen_id,
+            Patient.PatientID
+        FROM
+            (
+                Mutation
+                INNER JOIN (
+                    (
+                        Specimens
+                        INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+                    )
+                    INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+                ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+            )
+            INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]";
+    include_once 'header.php';
+    // Execute the query
+    $result = odbc_exec($conn, $sql);
+    echo '<form>
+    <!-- search bar -->
+    <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+    <!-- category filter -->
+    <select id="category" style="width:100%" >
+        <option value="0" selected hidden>Select Category</option>
+        <option value="1">Mutation ID</option>
+        <option value="2">Gene Involved</option>
+        <option value="3">Location</option>
+        <option value ="4">Potential Impact</option>
+        <option value ="5">Patient ID</option>
+    </select>
+</form>';
+    if ($result) {
+        // Start building the HTML table
+        echo '<table class="tablestyle" id="tbl1">
+                <thead>
+                    <tr>
+                        <th>Mutation ID</th>
+                        <th>Gene Affected</th>
+                        <th>Chromosome</th>
+                        <th>Consequence Type</th>
+                        <th>ICGC Specimen ID</th>
+                        <th>Patient ID</th>
+                    </tr>
+                </thead>';
+    
+        // Fetch each row from the result set
+        while ($row = odbc_fetch_array($result)) {
+            // Output each row as a table row
+            echo '<tr id="tbody1">
+                    <td>' . $row['mutationID'] . '</td>
+                    <td>' . $row['gene_affected'] . '</td>
+                    <td>' . $row['chromosome'] . '</td>
+                    <td>' . $row['consequence_type'] . '</td>
+                    <td>' . $row['icgc_specimen_id'] . '</td>
+                    <td>' . $row['PatientID'] . '</td>
+                </tr>';
+        }
+    
+        // Close the HTML table
+        echo '</table>';
+    } else {
+        // Handle the case where the query failed
+        echo 'Error executing query';
+    }
+    
+
+    
+?>
     ?>
 
     
@@ -101,3 +171,30 @@
 </body>
 
 </html>
+
+<!-- echo '<table class ="tablestyle" id="tbl1">
+                <thead>
+                    <tr>
+                        <th>Mutation ID</th>
+                        <th>Gene Affected</th>
+                        <th>Chromosome</th>
+                        <th>Consequence Type</th>
+                        <th>ICGC Specimen ID</th>
+                        <th>Patient ID</th>
+                    </tr>
+                </thead>';
+
+        // Fetch each row from the result set
+        while ($row = odbc_fetch_array($result)) {
+            // Output each row as a table row
+                echo '<tbody id="tbody">
+                        <tr>
+                            <td>' . $row['mutationID'] . '</td>
+                            <td>' . $row['gene_affected'] . '</td>
+                            <td>' . $row['chromosome'] . '</td>
+                            <td>' . $row['consequence_type'] . '</td>
+                            <td>' . $row['icgc_specimen_id'] . '</td>
+                            <td>' . $row['PatientID'] . '</td>
+                        </tr>
+                    </tbody>';
+        } -->

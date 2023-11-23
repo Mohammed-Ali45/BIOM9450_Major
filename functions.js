@@ -34,3 +34,4 @@ document.getElementById('newpatient').addEventListener('click', function() {
     // Redirect to a new page (replace 'new-page.html' with the desired URL)
     window.location.href = 'patient.php';
 });
+
