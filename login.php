@@ -12,11 +12,7 @@ include_once 'header.php'
                     <li><a href="index.php">Home</a></li>
                     <li><a href="about.php">About</a></li>
                     <li><a href="database.php">Database</a></li>
-                    <li>
-                        <div class="dropdown">
-                            <a class="dropbtn" href="login.php">Login</a>
-                        </div>
-                    </li>
+                    <li><a class="dropbtn" href="login.php">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -27,30 +23,36 @@ include_once 'header.php'
         <div class="card-single">
             <div class="card1">
                 <div class="card-header">Login</div>
-                    <div class="card-body">
-                        <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post">
-                            <div class="input-control">
-                                <label for="email">Email</label>
-                                <input id="email" name="email" type="text" placeholder="example@gmail.com">
-                                <div class="error"></div>
-                            </div>
-                            <div class="input-control">
-                                <label for="password">Password</label>
-                                <input id="password" name="password" type="password" placeholder="Password...">
-                                <div class="error"></div>
-                            </div>
-                            <div class="card-footer">
-                                <input type="reset" button class="btn btn-outline" value="Clear">
-                                <!--clears all input fields-->
-                                <input type="submit" button class="btn" value="Login" name="submit">
-                                <!--submit button-->
-                            </div>
-                            <p>Don't have an account? <a href="signup.php">Sign up here!</a></p>
-                        </form>
-                    </div>
+                <?php $current_url = $_SERVER['REQUEST_URI'];
+                if ($_SERVER['REQUEST_URI'] == '/login.php?error=invalidcredentials') {
+                    echo '<p class="invalid_creds">Invalid credentials. Please try again.</p>';
+                }
+
+                ?>
+                <div class="card-body">
+                    <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post">
+                        <div class="input-control">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="text" placeholder="example@gmail.com">
+                            <div class="error"></div>
+                        </div>
+                        <div class="input-control">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" placeholder="Password...">
+                            <div class="error"></div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="reset" button class="btn btn-outline" value="Clear">
+                            <!--clears all input fields-->
+                            <input type="submit" button class="btn" value="Login" name="submit">
+                            <!--submit button-->
+                        </div>
+                        <p>Don't have an account? <a href="signup.php">Sign up here!</a></p>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <?php
-            include_once 'footer.php'
-                ?>
+        <?php
+        include_once 'footer.php'
+            ?>

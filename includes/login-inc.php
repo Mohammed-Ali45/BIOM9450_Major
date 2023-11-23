@@ -11,10 +11,10 @@ if (isset($_POST["submit"])) {
 
     //Victoria
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //Only true when inputted email and password match with a user in db
     $userExists = false;
@@ -42,7 +42,7 @@ if (isset($_POST["submit"])) {
 
     checking for empty inputs and matching users information */
     if (empty($email) || empty($password) || ($userExists == false)) {
-        header('location: ../login.php?error=help');
+        header('location: ../login.php?error=invalidcredentials');
         exit;
 
     } elseif (is_null($patientID) === false && is_null($staffID) === true) {
