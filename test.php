@@ -24,7 +24,7 @@
     $password = 'W8VM8gT6';
     echo $email;
     //Looks for and retrieves rowdata in db that matches inputted email & password
-    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Passwords = '$password' ";
+    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
 
     //Executes above query
     $user_data = odbc_exec($conn, $user_data_query);
@@ -40,7 +40,24 @@
         
     }
      
-    echo $userExists;
+    
+    $statement = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type]
+                    FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]";
+    $cancer = odbc_exec($conn, $statement);
+
+    // Check if the query was successful
+    if (!$cancer) {
+        die("Query failed: " . odbc_errormsg($conn));
+    }
+
+    // Loop through the rows and display data
+    while ($row = odbc_fetch_array($cancer)) {
+        echo $row['Cancer type'] . "<br>";
+    }
+
+    // Close the database connection
+    odbc_close($conn);
+
     ?>
 
     

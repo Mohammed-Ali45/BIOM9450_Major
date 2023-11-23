@@ -4,7 +4,7 @@ session_start();
 //check if the user is logged in
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
-    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
+    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
     //grabbing data from the patient table (change the titles when databse is updated)
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
         include_once 'header.php'
@@ -20,7 +20,7 @@ if (isset($_SESSION['email'])) {
                     <ul>
                         <li><a href="researcher.php">Database</a></li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
+                        <li><a href="includes/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
                 </nav>
             </div>

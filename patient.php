@@ -16,6 +16,9 @@ if (isset($_SESSION['email'])) {
     $exists = odbc_exec($conn, $sql);
     $row = odbc_fetch_array($exists);
 
+    $statement = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type] FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id] WHERE Email = '$email'";
+    $cancer = odbc_exec($conn, $statement);
+    $row = odbc_fetch_array($cancer);
     include_once 'header.php'
 
         ?>
@@ -46,12 +49,8 @@ if (isset($_SESSION['email'])) {
                         <tr>
                             <td>Cancer Type</td>
                             <td>
-                                <?php echo $row['FirstName']; ?>
+                                <?php echo $row['Cancer type']; ?>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>Potential Impact</td>
-                            <td>Consequences jojfieowjfeiowjfeoij</td>
                         </tr>
                         <tr>
                             <td>Treatment Plan</td>

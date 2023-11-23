@@ -6,6 +6,7 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 
     //establish a connection, uncomment your own connection and comment out the other persons
+    
     //Victoria
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
     $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);

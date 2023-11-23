@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
     $userExists = false;
 
     //Looks for and retrieves rowdata in db that matches inputted email & password
-    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Passwords = '$password' ";
+    $user_data_query = "SELECT * FROM Users WHERE Email = '$email' AND Password = '$password' ";
     
     //Executes above query
     $user_data = odbc_exec($conn, $user_data_query);
