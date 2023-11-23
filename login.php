@@ -28,7 +28,7 @@ include_once 'header.php'
             <div class="card1">
                 <div class="card-header">Patient Login</div>
                 <div class="card-body">
-                    <form id="form" onsubmit="return validateForm()" action="includes/login-inc-test.php" method="post">
+                    <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post">
                         <div class="input-control">
                             <label for="email">Email</label>
                             <input id="email" name="email" type="text" placeholder="example@gmail.com">
