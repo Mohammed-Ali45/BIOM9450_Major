@@ -23,13 +23,16 @@ if (isset($_POST["submit"])) {
 
     //Executes above query
     $user_data = odbc_exec($conn, $user_data_query);
+    $user_email = odbc_result($user_data, "Email");
+    $user_password = odbc_result($user_data, "Password");
+    $fetch_result = odbc_fetch_row($user_data, 1);
 
     //Retrieves PatientID and StaffID fields from row containing user data
     $patientID = odbc_result($user_data, 'PatientID');
     $staffID = odbc_result($user_data, 'StaffID');
 
     //checks if above query managed to find match
-    if (odbc_fetch_row($user_data)) {
+    if (odbc_fetch_row($user_data, 1)) {
         $userExists = true;
     }
 
@@ -75,7 +78,7 @@ if (isset($_POST["submit"])) {
             exit;
         } elseif ($occupation == "Oncologist") {
             $_SESSION['email'] = $row_data['Email'];
-            header('location: ../researcher.php');
+            header('location: ../oncologist.php');
             exit;
         }
 
