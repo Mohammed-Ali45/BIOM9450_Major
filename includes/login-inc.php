@@ -42,7 +42,7 @@ if (isset($_POST["submit"])) {
 
     checking for empty inputs and matching users information */
     if (empty($email) || empty($password) || ($userExists == false)) {
-        header('location: ../login-test.php?error=help');
+        header('location: ../login.php?error=help');
         exit;
 
     } elseif (is_null($patientID) === false && is_null($staffID) === true) {
@@ -90,6 +90,6 @@ if (isset($_POST["submit"])) {
     }
 
 } else {
-    header("location: ../login-test.php?error=hi");
+    header("location: ../login.php?error=hi");
     exit();
 }
