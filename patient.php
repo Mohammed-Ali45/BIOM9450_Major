@@ -7,7 +7,7 @@ if (isset($_SESSION['email'])) {
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
     $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
@@ -138,6 +138,7 @@ if (isset($_SESSION['email'])) {
                                 $mutation_row = odbc_fetch_array($mutation_profile, $mutation_no);
                                 echo '<tr>';
                                 echo '<td>' . $mutation_row['mutationID'] . '</td>';
+                                echo ' ';
                                 echo '<td>' . $mutation_row['gene_affected'] . '</td>';
                                 echo '<td>' . $mutation_row['chromosome'] . '</td>';
                                 echo '<td>' . $mutation_row['consequence_type'] . '</td>';
