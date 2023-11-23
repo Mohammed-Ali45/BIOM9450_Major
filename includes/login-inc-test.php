@@ -32,6 +32,11 @@ if (isset($_POST["submit"])) {
     //checks if above query managed to find match
     if (odbc_fetch_row($user_data, 1)) {
         $userExists = true;
+    } else {
+        echo $userExists;
+        echo $patientID;
+        echo $staffID;
+        echo odbc_fetch_row($user_data, 1);
     }
 
 
