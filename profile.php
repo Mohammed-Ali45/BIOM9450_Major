@@ -14,7 +14,7 @@ if (isset($_SESSION['email'])) {
     //Moey
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
-    //grabbing data from the patient table (change the titles when databse is updated)
+    //grabbing data from the patient table
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
     $exists = odbc_exec($conn, $sql);
     $row = odbc_fetch_array($exists);
