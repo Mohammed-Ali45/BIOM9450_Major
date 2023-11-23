@@ -10,10 +10,10 @@ if (isset($_POST["submit"])) {
     1 of the 2 code blocks below should be uncommented according to who is currently running */
 
     //Victoria
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
 
     //Moey
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //Only true when inputted email and password match with a user in db
     $userExists = false;
@@ -30,14 +30,9 @@ if (isset($_POST["submit"])) {
     $staffID = odbc_result($user_data, 'StaffID');
 
     //checks if above query managed to find match
-    if (odbc_fetch_row($user_data, 1)) {
+    if (odbc_fetch_row($user_data)) {
         $userExists = true;
-    } else {
-        echo $userExists;
-        echo $patientID;
-        echo $staffID;
-        echo odbc_fetch_row($user_data, 1);
-    }
+    } 
 
 
     /* Decides where to redirect user.
@@ -89,6 +84,6 @@ if (isset($_POST["submit"])) {
     }
 
 } else {
-    header("location: ../login-test.php?error=help");
+    header("location: ../login-test.php?error=hi");
     exit();
 }
