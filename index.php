@@ -14,12 +14,7 @@ include_once 'header.php'
                     <li><a href="database.php">Database</a></li>
                     <li>
                         <div class="dropdown">
-                            <a class="dropbtn">Login</a>
-                            <div class="dropdown-content">
-                                <a href="login-p.php">Patient</a>
-                                <a href="login-r.php">Staff</a>
-                                <a href="login-test.php">test</a>
-                            </div>
+                            <a class="dropbtn" href="login.php">Login</a>
                         </div>
                     </li>
                 </ul>

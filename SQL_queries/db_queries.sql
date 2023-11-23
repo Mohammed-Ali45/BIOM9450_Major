@@ -7,7 +7,10 @@ SELECT
     Staff.Occupation
 FROM
     Staff
-    INNER JOIN Users ON Staff.[StaffID] = Users.[StaffID];
+    INNER JOIN Users ON Staff.[StaffID] = Users.[StaffID]
+WHERE
+    Users.Email = '$email'
+    AND Users.Password = '$password';
 
 
 
