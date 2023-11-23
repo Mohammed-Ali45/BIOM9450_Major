@@ -16,11 +16,14 @@ WHERE
 
 /* Retrieves the cancer type each patient has */
 SELECT
-    Patient.PatientID,
+    Patient.icgc_specimen_id,
+    Patient.Email,
     Specimens.[Cancer type]
 FROM
     Specimens
-    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id];
+    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+WHERE
+    Email = '$email';
 
 
 
@@ -45,4 +48,12 @@ FROM
     )
     INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
 WHERE
-    Patient.PatientID = $patientID;
+    Patient.PatientID = '$patientID';
+
+
+
+/* Counts the number of mutations for a given patient */
+SELECT
+    COUNT(*) AS count
+FROM
+    ('$mutation_profile_query');

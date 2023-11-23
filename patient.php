@@ -7,23 +7,32 @@ if (isset($_SESSION['email'])) {
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
     //grabbing data from the patient table
-    $sql = "SELECT * FROM Patient WHERE Email = '$email'";
-    $patient_info = odbc_exec($conn, $sql);
-    $row = odbc_fetch_array($patient_info);
-    $patientID = $row['PatientID'];
+    $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
+    $patient_data = odbc_exec($conn, $patient_data_query);
+    //$row = odbc_result($patient_data, 1);
+    $patientID = odbc_result($patient_data, 'PatientID');
 
     //grabbing cancer type for select patient
-    $cancer_stmt = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type] FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id] WHERE Email = '$email'";
-    $cancer = odbc_exec($conn, $cancer_stmt);
-    $cancer_row = odbc_fetch_array($cancer);
+    $cancertype_query = "SELECT
+        Patient.icgc_specimen_id,
+        Patient.Email,
+        Specimens.[Cancer type]
+    FROM
+        Specimens
+        INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+    WHERE
+        Email = '$email';";
+
+    $cancertype = odbc_exec($conn, $cancertype_query);
+    $patient_cancertype = odbc_result($cancertype, 'Cancer type');
 
     //grabbing mutation information for select patient
-    $mutation_stmt = "SELECT
+    $mutation_profile_query = "SELECT
                         Mutation.mutationID,
                         Mutation.gene_affected,
                         Mutation.chromosome,
@@ -44,14 +53,18 @@ if (isset($_SESSION['email'])) {
                         INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
                     WHERE
                         Patient.PatientID = $patientID";
-    $mutation_no_row = "SELECT COUNT(*) FROM $mutation_stmt";
-    $mutation = odbc_exec($conn, $mutation_stmt);
-    $mutation_row = odbc_fetch_array($mutation);
-    
-    for ($mutation_no=1; $mutation_no < $mutation_no_rows; $mutation_no++) {
 
-    };
+    $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($mutation_profile_query)";
+    $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
+    $mutation_profile = odbc_exec($conn, $mutation_profile_query);
 
+    /*
+    for ($mutation_no = 1; $mutation_no < $mutation_count; $mutation_no++) {
+
+
+    }
+    ;
+*/
     //paste the header file
     include_once 'header.php'
 
@@ -83,7 +96,7 @@ if (isset($_SESSION['email'])) {
                         <tr>
                             <td>Cancer Type</td>
                             <td>
-                                <?php echo $cancer_row['Cancer type']; ?>
+                                <?php echo $patient_cancertype; ?>
                             </td>
                         </tr>
                         <tr>
@@ -104,6 +117,7 @@ if (isset($_SESSION['email'])) {
                             <option value="4">Potential Impact</option>
                         </select>
                     </form>
+
                     <table class="tablestyle" id="tbl1">
                         <thead>
                             <tr>
@@ -114,18 +128,18 @@ if (isset($_SESSION['email'])) {
                             </tr>
                         </thead>
                         <tbody id="tbody1">
-                            <tr>
-                                <td><?php echo $mutation_row['mutationID']; ?></td>
-                                <td>Test</td>
-                                <td>Test</td>
-                                <td>Test</td>
-                            </tr>
-                            <tr>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                                <td>Hello</td>
-                            </tr>
+                            <?php
+                            for ($mutation_no = 1; $mutation_no < $mutation_count; $mutation_no++) {
+                                $mutation_row = odbc_fetch_array($mutation_profile, $mutation_no);
+                                echo '<tr>';
+                                echo '<td>' . $mutation_row['mutationID'] . '</td>';
+                                echo '<td>' . $mutation_row['gene_affected'] . '</td>';
+                                echo '<td>' . $mutation_row['chromosome'] . '</td>';
+                                echo '<td>' . $mutation_row['consequence_type'] . '</td>';
+                                echo '</tr>';
+                            }
+
+                            ?>
                         </tbody>
                     </table>
                 </div>
