@@ -22,7 +22,7 @@ if (isset($_SESSION['email'])) {
     $cancer = odbc_exec($conn, $cancer_stmt);
     $cancer_row = odbc_fetch_array($cancer);
 
-    //
+    //grabbing mutation information for select patient
     $mutation_stmt = "SELECT
                         Mutation.mutationID,
                         Mutation.gene_affected,
@@ -43,10 +43,16 @@ if (isset($_SESSION['email'])) {
                         )
                         INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
                     WHERE
-                        Patient.PatientID = '$patientID'";
+                        Patient.PatientID = $patientID";
+    $mutation_no_row = "SELECT COUNT(*) FROM $mutation_stmt";
     $mutation = odbc_exec($conn, $mutation_stmt);
     $mutation_row = odbc_fetch_array($mutation);
     
+    for ($mutation_no=1; $mutation_no < $mutation_no_rows; $mutation_no++) {
+
+    };
+
+    //paste the header file
     include_once 'header.php'
 
         ?>
@@ -109,7 +115,7 @@ if (isset($_SESSION['email'])) {
                         </thead>
                         <tbody id="tbody1">
                             <tr>
-                                <td>Test</td>
+                                <td><?php echo $mutation_row['mutationID']; ?></td>
                                 <td>Test</td>
                                 <td>Test</td>
                                 <td>Test</td>

@@ -45,4 +45,4 @@ FROM
     )
     INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
 WHERE
-    Patient.PatientID = '$patientID';
+    Patient.PatientID = $patientID;
