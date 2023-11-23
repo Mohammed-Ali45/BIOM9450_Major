@@ -139,7 +139,7 @@ html {
       <div class="container">
         <h2>Victoria Lee</h2>
         <p class="title">CEO</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Some text that describes me xyz</p>
         <p>Victoria@example.com</p>
         <p><button class="button">Contact</button></p>
       </div>
@@ -152,7 +152,7 @@ html {
       <div class="container">
         <h2>Mohammed Ali</h2>
         <p class="title">COO</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Some text that describes me xyz</p>
         <p>mohammed@example.com</p>
         <p><button class="button">Contact</button></p>
       </div>
@@ -165,7 +165,7 @@ html {
       <div class="container">
         <h2>Ruchal Kale</h2>
         <p class="title">Designer</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Some text that describes me xyz</p>
         <p>ruchal@example.com</p>
         <p><button class="button">Contact</button></p>
       </div>
