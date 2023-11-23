@@ -11,10 +11,10 @@ if (isset($_SESSION['email'])) {
 
     //Moey's db connection
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
-    //grabbing data from the patient table (change the titles when databse is updated)
+    //grabbing data from the patient table
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
-    $exists = odbc_exec($conn, $sql);
-    $row = odbc_fetch_array($exists);
+    $patient_info = odbc_exec($conn, $sql);
+    $row = odbc_fetch_array($patient_info);
 
     $statement = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type] FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id] WHERE Email = '$email'";
     $cancer = odbc_exec($conn, $statement);
