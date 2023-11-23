@@ -21,3 +21,28 @@ SELECT
 FROM
     Specimens
     INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id];
+
+
+
+/* Retrieves mutation profile for given PatientID */
+SELECT
+    Mutation.mutationID,
+    Mutation.gene_affected,
+    Mutation.chromosome,
+    MutationConsequences.consequence_type,
+    SpecimenMutations.icgc_specimen_id,
+    Patient.PatientID
+FROM
+    (
+        Mutation
+        INNER JOIN (
+            (
+                Specimens
+                INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+            )
+            INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+        ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+    )
+    INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
+WHERE
+    Patient.PatientID = '$patientID';
