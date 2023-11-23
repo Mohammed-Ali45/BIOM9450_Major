@@ -15,10 +15,38 @@ if (isset($_SESSION['email'])) {
     $sql = "SELECT * FROM Patient WHERE Email = '$email'";
     $patient_info = odbc_exec($conn, $sql);
     $row = odbc_fetch_array($patient_info);
+    $patientID = $row['PatientID'];
 
-    $statement = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type] FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id] WHERE Email = '$email'";
-    $cancer = odbc_exec($conn, $statement);
-    $row = odbc_fetch_array($cancer);
+    //grabbing cancer type for select patient
+    $cancer_stmt = "SELECT Patient.icgc_specimen_id, Patient.Email, Specimens.[Cancer type] FROM Specimens INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id] WHERE Email = '$email'";
+    $cancer = odbc_exec($conn, $cancer_stmt);
+    $cancer_row = odbc_fetch_array($cancer);
+
+    //
+    $mutation_stmt = "SELECT
+                        Mutation.mutationID,
+                        Mutation.gene_affected,
+                        Mutation.chromosome,
+                        MutationConsequences.consequence_type,
+                        SpecimenMutations.icgc_specimen_id,
+                        Patient.PatientID
+                    FROM
+                        (
+                            Mutation
+                            INNER JOIN (
+                                (
+                                    Specimens
+                                    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+                                )
+                                INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+                            ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+                        )
+                        INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
+                    WHERE
+                        Patient.PatientID = '$patientID'";
+    $mutation = odbc_exec($conn, $mutation_stmt);
+    $mutation_row = odbc_fetch_array($mutation);
+    
     include_once 'header.php'
 
         ?>
@@ -49,7 +77,7 @@ if (isset($_SESSION['email'])) {
                         <tr>
                             <td>Cancer Type</td>
                             <td>
-                                <?php echo $row['Cancer type']; ?>
+                                <?php echo $cancer_row['Cancer type']; ?>
                             </td>
                         </tr>
                         <tr>
