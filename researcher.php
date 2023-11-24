@@ -2,14 +2,14 @@
 
 session_start();
 //check if the user is logged in
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['Researcher_email'])) {
+    $email = $_SESSION['Researcher_email'];
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 
@@ -74,8 +74,8 @@ if (isset($_SESSION['email'])) {
                             for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
                                 $patient_row = odbc_fetch_array($patient_data_table, $patient_no);
                                 echo '<tr>';
-                                echo '<td>' . $patient_row['PatientID'] . '</td>';
-                                echo '<td><a href= patient.php>' . $patient_row['icgc_specimen_id'] . '</a></td>';
+                                echo '<td><a href=profile.php>' . $patient_row['PatientID'] . '</a></td>';
+                                echo '<td><a href=patient.php onclick= "send_patient_id(this, $patient_no)">' . $patient_row['icgc_specimen_id'] . '</a></td>';
                                 echo '<td>' . $patient_row['FirstName'] . '</td>';
                                 echo '<td>' . $patient_row['LastName'] . '</td>';
                                 echo '</tr>';
