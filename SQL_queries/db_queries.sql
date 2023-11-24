@@ -113,3 +113,71 @@ FROM
         '$repeating_mutations'
         INNER JOIN Mutation ON '$repeating_mutations'.[mutationID] = Mutation.[mutationID]
     ) ON '$patient_mutations'.[mutationID] = Mutation.[mutationID];
+
+
+
+/* Displaying repeating affected genes for researchers. These queries must be run in
+correct order and be named accordingly to function.
+1st lists every affected gene in every patient's mutational profile.
+
+1st query = "patient_specimenIDs" or similar */
+SELECT
+    icgc_specimen_id
+FROM
+    Patient
+ORDER BY
+    icgc_specimen_id;
+
+
+
+/* 2nd lists every affected gene in every patient's mutational profile.
+2nd query = "patient_affected_genes or simliar" */
+SELECT distinct
+    '$patient_specimenIDs'.icgc_specimen_id,
+    Mutation.gene_affected,
+    Patient.PatientID,
+    Patient.FirstName,
+    Patient.LastName
+FROM
+    (
+        (
+            Specimens
+            INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+        )
+        INNER JOIN (
+            Mutation
+            INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+        ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+    )
+    INNER JOIN '$patient_specimenIDs' ON Specimens.[icgc_specimen_id] = '$patient_specimenIDs'.[icgc_specimen_id]
+WHERE
+    ISNULL(gene_affected) = FALSE;
+
+
+
+/* 3rd forms list of all affected genes that repeat in 2nd query.
+3rd query = "repeating_genes" or similar */
+SELECT
+    gene_affected
+FROM
+    '$patient_affected_genes'
+GROUP BY
+    gene_affected
+HAVING
+    COUNT(gene_affected) > 1;
+
+
+
+/* 4th query lists only repeating affected genes and respective patient info
+4th query = "repeat_patient_genes" */
+SELECT distinct
+    '$repeating_genes'.gene_affected,
+    '$patient_affected_genes'.PatientID,
+    '$patient_affected_genes'.FirstName,
+    '$patient_affected_genes'.LastName
+FROM
+    '$patient_affected_genes'
+    INNER JOIN (
+        '$repeating_gens'
+        INNER JOIN Mutation ON '$repeating_gens'.[gene_affected] = Mutation.[gene_affected]
+    ) ON '$patient_affected_genes'.[gene_affected] = Mutation.[gene_affected];
