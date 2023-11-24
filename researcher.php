@@ -23,6 +23,51 @@ if (isset($_SESSION['Researcher_email'])) {
     $patient_count_query = "SELECT COUNT(*) AS patient_count FROM ($patient_data_query);";
     $patient_count = odbc_result(odbc_exec($conn, $patient_count_query), 'patient_count');
 
+    //grabbing similar mutations table
+    $patient_mutations = "SELECT
+                            Mutation.mutationID,
+                            Patient.PatientID,
+                            Patient.FirstName,
+                            Patient.LastName,
+                            Mutation.chromosome,
+                            Mutation.chromosome_start,
+                            Mutation.chromosome_end,
+                            Mutation.mutated_from_allele,
+                            Mutation.mutated_to_allele
+                        FROM
+                            (
+                                Specimens
+                                INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+                            )
+                            INNER JOIN (
+                                Mutation
+                                INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+                            ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id];";
+
+    $repeating_mutations = "SELECT
+                                Mutation.mutationID
+                            FROM
+                                '$patient_mutations'
+                            GROUP BY
+                                Mutation.mutationID
+                            HAVING
+                                COUNT(Mutation.mutationID) > 1;";
+
+    $repeat_patient_mutations = "SELECT
+                                    '$repeating_mutations'.mutationID,
+                                    '$patient_mutations'.PatientID,
+                                    '$patient_mutations'.FirstName,
+                                    '$patient_mutations'.LastName
+                                FROM
+                                    '$patient_mutations'
+                                    INNER JOIN (
+                                        '$repeating_mutations'
+                                        INNER JOIN Mutation ON '$repeating_mutations'.[mutationID] = Mutation.[mutationID]
+                                    ) ON '$patient_mutations'.[mutationID] = Mutation.[mutationID];";
+
+    
+    $repeat_patient_mutations_count = "SELECT COUNT(*) AS mutation_count FROM ($repeat_patient_mutations)";
+
 
     include_once 'header.php'
 

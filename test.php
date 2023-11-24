@@ -6,7 +6,7 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_ODBC);
 
     //Moey's db connection
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
@@ -92,12 +92,47 @@ if (isset($_SESSION['email'])) {
         $patient_mutations_table = odbc_exec($conn, $patient_mutations);
         $patient_mutations_data = odbc_fetch_array($patient_mutations_table);
 
-        // $patient_mutations_count_row = "SELECT COUNT(*) AS patient_mutations_count FROM ($patient_mutations)";
-        // $patient_mutations_count = odbc_result(odbc_exec($conn, $patient_mutations_count_row), 'patient_mutations_count');
+        //$patient_mutations_count_row = "SELECT COUNT(*) AS patient_mutations_count FROM ($patient_mutations)";
+        //$patient_mutations_count = odbc_result(odbc_exec($conn, $patient_mutations_count_row), 'patient_mutations_count');
         
         
-        ?>
-            
+        // ?>
+        <!-- // <h1>Patient Database</h1>
+        //             <form>
+        //                  search bar 
+        //                 <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+        //             </form>
+        //             <button id="newpatient">Add a new patient</button>
+        //             <table class="tablestyle" id="tbl1">
+        //                 <thead>
+        //                     <tr>
+        //                         <th style="width:15%">Patient ID</th>
+        //                         <th>Mutation ID</th>
+        //                         <th>First Name</th>
+        //                         <th>Last Name</th>
+        //                     </tr>
+        //                 </thead>
+        //                 <tbody id="tbody1"> -->
+        //                     <?php
+                            $counter = 0;
+                                    echo $patient_mutations_data['mutationID'];
+                            while ($patient_mutations_data = odbc_fetch_array($patient_mutations_table)) {
+                                echo '<tr>';
+                                echo '<td>' . $patient_mutations_data['PatientID'] . '</td>';
+                                echo '<td>' . $patient_mutations_data['mutationID'] . '</td>';
+                                echo '<td>' . $patient_mutations_data['FirstName'] . '</td>';
+                                echo '<td>' . $patient_mutations_data['LastName'] . '</td>';
+                                echo '</tr>';
+                            
+                                $counter++;
+                            
+        //                         if ($counter >= 10) {
+        //                             break; // Exit the loop after 10 iterations
+        //                         }
+                            }
+        //                     ?>
+        //                 </tbody>
+        //             </table>    
             <?php
             include_once 'footer.php'
                 ?>
