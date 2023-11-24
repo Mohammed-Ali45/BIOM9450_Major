@@ -23,6 +23,7 @@ if (isset($_SESSION['Researcher_email'])) {
     $patient_count_query = "SELECT COUNT(*) AS patient_count FROM ($patient_data_query);";
     $patient_count = odbc_result(odbc_exec($conn, $patient_count_query), 'patient_count');
 
+
     include_once 'header.php'
 
         ?>
