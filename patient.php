@@ -2,12 +2,12 @@
 
 session_start();
 //check if the user is logged in
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['Patient_email'])) {
+    $email = $_SESSION['Patient_email'];
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
@@ -19,7 +19,6 @@ if (isset($_SESSION['email'])) {
     //grabbing data from the patient table
     $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
     $patient_data = odbc_exec($conn, $patient_data_query);
-    //$row = odbc_result($patient_data, 1);
     $patientID = odbc_result($patient_data, 'PatientID');
 
     //grabbing cancer type for select patient
@@ -134,7 +133,7 @@ if (isset($_SESSION['email'])) {
                         </thead>
                         <tbody id="tbody1">
                             <?php
-                            for ($mutation_no = 1; $mutation_no < $mutation_count; $mutation_no++) {
+                            for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
                                 $mutation_row = odbc_fetch_array($mutation_profile, $mutation_no);
                                 echo '<tr>';
                                 echo '<td>' . $mutation_row['mutationID'] . '</td>';

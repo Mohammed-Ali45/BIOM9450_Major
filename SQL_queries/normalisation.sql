@@ -2,7 +2,7 @@
 BIOM9450 Major Project (Selection 2)
 Cancerictive
 Made by: Mohammed Mohammed Ali
-Last updated: 12/11/2023
+Last updated: 25/11/2023
 
 This file documents all queries used to process the given raw data into
 normalised tables and establish the necessary relationships to underly
@@ -92,6 +92,18 @@ SELECT DISTINCT
     RawData.[consequence_type]
 INTO
     Consequence
+FROM
+    RawData;
+
+
+
+/* Makes a table of all mutations from and to allele, and the associated mutation_type */
+SELECT DISTINCT
+    mutated_from_allele,
+    mutated_to_allele,
+    mutation_type
+INTO
+    MutationType
 FROM
     RawData;
 

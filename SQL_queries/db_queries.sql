@@ -61,20 +61,77 @@ FROM
 
 
 /* Displaying repeating mutations for researchers. These queries must be run in
-correct order and be named accordingly to function.
+correct order and be named accordingly to function. Two temporary tables are
+made and deleted after results are retrieved from the 3rd query.
+
 1st lists every mutation in every patient's mutational profile.
 
-1st query = "patient_mutations" or similar */
+1st query = "all_patient_mutations" or similar */
 SELECT
-    Mutation.mutationID,
     Patient.PatientID,
     Patient.FirstName,
     Patient.LastName,
-    Mutation.chromosome,
-    Mutation.chromosome_start,
-    Mutation.chromosome_end,
-    Mutation.mutated_from_allele,
-    Mutation.mutated_to_allele
+    SpecimenMutations.mutationID
+INTO
+    TT_pat_muts
+FROM
+    (
+        Specimens
+        INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+    )
+    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id];
+
+
+
+/* 2nd forms list of all mutationIDs that repeat in 1st query.
+2nd query = "repeating_mutations_index" or similar */
+SELECT
+    SpecimenMutations.mutationID
+INTO
+    TT_rep_muts
+FROM
+    (
+        Specimens
+        INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+    )
+    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+GROUP BY
+    SpecimenMutations.mutationID
+HAVING
+    COUNT(SpecimenMutations.mutationID) > 1;
+
+
+
+/* 3rd query lists only repeating mutationIDs and respective patient info
+3rd query = "repeating_mutations" */
+SELECT
+    TT_rep_muts.mutationID,
+    TT_pat_muts.PatientID,
+    TT_pat_muts.FirstName,
+    TT_pat_muts.LastName
+FROM
+    (
+        Mutation
+        INNER JOIN TT_pat_muts ON Mutation.[mutationID] = TT_pat_muts.[mutationID]
+    )
+    INNER JOIN TT_rep_muts ON Mutation.[mutationID] = TT_rep_muts.[mutationID]
+ORDER BY
+    TT_rep_muts.mutationID;
+
+
+
+/* Displaying repeating affected genes for researchers. These queries must be run in
+correct order and be named accordingly to function.
+
+1st lists every affected gene in every patient's mutational profile.
+1st query = "all_affected_genes or simliar */
+SELECT DISTINCT
+    Patient.PatientID,
+    Patient.FirstName,
+    Patient.LastName,
+    Mutation.gene_affected
+INTO
+    TT_pat_affgenes
 FROM
     (
         Specimens
@@ -83,101 +140,37 @@ FROM
     INNER JOIN (
         Mutation
         INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
-    ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id];
-
-
-
-/* 2nd forms list of all mutationIDs that repeat in 1st query.
-2nd query = "repeating_mutations" or similar */
-SELECT
-    Mutation.mutationID
-FROM
-    '$patient_mutations'
-GROUP BY
-    Mutation.mutationID
-HAVING
-    COUNT(Mutation.mutationID) > 1;
-
-
-
-/* 3rd query lists only repeating mutationIDs and respective patient info
-3rd query = "repeat_patient_mutations" */
-SELECT
-    '$repeating_mutations'.mutationID,
-    '$patient_mutations'.PatientID,
-    '$patient_mutations'.FirstName,
-    '$patient_mutations'.LastName
-FROM
-    '$patient_mutations'
-    INNER JOIN (
-        '$repeating_mutations'
-        INNER JOIN Mutation ON '$repeating_mutations'.[mutationID] = Mutation.[mutationID]
-    ) ON '$patient_mutations'.[mutationID] = Mutation.[mutationID];
-
-
-
-/* Displaying repeating affected genes for researchers. These queries must be run in
-correct order and be named accordingly to function.
-1st lists every affected gene in every patient's mutational profile.
-
-1st query = "patient_specimenIDs" or similar */
-SELECT
-    icgc_specimen_id
-FROM
-    Patient
-ORDER BY
-    icgc_specimen_id;
-
-
-
-/* 2nd lists every affected gene in every patient's mutational profile.
-2nd query = "patient_affected_genes or simliar" */
-SELECT distinct
-    '$patient_specimenIDs'.icgc_specimen_id,
-    Mutation.gene_affected,
-    Patient.PatientID,
-    Patient.FirstName,
-    Patient.LastName
-FROM
-    (
-        (
-            Specimens
-            INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
-        )
-        INNER JOIN (
-            Mutation
-            INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
-        ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
-    )
-    INNER JOIN '$patient_specimenIDs' ON Specimens.[icgc_specimen_id] = '$patient_specimenIDs'.[icgc_specimen_id]
+    ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
 WHERE
-    ISNULL(gene_affected) = FALSE;
+    ISNULL(gene_affected) = FALSE
+ORDER BY
+    Mutation.gene_affected;
 
 
 
-/* 3rd forms list of all affected genes that repeat in 2nd query.
-3rd query = "repeating_genes" or similar */
+/* 2nd lists every affected gene that repeats 
+2nd query = "repeating_genes_index or simliar" */
 SELECT
-    gene_affected
+    Mutation.gene_affected
+INTO
+    TT_rep_genes
 FROM
-    '$patient_affected_genes'
+    pat_genes1
 GROUP BY
-    gene_affected
+    Mutation.gene_affected
 HAVING
     COUNT(gene_affected) > 1;
 
 
 
-/* 4th query lists only repeating affected genes and respective patient info
-4th query = "repeat_patient_genes" */
-SELECT distinct
-    '$repeating_genes'.gene_affected,
-    '$patient_affected_genes'.PatientID,
-    '$patient_affected_genes'.FirstName,
-    '$patient_affected_genes'.LastName
+/* 3rd lists only genes that have affected more than one patient and the
+respective patient info
+3rd query = "repeating_affected_genes or similar" */
+SELECT
+    TT_pat_affgenes.PatientID,
+    TT_pat_affgenes.FirstName,
+    TT_pat_affgenes.LastName,
+    TT_rep_genes.gene_affected
 FROM
-    '$patient_affected_genes'
-    INNER JOIN (
-        '$repeating_gens'
-        INNER JOIN Mutation ON '$repeating_gens'.[gene_affected] = Mutation.[gene_affected]
-    ) ON '$patient_affected_genes'.[gene_affected] = Mutation.[gene_affected];
+    TT_pat_affgenes
+    INNER JOIN TT_rep_genes ON TT_pat_affgenes.gene_affected = TT_rep_genes.gene_affected;

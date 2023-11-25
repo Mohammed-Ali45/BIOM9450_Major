@@ -65,7 +65,7 @@ if (isset($_SESSION['Researcher_email'])) {
                                         INNER JOIN Mutation ON '$repeating_mutations'.[mutationID] = Mutation.[mutationID]
                                     ) ON '$patient_mutations'.[mutationID] = Mutation.[mutationID];";
 
-    
+
     $repeat_patient_mutations_count = "SELECT COUNT(*) AS mutation_count FROM ($repeat_patient_mutations)";
 
 
@@ -120,8 +120,8 @@ if (isset($_SESSION['Researcher_email'])) {
                             for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
                                 $patient_row = odbc_fetch_array($patient_data_table, $patient_no);
                                 echo '<tr>';
-                                echo '<td><a href=profile.php>' . $patient_row['PatientID'] . '</a></td>';
-                                echo '<td><a href=patient.php onclick= "send_patient_id(this, $patient_no)">' . $patient_row['icgc_specimen_id'] . '</a></td>';
+                                echo '<td><a id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '>' . $patient_row['PatientID'] . '</a></td>';
+                                echo '<td><a id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '>' . $patient_row['icgc_specimen_id'] . '</a></td>';
                                 echo '<td>' . $patient_row['FirstName'] . '</td>';
                                 echo '<td>' . $patient_row['LastName'] . '</td>';
                                 echo '</tr>';
