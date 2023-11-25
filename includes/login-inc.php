@@ -11,10 +11,10 @@ if (isset($_POST["submit"])) {
 
     //Victoria
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //Only true when inputted email and password match with a user in db
     $userExists = false;
@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
         $row_data = odbc_fetch_array($user_data);
 
         //storing email of user in session variable
-        $_SESSION['email'] = $row_data['Email'];
+        $_SESSION['Patient_email'] = $row_data['Email'];
         header('location: ../patient.php');
         exit;
 
@@ -77,11 +77,11 @@ if (isset($_POST["submit"])) {
         $occupation = odbc_result(odbc_exec($conn, $staff_query), "Occupation");
 
         if ($occupation == "Researcher") {
-            $_SESSION['email'] = $row_data['Email'];
+            $_SESSION['Researcher_email'] = $row_data['Email'];
             header('location: ../researcher.php');
             exit;
         } elseif ($occupation == "Oncologist") {
-            $_SESSION['email'] = $row_data['Email'];
+            $_SESSION['Oncologist_email'] = $row_data['Email'];
             header('location: ../oncologist.php');
             exit;
         }

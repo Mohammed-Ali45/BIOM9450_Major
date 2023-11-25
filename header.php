@@ -2,18 +2,21 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <!--setting up file-->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--linking css files-->
-    <link rel="resetsheet" type="text/css" href="css/reset.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="resetsheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <!--linking js file-->
     <script defer src="validation.js"></script>
     <script defer src="functions.js"></script>
-    
+    <!--linking jquery-->
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!--inputting fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,4 +25,3 @@
     <title>Cancerictive</title>
 
 </head>
-
