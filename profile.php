@@ -43,7 +43,7 @@ if (isset($_SESSION['email'])) {
                 <div class = "card">
                     <div class="row">
                         <div class="column left">
-                        <img src = "patient-photo/<?php echo $row['PatientID']?>.jpg" alt="profile photo" width="200" height="200">
+                        <img src = "patient-photo/img_<?php echo $row['PatientID']?>.jpg" alt="profile photo" width="200" height="200">
                         </div>
                         <div class="column right">
                             <table class="tablestyle">

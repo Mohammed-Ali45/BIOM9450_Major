@@ -3,12 +3,12 @@
 var searchbar = document.getElementById('searchbar');
 var category = document.getElementById('category');
 var tbody = document.getElementById('tbody1');
-var orignaltabledata = tbody.innerHTML;
+var originaltabledata = tbody.innerHTML; //storing original html content
 
 //search function
 function Search() {
-    tbody.innerHTML = orignaltabledata;
-    let rows = tbody.children; //all of the table tows tags
+    tbody.innerHTML = originaltabledata; //restoring original table when unfiltered
+    let rows = tbody.children; //all of the table rows tags
 
     if(searchbar.value.length < 1 || category.value == '0') {
         return; //do not filter if you have no inputs
@@ -16,10 +16,10 @@ function Search() {
 
     let filteredrows = ''; //initialize filtered rows as empty
     let catno = Number(category.value) -1; //index of array starts from 0
-    let searchtext = searchbar.value.toLowerCase();
+    let searchtext = searchbar.value.toLowerCase(); //case sensitive search
 
     for (let i = 0; i < rows.length; i++) {
-        const currentrowtext = rows[i].children[catno].innerText.toLowerCase(); //assigning tr's table cell according to the category selected
+        const currentrowtext = rows[i].children[catno].innerText.toLowerCase(); //assigning table row's cell according to the category selected
         if(currentrowtext.indexOf(searchtext) > -1){ //if text is found will return index and will return filtered row
             filteredrows += rows[i].outerHTML //current row
         }
@@ -27,6 +27,38 @@ function Search() {
     tbody.innerHTML = filteredrows; //filtered data will go into the tbody
 }
 searchbar.addEventListener('input', Search);
+
+//search function for mutation table
+//getting the references
+var searchbar_mutation = document.getElementById('searchbar_mutation');
+var tbody_mutation = document.getElementById('tbody2');
+var originaltabledata_mut = tbody_mutation.innerHTML; // Storing original html content
+
+// Search function
+function Search_mutation() {
+    tbody_mutation.innerHTML = originaltabledata_mut; // Restoring original table when unfiltered
+    let rows_mut = tbody_mutation.children; // All of the table rows tags
+
+    if (searchbar_mutation.value.length < 1) {
+        return; // Do not filter if you have no inputs
+    }
+
+    let filteredrows_mut = ''; // Initialize filtered rows as empty
+    let searchtext_mut = searchbar_mutation.value.toLowerCase(); // Case-sensitive search
+
+    for (let i = 0; i < rows_mut.length; i++) {
+        const currentrowtext_mut = rows_mut[i].innerText.toLowerCase(); // Entire text content of the row
+        if (currentrowtext_mut.indexOf(searchtext_mut) > -1) {
+        // If text is found, add the entire row to filtered rows
+        filteredrows_mut += rows_mut[i].outerHTML;
+        }
+    }
+    tbody_mutation.innerHTML = filteredrows_mut; // Filtered data will go into the tbody
+}
+
+searchbar_mutation.addEventListener('input', Search_mutation);
+
+
 
 //register button
 // JavaScript code to handle the button click event
