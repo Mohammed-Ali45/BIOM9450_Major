@@ -14,6 +14,6 @@ $patient_email = odbc_result($patient_data, 'Email');
 
 
 
-$_SESSION['Patient_Email'] = $patient_email;
+$_SESSION['Patient_email'] = $patient_email;
 header('location: /patient.php');
 exit;

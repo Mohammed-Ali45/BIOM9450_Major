@@ -2,8 +2,8 @@
 
 session_start();
 //check if the user is logged in
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['Patient_email'])) {
+    $email = $_SESSION['Patient_email'];
 
     //establish a connection, uncomment your own connection and comment out the other persons
 
@@ -15,9 +15,8 @@ if (isset($_SESSION['email'])) {
     $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
     //grabbing data from the patient table
-    $sql = "SELECT * FROM Patient WHERE Email = '$email'";
-    $exists = odbc_exec($conn, $sql);
-    $row = odbc_fetch_array($exists);
+    $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
+    $patient_data = odbc_exec($conn, $patient_data_query);
     include_once 'header.php'
 
         ?>
@@ -43,8 +42,8 @@ if (isset($_SESSION['email'])) {
                 <div class="card">
                     <div class="row">
                         <div class="column left">
-                            <img src="patient-photo/<?php echo $row['PatientID'] ?>.jpg" alt="profile photo" width="200"
-                                height="200">
+                            <img src="patient-photo/<?php echo 'img_' . odbc_result($patient_data, 'PatientID') ?>.jpg"
+                                alt="profile photo" width="200" height="200">
                         </div>
                         <div class="column right">
                             <table class="tablestyle">
@@ -54,46 +53,46 @@ if (isset($_SESSION['email'])) {
                                 <tr>
                                     <td>First Name:</td>
                                     <td>
-                                        <?php echo $row['FirstName']; ?>
+                                        <?php echo odbc_result($patient_data, 'FirstName'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Last Name:</td>
                                     <td>
-                                        <?php echo $row['LastName']; ?>
+                                        <?php echo odbc_result($patient_data, 'LastName'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Email:</td>
                                     <td>
-                                        <?php echo $row['Email']; ?>
+                                        <?php echo odbc_result($patient_data, 'Email'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Address:</td> <!--fix the spacing here pls -->
                                     <td>
-                                        <?php echo $row['StreetNumber'];
-                                        echo $row['StreetName'];
-                                        echo $row['City'];
-                                        echo $row['Postcode']; ?>
+                                        <?php echo odbc_result($patient_data, 'StreetNumber');
+                                        echo odbc_result($patient_data, 'StreetName');
+                                        echo odbc_result($patient_data, 'City');
+                                        echo odbc_result($patient_data, 'Postcode'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Phone No.:</td>
                                     <td>
-                                        <?php echo $row['PhoneNo']; ?>
+                                        <?php echo odbc_result($patient_data, 'PhoneNo'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Age:</td>
                                     <td>
-                                        <?php echo $row['age']; ?>
+                                        <?php echo odbc_result($patient_data, 'age'); ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Country:</td>
                                     <td>
-                                        <?php echo $row['country']; ?>
+                                        <?php echo odbc_result($patient_data, 'country'); ?>
                                     </td>
                                 </tr>
                             </table>

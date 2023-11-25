@@ -2,8 +2,8 @@
 
 session_start();
 //check if the user is logged in
-if (isset($_SESSION['Patient_email']) || isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])) {
-    $email = $_SESSION['Patient_Email'];
+if (isset($_SESSION['Patient_email'])) {
+    $email = $_SESSION['Patient_email'];
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
@@ -19,7 +19,6 @@ if (isset($_SESSION['Patient_email']) || isset($_SESSION['Researcher_email']) ||
     //grabbing data from the patient table
     $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
     $patient_data = odbc_exec($conn, $patient_data_query);
-    //$row = odbc_result($patient_data, 1);
     $patientID = odbc_result($patient_data, 'PatientID');
 
     //grabbing cancer type for select patient
