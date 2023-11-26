@@ -4,10 +4,10 @@ session_start();
 
 // Victoria's db connection
 //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-//$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_ODBC);
+$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_ODBC);
 
 //Moey's db connection
-$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+//$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 include_once 'header.php'
@@ -109,8 +109,8 @@ FROM
 
     //Okay let's try printing out the results of this array and see if they stick around
     ?>
-
-    <table class="tablestyle" id="tbl1">
+    <input type="text" id="searchbar_mutation" placeholder="Search Here..." style="width:100%">
+    <table class="tablestyle" id="tbl2">
         <thead>
             <tr>
                 <th style="width:15%">Mutation ID</th>
@@ -119,7 +119,7 @@ FROM
                 <th>Potential Impact</th>
             </tr>
         </thead>
-        <tbody id="tbody1">
+        <tbody id="tbody2">
             <?php
             for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
                 $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);

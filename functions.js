@@ -28,8 +28,8 @@ function Search() {
 }
 searchbar.addEventListener('input', Search);
 
-//search function for mutation table
-//getting the references
+// Search function for mutation table
+// Getting the references
 var searchbar_mutation = document.getElementById('searchbar_mutation');
 var tbody_mutation = document.getElementById('tbody2');
 var originaltabledata_mut = tbody_mutation.innerHTML; // Storing original html content
@@ -47,10 +47,10 @@ function Search_mutation() {
     let searchtext_mut = searchbar_mutation.value.toLowerCase(); // Case-sensitive search
 
     for (let i = 0; i < rows_mut.length; i++) {
-        const currentrowtext_mut = rows_mut[i].innerText.toLowerCase(); // Entire text content of the row
-        if (currentrowtext_mut.indexOf(searchtext_mut) > -1) {
-        // If text is found, add the entire row to filtered rows
-        filteredrows_mut += rows_mut[i].outerHTML;
+        const mutationID_col = rows_mut[i].querySelector('td:nth-child(1)').innerText.toLowerCase(); // Mutation ID column text content
+        if (mutationID_col === searchtext_mut) {
+            // If Mutation ID matches, add the entire row to filtered rows
+            filteredrows_mut += rows_mut[i].outerHTML;
         }
     }
     tbody_mutation.innerHTML = filteredrows_mut; // Filtered data will go into the tbody
