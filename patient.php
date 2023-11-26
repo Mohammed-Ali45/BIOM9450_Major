@@ -78,7 +78,14 @@ if (isset($_SESSION['Patient_email'])) {
         <!--setting up the nav bar-->
         <header>
             <div class="container1">
-                <img src="images/snail.jpg" alt="logo" class="logo" width="70" height="70">
+                <div>
+                    <img src="images/snail.jpg" alt="logo" class="logo">
+                    <div id="logo-text">
+                        <span id="cancerictive-text" class="DM-Serif">Cancerictive</span>
+                        <br />
+                        <span id="slogan-text" class="Lato">Innovation & Compassion</span>
+                    </div>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="patient.php">Mutations</a></li>
