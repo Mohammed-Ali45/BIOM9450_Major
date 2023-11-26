@@ -81,7 +81,7 @@ if (isset($_SESSION['Researcher_email'])) {
                                 <th>Last Name</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody1">
+                        <tbody>
                             <?php
                             //Prints all Patient data retreived from above queries
                             for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
@@ -192,7 +192,7 @@ if (isset($_SESSION['Researcher_email'])) {
                         <th>Potential Impact</th>
                     </tr>
                 </thead>
-                <tbody id="tbody1">
+                <tbody>
                     <?php
                     for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
                         $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
@@ -260,13 +260,13 @@ if (isset($_SESSION['Researcher_email'])) {
 
             // 2nd query lists all genes that repeat
             $repeating_genes_index = "SELECT
-                        Mutation.gene_affected
+                        TT_pat_affgenes.gene_affected
                         INTO
                         TT_rep_genes
                         FROM
-                        pat_genes1
+                        TT_pat_affgenes
                         GROUP BY
-                        Mutation.gene_affected
+                        TT_pat_affgenes.gene_affected
                         HAVING
                         COUNT(gene_affected) > 1";
 
@@ -308,7 +308,7 @@ if (isset($_SESSION['Researcher_email'])) {
                         <th>Potential Impact</th>
                     </tr>
                 </thead>
-                <tbody id="tbody1">
+                <tbody>
                     <?php
                     for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
                         $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
