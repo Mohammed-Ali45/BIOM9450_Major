@@ -23,10 +23,7 @@
         </div>
     </header>
 
-    <div class="flex-container">
-         <div class="card-single">
-            <div class = "card">
-            
+    
                 <h1>Contact Information</h1>
                 <ul>
             <li>Email: <a href="mailto:info@cancerictive.com">info@cancerictive.com</a></li>
