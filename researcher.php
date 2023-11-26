@@ -35,7 +35,14 @@ if (isset($_SESSION['Researcher_email'])) {
         <!--setting up the nav bar-->
         <header>
             <div class="container1">
-                <img src="images/snail.jpg" alt="logo" class="logo" width="70" height="70">
+                <div>
+                    <img src="images/snail.jpg" alt="logo" class="logo">
+                    <div id="logo-text">
+                        <span id="cancerictive-text" class="DM-Serif">Cancerictive</span>
+                        <br />
+                        <span id="slogan-text" class="Lato">Innovation & Compassion</span>
+                    </div>
+                </div>
                 <nav>
                     <ul>
                         <li><a href="researcher.php">Database</a></li>
@@ -53,7 +60,8 @@ if (isset($_SESSION['Researcher_email'])) {
                     <h1>Patient Database</h1>
                     <form>
                         <!-- search bar -->
-                        <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+                        <input class="input-type-text bottom-margin" type="text" id="searchbar" placeholder="Search Here..."
+                            style="width:100%">
                         <!-- category filter -->
                         <select id="category" style="width:100%">
                             <option value="0" selected hidden>Select Category</option>

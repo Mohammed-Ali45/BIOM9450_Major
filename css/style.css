@@ -1,253 +1,291 @@
 /* setting up basic stuff i.e background and margin */
 body {
-    margin: 0;
-    background: #F0F2F3;
-    font-weight: 300;
+  margin: 0;
+  background: #f0f2f3;
+  font-weight: 300;
 }
 
 /* inputting font from google */
-*, *::before, *::after{
-    font-family: 'Poppins', sans-serif;
+*,
+*::before,
+*::after {
+  font-family: "Poppins", sans-serif;
 }
 
 /* to make font easier to read */
-p { font-size:large; }
+p {
+  font-size: large;
+}
 
 /* keeping a 20% margin on both sides for body text */
 .container {
-    width: 80%;
-    margin: 0 auto;
-} 
+  width: 80%;
+  margin: 0 auto;
+}
 
-/* for the navigation bar only */
+/* Start of universal classes */
+.hyperlink {
+  color: #d6a419;
+  text-decoration: none;
+
+  transition: color 0.2s, color 0.2s;
+}
+
+.hyperlink:hover {
+  color: #003366;
+  text-decoration: underline;
+}
+
+/* end of universal classes */
+
+/* Start of header styling */
 .container1 {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-} 
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
 
 header {
-    background: #003366;
+  background: #003366;
 }
 
 header::after {
-    content: '';
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .logo {
-    float: left;
-} 
+  float: left;
+  width: 70px;
+  height: 70px;
+}
 
-label.logo{
-    color: #444;
-    font-size: 30px;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 80px;
-    font-weight: bold;
+label.logo {
+  color: #444;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 80px;
+  font-weight: bold;
+}
 
+#logo-text {
+  display: inline-block;
+  height: 70px;
+  width: 270px;
+}
+
+#cancerictive-text {
+  color: #d6a419;
+  font-size: 2rem;
+  padding-left: 20px;
+  vertical-align: bottom;
+  line-height: 0rem;
+}
+
+#slogan-text {
+  color: white;
+  padding-left: 20px;
+  vertical-align: super;
+  line-height: 2.5rem;
 }
 
 /* nav bar stuff */
 nav ul {
-    float:right;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  float: right;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 nav ul li {
-    display: inline-block;
-    margin-left: 70px;
-     padding-top: 23px; 
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 23px;
 }
 
 nav ul li a {
-    color: #F0F2F3;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 10px 13px;
-    border-radius: 3px;
+  color: #f0f2f3;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 10px 13px;
+
+  transition: background-color 0.2s, color 0.2s;
 }
 /* nav button animations */
 nav a:hover {
-    color: #D6A419;
+  color: #d6a419;
 }
 
-/* Dropdown Button */
+/* Header Login button */
 .dropbtn {
-    background-color: #71B1C5;
-    color: white;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #71B1C5;
-    min-width: 130px;
-    z-index: 1;
-    border-radius: 0.2rem;
-    top: 29px;
-    right: 0; /* Align from the right */
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: white;
-    padding: 10px;
-    text-decoration: none;
-    display: block;
-  }
+  background-color: #1b8d89;
+  color: white;
+}
 
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {display: block;}
-  
-  /* Change the background color of the dropdown button when the dropdown content is shown */
-  .dropdown:hover .dropbtn {background-color: #71B1C5;}
+.dropbtn:hover {
+  background-color: white;
+}
+/* End of header styling */
 
 /* setting up the cards to be only in a column */
 .card-single {
-    display: column;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); 
-    gap: 3rem;
-    align-items: flex-start;
+  display: column;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  align-items: flex-start;
 }
 
 /* Responsive columns */
 @media screen and (max-width: 600px) {
-    .card-single {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
+  .card-single {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
+}
 
 /* Style the counter cards */
 .card {
-    padding-top: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    background-color: #ffffff;
-    border: none;
-  }
+  padding-top: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  background-color: #ffffff;
+  border: none;
+}
 
-  .card-header {
-    font-size:1.5rem;
-    text-align: center;
-    margin-bottom:.5rem;
-    font-weight: bold;
+.card-header {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .card-body {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .card-body ul {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .card-footer {
-    margin-top:1rem;
+  margin-top: 1rem;
 }
-
 
 /* making specific cards for forms so that colour and size are different */
 .card1 {
-    padding-top: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    background-color: #ffffff;
-    border-radius:1rem;
-    border: none;
-    font-size: large;
-    width: 40%;
-    margin: 0 auto;
-  }
+  padding-top: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  border: none;
+  font-size: large;
+  width: 40%;
+  margin: 0 auto;
+}
 
-/* styling the field boxes to appropriately fit the cards and changing bg colour */
-  input[type=text] {
-    width: 95%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    align-items: center;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
+/* These two classes replace the above one to avoid the issue of misplaced 
+error messages on login page */
+.input-type-text {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 0px 0;
+  align-items: center;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
 
-  input[type=email] {
-    width: 95%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
+.bottom-margin {
+  margin-bottom: 20px;
+}
+/* End of input type text fix */
 
-  input[type=password] {
-    width: 95%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
+input[type="email"] {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
 
-  select[id=category] {
-    width: 95%;
-    padding: 15px;
-    margin: 5px 0 20px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
+input[type="password"] {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 0px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
 
-  /* styling the error messages */
+select[id="category"] {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* styling the error messages */
 .input-control {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* styling the input elements inside input control container */
- .input-control input {
-    border: 2px solid #f1f1f1;
-	border-radius: 4px;
-	display: block;
-	font-size: 12px;
-	padding: 10px;
-} 
+.input-control input {
+  border: 2px solid #f1f1f1;
+  border-radius: 4px;
+  display: block;
+  font-size: 12px;
+  padding: 10px;
+}
 
 /* styling when clicked */
 .input-control input:focus {
-    outline: 0;
+  outline: 0;
 }
 /* success border colour */
 .input-control.success input {
-    border-color: #09c372;
+  border-color: #09c372;
 }
 /* error border colour */
 .input-control.error input {
-    border-color: #ff3860;
+  border-color: #ff3860;
 }
 /* error mesage */
 .input-control .error {
-    color: #ff3860;
-    font-size: small;
+  color: #ff3860;
+  font-size: small;
+  margin-bottom: 20px;
+}
+
+/* Login and clear button styling */
+.btn {
+  background-color: #003366;
+  border: none;
+  padding: 5px 10px;
+  margin-bottom: 30px;
+
+  font-size: 1rem;
+  color: #d6a419;
+
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn:hover {
+  background-color: #d6a419;
+  color: white;
 }
 
 /* two uneven columns styling */
-
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -273,7 +311,7 @@ nav a:hover {
 }
 
 /* styling the table */
- /* table {
+/* table {
   width: 90%;
   border-collapse: collapse;
   border: 1px solid #a5a5a5;
@@ -286,7 +324,6 @@ nav a:hover {
   width: 100%;
 }
 
-
 .tablestyle td {
   padding: 15px;
   text-align: left;
@@ -295,7 +332,6 @@ nav a:hover {
   padding: 15px;
   text-align: center;
 }
-
 
 .tablestyle th {
   background-color: #003366;
@@ -307,12 +343,21 @@ nav a:hover {
 }
 
 .tablestyle tr:nth-child(odd) {
-  background: linear-gradient(to right, #71B1C5, #3498db);
+  background: linear-gradient(to right, #71b1c5, #3498db);
   color: #fff;
 }
 
-.flex-container{display: flex;justify-content: space-around;background:#fff;}
+.flex-container {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+}
 
+/* Fonts imported by Moey */
+.DM-Serif {
+  font-family: "DM Serif Display", serif;
+}
 
-
-  
+.Lato {
+  font-family: "Lato", sans-serif;
+}

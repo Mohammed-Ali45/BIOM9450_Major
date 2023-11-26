@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+</div>
 
 <head>
   <meta charset="UTF-8">
@@ -17,7 +16,7 @@
       <div class="wave" id="wave4"></div>
     </div>
     <ul class="social-icon">
-      <li class="social-icon__item"><a class="social-icon__link" href="#"> 
+      <li class="social-icon__item"><a class="social-icon__link" href="#">
           <ion-icon name="logo-facebook"></ion-icon>
         </a></li>
       <li class="social-icon__item"><a class="social-icon__link" href="#">
@@ -40,6 +39,4 @@
   </footer>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
-
-</html>
+  </body>

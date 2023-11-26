@@ -9,10 +9,11 @@
 
 bodyfooter {
   display: flex;
-  background: #333;
+  background: #f0f2f3;
   justify-content: flex-end;
   align-items: flex-end;
-  min-height: 100vh;
+  min-height: 60vh;
+  margin-top: 10px;
 }
 
 .footer {
@@ -89,28 +90,28 @@ bodyfooter {
   z-index: 1000;
   opacity: 1;
   bottom: 0;
-  animation: animateWaves 4s linear infinite;
+  animation: animateWaves 30s linear infinite;
 }
 
 .wave#wave2 {
   z-index: 999;
   opacity: 0.5;
   bottom: 10px;
-  animation: animate 4s linear infinite !important;
+  animation: animate 35s linear infinite !important;
 }
 
 .wave#wave3 {
   z-index: 1000;
   opacity: 0.2;
   bottom: 15px;
-  animation: animateWaves 3s linear infinite;
+  animation: animateWaves 32s linear infinite;
 }
 
 .wave#wave4 {
   z-index: 999;
   opacity: 0.7;
   bottom: 20px;
-  animation: animate 3s linear infinite;
+  animation: animate 37s linear infinite;
 }
 
 @keyframes animateWaves {
