@@ -37,26 +37,23 @@ if (isset($_SESSION['Patient_email'])) {
 
     //grabbing mutation information for select patient
     $mutation_profile_query = "SELECT
-                        Mutation.mutationID,
-                        Mutation.gene_affected,
-                        Mutation.chromosome,
-                        MutationConsequences.consequence_type,
-                        SpecimenMutations.icgc_specimen_id,
-                        Patient.PatientID
-                    FROM
-                        (
-                            Mutation
-                            INNER JOIN (
-                                (
-                                    Specimens
-                                    INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
-                                )
-                                INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
-                            ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
-                        )
-                        INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
-                    WHERE
-                        Patient.PatientID = $patientID";
+                                    Mutation.mutationID,
+                                    Mutation.chromosome,
+                                    Mutation.chromosome_start,
+                                    Mutation.chromosome_end,
+                                    Mutation.gene_affected,
+                                    Patient.PatientID
+                                FROM
+                                    (
+                                        Specimens
+                                        INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
+                                    )
+                                    INNER JOIN (
+                                        Mutation
+                                        INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+                                    ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
+                                    WHERE PatientID = $patientID
+                                ";
 
     $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($mutation_profile_query)";
     $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
@@ -125,7 +122,7 @@ if (isset($_SESSION['Patient_email'])) {
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Mutation ID</option>
                             <option value="2">Gene Involved</option>
-                            <option value="3">Location</option>
+                            <option value="3">Chromosome</option>
                             <option value="4">Potential Impact</option>
                         </select>
                     </form>
@@ -134,21 +131,27 @@ if (isset($_SESSION['Patient_email'])) {
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
-                                <th>Gene Involved</th>
-                                <th>Location</th>
-                                <th>Potential Impact</th>
+                                <th>Chromosome</th>
+                                <th>Start location</th>
+                                <th>End Location</th>
+                                <th>Gene Affected</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody1">
+                        <tbody class="center-aligned">
                             <?php
                             for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
                                 $mutation_row = odbc_fetch_array($mutation_profile, $mutation_no);
-                                echo '<tr>';
+                                echo '<tr id="mut-row ' . $mutation_no . '">';
                                 echo '<td>' . $mutation_row['mutationID'] . '</td>';
                                 echo ' ';
-                                echo '<td>' . $mutation_row['gene_affected'] . '</td>';
                                 echo '<td>' . $mutation_row['chromosome'] . '</td>';
-                                echo '<td>' . $mutation_row['consequence_type'] . '</td>';
+                                echo '<td>' . (int) $mutation_row['chromosome_start'] . '</td>';
+                                echo '<td>' . (int) $mutation_row['chromosome_end'] . '</td>';
+                                echo '<td>' . $mutation_row['gene_affected'] . '</td>';
+                                echo '</tr>';
+
+                                echo '<tr>';
+                                echo '<td class="collapsable-row" rowspan="2"></td>';
                                 echo '</tr>';
                             }
 
