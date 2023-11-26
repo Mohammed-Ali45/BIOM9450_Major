@@ -55,7 +55,7 @@ include_once 'header.php'
                             <input type="submit" button class="btn" value="Login" name="submit">
                             <!--submit button-->
                         </div>
-                        <p>Don't have an account? <a href="signup.php">Sign up here!</a></p>
+                        <p>Don't have an account? <a class="hyperlink" href="signup.php">Sign up here!</a></p>
                     </form>
                 </div>
             </div>
