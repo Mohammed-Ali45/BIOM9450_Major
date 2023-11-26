@@ -81,7 +81,7 @@ if (isset($_SESSION['Researcher_email'])) {
                                 <th>Last Name</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody1">
                             <?php
                             //Prints all Patient data retreived from above queries
                             for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
@@ -184,15 +184,15 @@ if (isset($_SESSION['Researcher_email'])) {
                 <div class="card">
                     <h1>Mutations</h1>
                     <!-- search bar -->
-                    <input type="text" id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:100%">
+                    <input class="input-type-text bottom-margin" type="text" id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:100%">
                     <!--Now printing the table produced by the above 3 queries-->
                     <table class="tablestyle" id="tbl2">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
-                                <th>Gene Involved</th>
-                                <th>Location</th>
-                                <th>Potential Impact</th>
+                                <th>Patient ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                             </tr>
                         </thead>
                         <tbody id="tbody2">
@@ -305,17 +305,20 @@ if (isset($_SESSION['Researcher_email'])) {
             <div class="card-single">
                 <div class="card">
                     <h1>Affected Genes</h1>
+                    <!-- search bar for genes table -->
+                    <input class="input-type-text bottom-margin" type="text" id="searchbar_gene" placeholder="Search Here..."
+                            style="width:100%">
                     <!--Prints the table produced in the above 3 queries for repeating affected genes-->
                     <table class="tablestyle" id="tbl1">
                         <thead>
                             <tr>
-                                <th style="width:15%">Mutation ID</th>
-                                <th>Gene Involved</th>
-                                <th>Location</th>
-                                <th>Potential Impact</th>
+                                <th style="width:15%">Gene Involved</th>
+                                <th>Patient ID</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody1">
+                        <tbody id="tbody3">
                             <?php
                             for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
                                 $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
