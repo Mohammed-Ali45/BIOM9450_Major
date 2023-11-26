@@ -172,35 +172,39 @@ if (isset($_SESSION['Researcher_email'])) {
             $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
             ?>
 
+            <div class="card-single">
+                <div class="card">
+                    <h1>Mutations</h1>
+                    <!-- search bar -->
+                    <input type="text" id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:100%">
+                    <!--Now printing the table produced by the above 3 queries-->
+                    <table class="tablestyle" id="tbl2">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">Mutation ID</th>
+                                <th>Gene Involved</th>
+                                <th>Location</th>
+                                <th>Potential Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody2">
+                            <?php
+                            for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
+                                $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
+                                echo '<tr>';
+                                echo '<td>' . $mutation_row['mutationID'] . '</td>';
+                                echo ' ';
+                                echo '<td>' . $mutation_row['PatientID'] . '</td>';
+                                echo '<td>' . $mutation_row['FirstName'] . '</td>';
+                                echo '<td>' . $mutation_row['LastName'] . '</td>';
+                                echo '</tr>';
+                            }
 
-
-            <!--Now printing the table produced by the above 3 queries-->
-            <table class="tablestyle" id="tbl1">
-                <thead>
-                    <tr>
-                        <th style="width:15%">Mutation ID</th>
-                        <th>Gene Involved</th>
-                        <th>Location</th>
-                        <th>Potential Impact</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody1">
-                    <?php
-                    for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
-                        $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
-                        echo '<tr>';
-                        echo '<td>' . $mutation_row['mutationID'] . '</td>';
-                        echo ' ';
-                        echo '<td>' . $mutation_row['PatientID'] . '</td>';
-                        echo '<td>' . $mutation_row['FirstName'] . '</td>';
-                        echo '<td>' . $mutation_row['LastName'] . '</td>';
-                        echo '</tr>';
-                    }
-
-                    ?>
-                </tbody>
-            </table>
-
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <?php
             // Releases db lock, end of repeating mutation data retrieval
@@ -290,33 +294,37 @@ if (isset($_SESSION['Researcher_email'])) {
             $gene_count = odbc_result(odbc_exec($conn, $gene_count_query), 'gene_count');
             ?>
 
-            <!--Prints the table produced in the above 3 queries for repeating affected genes-->
-            <table class="tablestyle" id="tbl1">
-                <thead>
-                    <tr>
-                        <th style="width:15%">Mutation ID</th>
-                        <th>Gene Involved</th>
-                        <th>Location</th>
-                        <th>Potential Impact</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody1">
-                    <?php
-                    for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
-                        $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
-                        echo '<tr>';
-                        echo '<td>' . $gene_row['gene_affected'] . '</td>';
-                        echo ' ';
-                        echo '<td>' . $gene_row['PatientID'] . '</td>';
-                        echo '<td>' . $gene_row['FirstName'] . '</td>';
-                        echo '<td>' . $gene_row['LastName'] . '</td>';
-                        echo '</tr>';
-                    }
+            <div class = "card-single">
+                <div class = "card">
+                    <h1>Affected Genes</h1>
+                    <!--Prints the table produced in the above 3 queries for repeating affected genes-->
+                    <table class="tablestyle" id="tbl1">
+                        <thead>
+                            <tr>
+                                <th style="width:15%">Mutation ID</th>
+                                <th>Gene Involved</th>
+                                <th>Location</th>
+                                <th>Potential Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody1">
+                            <?php
+                            for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
+                                $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
+                                echo '<tr>';
+                                echo '<td>' . $gene_row['gene_affected'] . '</td>';
+                                echo ' ';
+                                echo '<td>' . $gene_row['PatientID'] . '</td>';
+                                echo '<td>' . $gene_row['FirstName'] . '</td>';
+                                echo '<td>' . $gene_row['LastName'] . '</td>';
+                                echo '</tr>';
+                            }
 
-                    ?>
-                </tbody>
-            </table>
-
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <?php
 
@@ -342,10 +350,10 @@ if (isset($_SESSION['Researcher_email'])) {
 
 
 
-            <?php
-            include_once 'footer.php'
-                ?>
-            <?php
+    <?php
+        include_once 'footer.php'
+    ?>
+<?php
 
 } else {
 
