@@ -40,7 +40,8 @@ include_once 'header.php'
                     <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post">
                         <div class="input-control">
                             <label for="email">Email</label>
-                            <input id="email" name="email" type="text" placeholder="example@gmail.com">
+                            <input class="input-type-text" id="email" name="email" type="text"
+                                placeholder="example@gmail.com">
                             <div class="error"></div>
                         </div>
                         <div class="input-control">

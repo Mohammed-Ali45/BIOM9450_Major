@@ -60,7 +60,8 @@ if (isset($_SESSION['Researcher_email'])) {
                     <h1>Patient Database</h1>
                     <form>
                         <!-- search bar -->
-                        <input type="text" id="searchbar" placeholder="Search Here..." style="width:100%">
+                        <input class="input-type-text bottom-margin" type="text" id="searchbar" placeholder="Search Here..."
+                            style="width:100%">
                         <!-- category filter -->
                         <select id="category" style="width:100%">
                             <option value="0" selected hidden>Select Category</option>
