@@ -13,10 +13,11 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
 
     // Vic's db connection
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+
 
     //Moey's db connection
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 
@@ -52,10 +53,101 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
         <div class="container">
 
             <div class="card-single">
-                <div class="card1">
+                <div class="card1" style="width:70%">
                     <div class="card-header">New Patient Register</div>
                     <div class="card-body">
-                        <form id="form" onsubmit="return validateForm()" action="includes/loginr-inc.php" method="post">
+                        <form id="form" onsubmit="return validateForm()" action="includes/newpatient-inc.php" method="post">
+                            <div class="input-control">
+                                <label for="Fname">First Name</label>
+                                <input class="input-type-text" id="Fname" name="Fname" type="text"
+                                    placeholder="First Name Here...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                                <label for="Lname">Last Name</label>
+                                <input class="input-type-text" id="Lname" name="Lname" type="text"
+                                    placeholder="Last Name Here...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                                <label for="age">Age</label>
+                                <input class="input-type-text" id="age" name="age" type="text"
+                                    placeholder="50...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                                <label for="dob">Date of Birth</label>
+                                <input class="input-type-text" id="dob" name="dob" type="text"
+                                    placeholder="dd/mm/yyyy...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                                <label for="phone-no">Phone Number</label>
+                                <input class="input-type-text" id="phone-no" name="phone-no" type="text"
+                                    placeholder="04 1234 5678">
+                                <div class="error"></div>
+                            </div>
+
+
+
+
+                            <h2 style="text-align:center">Address</h2>
+                            <div class="input-control">
+                                <label for="street-no">Street Number</label>
+                                <input class="input-type-text" id="street-no" name="street-no" type="text"
+                                    placeholder="6...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="street-name">Street Name</label>
+                                <input class="input-type-text" id="street-name" name="street-name" type="text"
+                                    placeholder="John St...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="city">City</label>
+                                <input class="input-type-text" id="city" name="city" type="text"
+                                    placeholder="Mulberry...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="postcode">Postcode</label>
+                                <input class="input-type-text" id="postcode" name="postcode" type="text"
+                                    placeholder="2175...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="country">Country</label>
+                                <input class="input-type-text" id="country" name="country" type="text"
+                                    placeholder="Australia...">
+                                <div class="error"></div>
+                            </div>
+
+
+
+
+
+                            <h2 style="text-align:center">Diagnosis</h2>
+                            <div class="input-control">
+                            <label for="icgc_specimen_ID">ICGC Specimen ID</label>
+                                <input class="input-type-text" id="city" name="city" type="text"
+                                    placeholder="Mulberry...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="cancer">Cancer Type</label>
+                                <input class="input-type-text" id="cancer" name="cancer" type="text"
+                                    placeholder="Breast...">
+                                <div class="error"></div>
+                            </div>
+                            <div class="input-control">
+                            <label for="treatment">Treatment</label>
+                                <input class="input-type-text" id="treatment" name="treatment" type="text"
+                                    placeholder="Chemotherapy...">
+                                <div class="error"></div>
+                            </div>
+
+                            <h2 style="text-align:center">Login Information</h2>
                             <div class="input-control">
                                 <label for="email">Email</label>
                                 <input class="input-type-text" id="email" name="email" type="text"
@@ -64,14 +156,16 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="password">Password</label>
-                                <input id="password" name="password" type="password" placeholder="Password...">
+                                <input class="input-type-text" id="password" name="password" type="password" 
+                                placeholder="Password...">
                                 <div class="error"></div>
                             </div>
-                            <div class="input-control">
-                                <label for="rid">Researcher ID</label>
-                                <input class="input-type-text" id="rid" name="rid" type="text" placeholder="12345...">
-                                <div class="error"></div>
-                            </div>
+
+
+
+
+
+
                             <div class="card-footer">
                                 <input type="reset" button class="btn btn-outline" value="Clear">
                                 <!--clears all input fields-->

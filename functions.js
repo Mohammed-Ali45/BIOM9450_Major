@@ -97,7 +97,7 @@ searchbar_gene.addEventListener("input", Search_gene);
 // JavaScript code to handle the button click event
 document.getElementById("newpatient").addEventListener("click", function () {
   // Redirect to a new page (replace 'new-page.html' with the desired URL)
-  window.location.href = "patient.php";
+  window.location.href = "newpatient.php";
 });
 
 // hiding and showing consequence table
