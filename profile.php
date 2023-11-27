@@ -57,10 +57,10 @@ if (isset($_SESSION['Patient_email'])) {
                             <table class="tablestyle normal-table">
                                 <thead>
                                     <tr>
-                                        <th colspan="2"><span id="personal-info">Personal Information</span></th>
+                                        <th colspan="2"><span class="table-header">Personal Information</span></th>
                                     </tr>
                                 </thead>
-                                <tbody id="deets-table">
+                                <tbody class="deets-table">
                                     <tr>
                                         <td class="label-cells">First Name:</td>
                                         <td>

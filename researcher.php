@@ -53,17 +53,54 @@ if (isset($_SESSION['Researcher_email'])) {
             </div>
         </header>
 
+
+
+
+
+
+
+
+
+
+
         <!--the body section-->
         <div class="container">
             <div class="card-single">
+                <div class="card more-narrowed-padding">
+                    <h1>Researcher Dashboard</h1>
+                    <p>Welcome to your dashboard. This page will offer you selected filtered views of all mutational
+                        profiles of every patient within the Cancerictive database. If you wish to do a more specific query
+                        than
+                        is offered here, please contact your IT administrator, and they can help you retrieve the
+                        data necessary to carry out your work.
+                    </p>
+                    <br />
+                    <p>
+                        All tables are search filtered for more precise selections of data, and tables can be accessed by
+                        clicking on the relevant dropdowns below. Some tables may contain cells with data in a dark blue
+                        font. This designates
+                        clickable
+                        links that will open a new page to access more data relevant to the selected cell.
+                    </p>
+                    <br />
+                    <br />
+                    <p>something</p>
+                </div>
+            </div>
+
+
+
+
+            <!--Patient list table-->
+            <div class="card-single">
                 <div class="card">
-                    <h1>Patient Database</h1>
+                    <h1 class="more-narrowed-padding">Patient Database</h1>
                     <form>
                         <!-- search bar -->
-                        <input class="input-type-text bottom-margin" type="text" id="searchbar" placeholder="Search Here..."
-                            style="width:100%">
+                        <input class="input-type-text bottom-margin more-narrowed-margin" type="text" id="searchbar"
+                            placeholder="Search Here..." style="width:30%">
                         <!-- category filter -->
-                        <select id="category" style="width:100%">
+                        <select class="select-id-category more-narrowed-margin" id="category" style="width:30%">
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Patient ID</option>
                             <option value="2">ICGC Specimen ID</option>
@@ -87,10 +124,10 @@ if (isset($_SESSION['Researcher_email'])) {
                             for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
                                 $patient_row = odbc_fetch_array($patient_data_table, $patient_no);
                                 echo '<tr>';
-                                echo '<td><a id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=profile>' . $patient_row['PatientID'] . '</a></td>';
-                                echo '<td><a id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=patient>' . $patient_row['icgc_specimen_id'] . '</a></td>';
-                                echo '<td>' . $patient_row['FirstName'] . '</td>';
-                                echo '<td>' . $patient_row['LastName'] . '</td>';
+                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=profile>' . $patient_row['PatientID'] . '</a></td>';
+                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=patient>' . $patient_row['icgc_specimen_id'] . '</a></td>';
+                                echo '<td class="center-aligned">' . $patient_row['FirstName'] . '</td>';
+                                echo '<td class="center-aligned">' . $patient_row['LastName'] . '</td>';
                                 echo '</tr>';
                             }
                             ?>
@@ -98,17 +135,6 @@ if (isset($_SESSION['Researcher_email'])) {
                     </table>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -180,11 +206,23 @@ if (isset($_SESSION['Researcher_email'])) {
             $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
             ?>
 
+
+
+
+
+
+
+
+
+
+
+            <!--Building the mutations table-->
             <div class="card-single">
                 <div class="card">
-                    <h1>Mutations</h1>
+                    <h1 class="more-narrowed-padding">Mutations</h1>
                     <!-- search bar -->
-                    <input class="input-type-text bottom-margin" type="text" id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:100%">
+                    <input class="input-type-text bottom-margin more-narrowed-margin" type="text" id="searchbar_mutation"
+                        placeholder="Search Mutation ID..." style="width:30%">
                     <!--Now printing the table produced by the above 3 queries-->
                     <table class="tablestyle normal-table" id="tbl2">
                         <thead>
@@ -306,8 +344,8 @@ if (isset($_SESSION['Researcher_email'])) {
                 <div class="card">
                     <h1>Affected Genes</h1>
                     <!-- search bar for genes table -->
-                    <input class="input-type-text bottom-margin" type="text" id="searchbar_gene" placeholder="Search Here..."
-                            style="width:100%">
+                    <input class="input-type-text bottom-margin" type="text" id="searchbar_gene"
+                        placeholder="Search Here..." style="width:100%">
                     <!--Prints the table produced in the above 3 queries for repeating affected genes-->
                     <table class="tablestyle normal-table" id="tbl1">
                         <thead>

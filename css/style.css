@@ -229,7 +229,16 @@ input[type="password"] {
   background: #f1f1f1;
 }
 
-select[id="category"] {
+/* select[id="category"] {
+  width: 95%;
+  padding: 15px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+} */
+
+.select-id-category {
   width: 95%;
   padding: 15px;
   margin: 5px 0 20px 0;
@@ -372,6 +381,10 @@ select[id="category"] {
   text-align: center;
 }
 
+.table-header {
+  font-size: 2rem;
+}
+
 /* End table styling */
 
 /* For profile.php */
@@ -380,11 +393,7 @@ select[id="category"] {
   height: 300px;
 }
 
-#personal-info {
-  font-size: 2rem;
-}
-
-#deets-table {
+.deets-table {
   font-size: 1.5rem;
 }
 
@@ -392,7 +401,32 @@ select[id="category"] {
   border-right: white 1px solid;
 }
 
+.table-hyperlink {
+  color: #003366;
+  text-decoration: none;
+
+  transition: color 0.2s, color 0.2s;
+}
+
+.table-hyperlink:hover {
+  color: #ffbb00;
+  text-decoration: underline;
+}
+
 /* end profile.php styling */
+
+/* for researcher.php */
+.more-narrowed-margin {
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.more-narrowed-padding {
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+/* end of researcher.php styling */
 
 .flex-container {
   display: flex;
