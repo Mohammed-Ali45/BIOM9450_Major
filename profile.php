@@ -49,62 +49,73 @@ if (isset($_SESSION['Patient_email'])) {
                 <div class="card">
                     <div class="row">
                         <div class="column left">
-                            <img src="patient-photo/<?php echo 'img_' . odbc_result($patient_data, 'PatientID') ?>.jpg"
+                            <img class="patient-photo"
+                                src="patient-photo/<?php echo 'img_' . odbc_result($patient_data, 'PatientID') ?>.jpg"
                                 alt="profile photo" width="200" height="200">
                         </div>
                         <div class="column right">
-                            <table class="tablestyle">
-                                <tr>
-                                    <th colspan="2">Personal Information</th>
-                                </tr>
-                                <tr>
-                                    <td>First Name:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'FirstName'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'LastName'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'Email'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Address:</td> <!--fix the spacing here pls -->
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'StreetNumber') . ' ';
-                                        echo odbc_result($patient_data, 'StreetName') . ' ';
-                                        echo odbc_result($patient_data, 'City') . ' ';
-                                        echo odbc_result($patient_data, 'Postcode'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Phone No.:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'PhoneNo'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Age:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'age'); ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Country:</td>
-                                    <td>
-                                        <?php echo odbc_result($patient_data, 'country'); ?>
-                                    </td>
-                                </tr>
+                            <table class="tablestyle normal-table">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"><span id="personal-info">Personal Information</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="deets-table">
+                                    <tr>
+                                        <td class="label-cells">First Name:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'FirstName'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Last Name:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'LastName'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Email:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'Email'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Address:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'StreetNumber') . ' ';
+                                            echo odbc_result($patient_data, 'StreetName') . ' ';
+                                            echo odbc_result($patient_data, 'City') . ' ';
+                                            echo odbc_result($patient_data, 'Postcode'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Phone No.:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'PhoneNo'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Age:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'age'); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label-cells">Country:</td>
+                                        <td>
+                                            <?php echo odbc_result($patient_data, 'country'); ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+            <!--Want to put some buttons here for redirecting patient-->
+            <div class="card-single">
+                <div class="card">
+                    something
                 </div>
             </div>
 

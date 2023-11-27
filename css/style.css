@@ -140,6 +140,8 @@ nav a:hover {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 3rem;
   align-items: flex-start;
+
+  margin-bottom: 2rem;
 }
 
 /* Responsive columns */
@@ -371,6 +373,26 @@ select[id="category"] {
 }
 
 /* End table styling */
+
+/* For profile.php */
+.patient-photo {
+  width: 300px;
+  height: 300px;
+}
+
+#personal-info {
+  font-size: 2rem;
+}
+
+#deets-table {
+  font-size: 1.5rem;
+}
+
+.label-cells {
+  border-right: white 1px solid;
+}
+
+/* end profile.php styling */
 
 .flex-container {
   display: flex;
