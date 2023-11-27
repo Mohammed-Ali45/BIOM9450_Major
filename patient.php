@@ -91,29 +91,42 @@ if (isset($_SESSION['Patient_email'])) {
         <!--the body section-->
         <div class="container">
             <div class="card-single">
-                <div class="card">
-                    <table class="tablestyle">
+                <div class="card more-narrowed-padding">
+                    <table class="tablestyle normal-table">
                         <tr>
-                            <th colspan="2">Diagnosis</th>
+                            <th colspan="2"><span class="table-header">Diagnosis</span></th>
                         </tr>
-                        <tr>
-                            <td>Cancer Type</td>
-                            <td>
-                                <?php echo $patient_cancertype; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Treatment Plan</td>
-                            <td>Antibiotics, Chemotherapy</td>
-                        </tr>
+                        <tbody class="deets-table">
+                            <tr>
+                                <td class="label-cells">Cancer Type</td>
+                                <td>
+                                    <?php echo $patient_cancertype; ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-cells">Treatment Plan</td>
+                                <td>Antibiotics, Chemotherapy</td>
+                            </tr>
+                        </tbody>
                     </table>
-                    <h1>Mutational Profile</h1>
+                </div>
+            </div>
+            <div class="card-single">
+                <div class="card">
+                    <h1 class="more-narrowed-padding">Mutational Profile</h1>
+                    <p class="more-narrowed-padding">This table displays information associated with every mutation found in
+                        the
+                        biopsy of your cancer. You may filter this information by the ID of the mutation, the chromosome in
+                        which the mutation appears, the location within the affected chromosome, and the affected gene
+                        (where applicable)</p>
+                    <br />
+                    <br />
                     <form>
                         <!-- search bar -->
-                        <input class="input-type-text bottom-margin" type="text" id="searchbar" placeholder="Search Here..."
-                            style="width:100%">
+                        <input class="input-type-text bottom-margin more-narrowed-margin" type="text" id="searchbar"
+                            placeholder="Search Here..." style="width:30%">
                         <!-- category filter -->
-                        <select id="category" style="width:100%">
+                        <select class="select-id-category more-narrowed-margin" id="category" style="width:30%">
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Mutation ID</option>
                             <option value="2">Gene Involved</option>
@@ -154,7 +167,7 @@ if (isset($_SESSION['Patient_email'])) {
                                 echo '<td>' . $mutation_row['gene_affected'] . '</td>';
                                 echo '</tr>';
 
-                                $mutation_row = odbc_fetch_array($mutation_profile);
+
 
 
                                 // query for consequence types for given mutationID
@@ -180,6 +193,7 @@ if (isset($_SESSION['Patient_email'])) {
                                 echo '</td>';
                                 echo '</tr>';
 
+                                $mutation_row = odbc_fetch_array($mutation_profile);
                                 $mut_counter++;
                             }
 
