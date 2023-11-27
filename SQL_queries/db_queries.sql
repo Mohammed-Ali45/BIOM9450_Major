@@ -30,25 +30,21 @@ WHERE
 /* Retrieves mutation profile for given PatientID */
 SELECT
     Mutation.mutationID,
-    Mutation.gene_affected,
     Mutation.chromosome,
-    MutationConsequences.consequence_type,
-    SpecimenMutations.icgc_specimen_id,
-    Patient.PatientID
+    Mutation.chromosome_start,
+    Mutation.chromosome_end,
+    Mutation.gene_affected
 FROM
     (
-        Mutation
-        INNER JOIN (
-            (
-                Specimens
-                INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
-            )
-            INNER JOIN SpecimenMutations ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
-        ) ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+        Specimens
+        INNER JOIN Patient ON Specimens.[icgc_specimen_id] = Patient.[icgc_specimen_id]
     )
-    INNER JOIN MutationConsequences ON Mutation.[mutationID] = MutationConsequences.[mutationID]
+    INNER JOIN (
+        Mutation
+        INNER JOIN SpecimenMutations ON Mutation.[mutationID] = SpecimenMutations.[mutationID]
+    ) ON Specimens.[icgc_specimen_id] = SpecimenMutations.[icgc_specimen_id]
 WHERE
-    Patient.PatientID = '$patientID';
+    Patient.PatientID = '$patient_id';
 
 
 
@@ -151,13 +147,13 @@ ORDER BY
 /* 2nd lists every affected gene that repeats 
 2nd query = "repeating_genes_index or simliar" */
 SELECT
-    Mutation.gene_affected
+    TT_pat_affgenes.gene_affected
 INTO
     TT_rep_genes
 FROM
-    pat_genes1
+    TT_pat_affgenes
 GROUP BY
-    Mutation.gene_affected
+    TT_pat_affgenes.gene_affected
 HAVING
     COUNT(gene_affected) > 1;
 

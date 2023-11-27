@@ -65,13 +65,13 @@ ORDER BY
 
     // Here's the second query
     $querytwo = "SELECT
-    Mutation.gene_affected
+    TT_pat_affgenes.gene_affected
 INTO
     TT_rep_genes
 FROM
-    pat_genes1
+    TT_pat_affgenes
 GROUP BY
-    Mutation.gene_affected
+    TT_pat_affgenes.gene_affected
 HAVING
     COUNT(gene_affected) > 1";
 
@@ -104,9 +104,9 @@ FROM
 
 
     //Let's count the rows
-    $gene_count_query = "SELECT COUNT(*) AS gene_count FROM ($querythree)";
-    $gene_count = odbc_result(odbc_exec($conn, $gene_count_query), 'gene_count');
-
+    //$gene_count_query = "SELECT COUNT(*) AS gene_count FROM ($querythree)";
+    //$gene_count = odbc_result(odbc_exec($conn, $gene_count_query), 'gene_count');
+    
 
     //Okay let's try printing out the results of this array and see if they stick around
     ?>
@@ -122,15 +122,21 @@ FROM
         </thead>
         <tbody id="tbody1">
             <?php
-            for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
-                $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
-                echo '<tr>';
+            $gene_row = odbc_fetch_array($only_repeating_genes);
+            $gene_counter = 1;
+            while ($gene_row != false) {
+
+                echo '<tr id="gene_row' . $gene_counter . '">';
                 echo '<td>' . $gene_row['gene_affected'] . '</td>';
                 echo ' ';
                 echo '<td>' . $gene_row['PatientID'] . '</td>';
                 echo '<td>' . $gene_row['FirstName'] . '</td>';
                 echo '<td>' . $gene_row['LastName'] . '</td>';
                 echo '</tr>';
+
+                $gene_row = odbc_fetch_array($only_repeating_genes);
+                $gene_counter++;
+
             }
 
             ?>
@@ -155,9 +161,7 @@ FROM
 
     ?>
 
-    <?php
-    include_once 'footer.php'
-        ?>
+
     <?php
 
     ?>

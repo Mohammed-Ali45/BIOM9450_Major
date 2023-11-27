@@ -4,10 +4,10 @@ session_start();
 
 // Victoria's db connection
 //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_ODBC);
+//$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_ODBC);
 
 //Moey's db connection
-//$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 include_once 'header.php'
@@ -103,9 +103,9 @@ FROM
 
 
     //Let's count the rows
-    $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($querythree)";
-    $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
-
+    //$mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($querythree)";
+    //$mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
+    
 
     //Okay let's try printing out the results of this array and see if they stick around
     ?>
@@ -121,15 +121,33 @@ FROM
         </thead>
         <tbody id="tbody2">
             <?php
-            for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
-                $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
-                echo '<tr>';
+            // for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
+            //     $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
+            //     echo '<tr>';
+            //     echo '<td>' . $mutation_row['mutationID'] . '</td>';
+            //     echo ' ';
+            //     echo '<td>' . $mutation_row['PatientID'] . '</td>';
+            //     echo '<td>' . $mutation_row['FirstName'] . '</td>';
+            //     echo '<td>' . $mutation_row['LastName'] . '</td>';
+            //     echo '</tr>';
+            // }
+            
+
+
+            $mutation_row = odbc_fetch_array($only_repeating_mutations);
+            $mut_counter = 1;
+            while ($mutation_row != false) {
+
+                echo '<tr id="mut_row' . $mut_counter . '">';
                 echo '<td>' . $mutation_row['mutationID'] . '</td>';
                 echo ' ';
                 echo '<td>' . $mutation_row['PatientID'] . '</td>';
                 echo '<td>' . $mutation_row['FirstName'] . '</td>';
                 echo '<td>' . $mutation_row['LastName'] . '</td>';
                 echo '</tr>';
+
+                $mutation_row = odbc_fetch_array($only_repeating_mutations);
+                $mut_counter++;
             }
 
             ?>

@@ -8,10 +8,10 @@ if (isset($_SESSION['Researcher_email'])) {
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 
@@ -72,7 +72,7 @@ if (isset($_SESSION['Researcher_email'])) {
                         </select>
                     </form>
                     <button id="newpatient">Add a new patient</button>
-                    <table class="tablestyle" id="tbl1">
+                    <table class="tablestyle normal-table" id="tbl1">
                         <thead>
                             <tr>
                                 <th style="width:15%">Patient ID</th>
@@ -186,7 +186,7 @@ if (isset($_SESSION['Researcher_email'])) {
                     <!-- search bar -->
                     <input type="text" id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:100%">
                     <!--Now printing the table produced by the above 3 queries-->
-                    <table class="tablestyle" id="tbl2">
+                    <table class="tablestyle normal-table" id="tbl2">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
@@ -306,7 +306,7 @@ if (isset($_SESSION['Researcher_email'])) {
                 <div class="card">
                     <h1>Affected Genes</h1>
                     <!--Prints the table produced in the above 3 queries for repeating affected genes-->
-                    <table class="tablestyle" id="tbl1">
+                    <table class="tablestyle normal-table" id="tbl1">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>

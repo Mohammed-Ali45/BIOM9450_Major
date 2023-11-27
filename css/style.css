@@ -36,6 +36,10 @@ p {
   text-decoration: underline;
 }
 
+.center-aligned {
+  text-align: center;
+}
+
 /* end of universal classes */
 
 /* Start of header styling */
@@ -319,6 +323,7 @@ select[id="category"] {
   background-color: #ffffff;
 } */
 
+/* Start table styling */
 .tablestyle {
   border-collapse: collapse;
   width: 100%;
@@ -326,7 +331,6 @@ select[id="category"] {
 
 .tablestyle td {
   padding: 15px;
-  text-align: left;
 }
 .tablestyle th {
   padding: 15px;
@@ -338,14 +342,35 @@ select[id="category"] {
   color: #fff;
 }
 
-.tablestyle tr:nth-child(even) {
+.normal-table tr:nth-child(even) {
   background: linear-gradient(to right, #ecf0f1, #bdc3c7);
 }
 
-.tablestyle tr:nth-child(odd) {
+.normal-table tr:nth-child(odd) {
   background: linear-gradient(to right, #71b1c5, #3498db);
   color: #fff;
 }
+
+/* for tables with collapsable elements */
+.collapsable-table tr:nth-child(4n + 1) {
+  background: linear-gradient(to right, #71b1c5, #3498db);
+  color: #fff;
+}
+
+.collapsable-table tr:nth-child(4n-1) {
+  background: linear-gradient(to right, #ecf0f1, #bdc3c7);
+}
+
+.collapsable-row {
+  display: none;
+}
+
+.collapsable-row td {
+  padding-bottom: 100px;
+  text-align: center;
+}
+
+/* End table styling */
 
 .flex-container {
   display: flex;

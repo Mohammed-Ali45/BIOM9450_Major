@@ -7,7 +7,7 @@ if (isset($_SESSION['Patient_email'])) {
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
     $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
@@ -55,17 +55,12 @@ if (isset($_SESSION['Patient_email'])) {
                                     WHERE PatientID = $patientID
                                 ";
 
-    $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($mutation_profile_query)";
-    $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
+    // $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($mutation_profile_query)";
+    // $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
     $mutation_profile = odbc_exec($conn, $mutation_profile_query);
 
-    /*
-    for ($mutation_no = 1; $mutation_no < $mutation_count; $mutation_no++) {
 
 
-    }
-    ;
-*/
     //paste the header file
     include_once 'header.php'
 
@@ -127,7 +122,12 @@ if (isset($_SESSION['Patient_email'])) {
                         </select>
                     </form>
 
-                    <table class="tablestyle" id="tbl1">
+                    <table class="tablestyle collapsable-table" id="tbl1">
+                        <!-- <col width="5%">
+                        <col width="5%">
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="50%"> -->
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
@@ -137,11 +137,15 @@ if (isset($_SESSION['Patient_email'])) {
                                 <th>Gene Affected</th>
                             </tr>
                         </thead>
-                        <tbody class="center-aligned">
+                        <tbody id="tbody1" class="center-aligned">
                             <?php
-                            for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
-                                $mutation_row = odbc_fetch_array($mutation_profile, $mutation_no);
-                                echo '<tr id="mut-row ' . $mutation_no . '">';
+
+                            // Printing all rows of the resulting table
+                            $mutation_row = odbc_fetch_array($mutation_profile);
+                            $mut_counter = 1;
+                            while ($mutation_row != false) {
+
+                                echo '<tr id="mut-row' . $mut_counter . '" onclick="toggle_conseq_row(this.id)">';
                                 echo '<td>' . $mutation_row['mutationID'] . '</td>';
                                 echo ' ';
                                 echo '<td>' . $mutation_row['chromosome'] . '</td>';
@@ -150,9 +154,33 @@ if (isset($_SESSION['Patient_email'])) {
                                 echo '<td>' . $mutation_row['gene_affected'] . '</td>';
                                 echo '</tr>';
 
-                                echo '<tr>';
-                                echo '<td class="collapsable-row" rowspan="2"></td>';
+                                $mutation_row = odbc_fetch_array($mutation_profile);
+
+
+                                // query for consequence types for given mutationID
+                                $mut_row = $mutation_row['mutationID'];
+                                $consequence_type_query = "SELECT consequence_type
+                                                        FROM MutationConsequences
+                                                        WHERE mutationID = $mut_row";
+
+                                $consequence_types = odbc_exec($conn, $consequence_type_query);
+                                $consequence_types_list = odbc_fetch_array($consequence_types);
+
+
+
+                                // Prints all consequence types
+                                echo '<tr id="conseq-row' . $mut_counter . '" class="collapsable-row">';
+                                echo '<td colspan="3">';
+                                while ($consequence_types_list != false) {
+                                    echo $consequence_types_list['consequence_type'];
+                                    echo '<br/>';
+                                    $consequence_types_list = odbc_fetch_array($consequence_types);
+                                }
+
+                                echo '</td>';
                                 echo '</tr>';
+
+                                $mut_counter++;
                             }
 
                             ?>
@@ -160,6 +188,7 @@ if (isset($_SESSION['Patient_email'])) {
                     </table>
                 </div>
             </div>
+
 
             <?php
             include_once 'footer.php'
