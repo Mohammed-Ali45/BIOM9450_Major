@@ -61,6 +61,38 @@ function Search_mutation() {
 
 searchbar_mutation.addEventListener("input", Search_mutation);
 
+//search function for genes table
+//grabbing references
+var searchbar_gene = document.getElementById("searchbar_gene");
+var tbody_gene = document.getElementById("tbody3");
+var originaltabledata_gene = tbody_gene.innerHTML; // Storing original html content
+
+// Search function
+function Search_gene() {
+  tbody_gene.innerHTML = originaltabledata_gene; // Restoring original table when unfiltered
+  let rows_gene = tbody_gene.children; // All of the table rows tags
+
+  if (searchbar_gene.value.length < 1) {
+    return; // Do not filter if you have no inputs
+  }
+
+  let filteredrows_gene = ""; // Initialize filtered rows as empty
+  let searchtext_gene = searchbar_gene.value.toLowerCase(); // Case-sensitive search
+
+  for (let i = 0; i < rows_gene.length; i++) {
+    const gene_affected_col = rows_gene[i]
+      .querySelector("td:nth-child(1)")
+      .innerText.toLowerCase(); // taking text from gene column
+    if (gene_affected_col === searchtext_gene) {
+      // If text is found, add the entire row to filtered rows
+      filteredrows_gene += rows_gene[i].outerHTML;
+    }
+  }
+  tbody_gene.innerHTML = filteredrows_gene; // Filtered data will go into the tbody
+}
+
+searchbar_gene.addEventListener("input", Search_gene);
+
 //register button
 // JavaScript code to handle the button click event
 document.getElementById("newpatient").addEventListener("click", function () {
