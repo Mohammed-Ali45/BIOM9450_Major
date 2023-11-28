@@ -17,11 +17,6 @@ if (isset($_SESSION['Researcher_email'])) {
     //grabbing patient table
     $patient_data_query = "SELECT Patient.[PatientID], Patient.[FirstName], Patient.[LastName], Patient.[icgc_specimen_id] FROM Patient";
     $patient_data_table = odbc_exec($conn, $patient_data_query);
-    $patient_data = odbc_fetch_array($patient_data_table);
-
-    //Counting the number of rows in the result
-    $patient_count_query = "SELECT COUNT(*) AS patient_count FROM ($patient_data_query);";
-    $patient_count = odbc_result(odbc_exec($conn, $patient_count_query), 'patient_count');
 
 
     include_once 'header.php'
@@ -133,14 +128,20 @@ if (isset($_SESSION['Researcher_email'])) {
                         <tbody id="tbody1">
                             <?php
                             //Prints all Patient data retreived from above queries
-                            for ($patient_no = 1; ($patient_no - 1) < $patient_count; $patient_no++) {
-                                $patient_row = odbc_fetch_array($patient_data_table, $patient_no);
+                            $patient_no = 1;
+                            $patient_row = odbc_fetch_array($patient_data_table);
+                            while ($patient_row != false) {
+
                                 echo '<tr>';
                                 echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=profile>' . $patient_row['PatientID'] . '</a></td>';
                                 echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=patient>' . $patient_row['icgc_specimen_id'] . '</a></td>';
                                 echo '<td class="center-aligned">' . $patient_row['FirstName'] . '</td>';
                                 echo '<td class="center-aligned">' . $patient_row['LastName'] . '</td>';
                                 echo '</tr>';
+
+
+                                $patient_row = odbc_fetch_array($patient_data_table);
+                                $patient_no++;
                             }
                             ?>
                         </tbody>
@@ -215,11 +216,6 @@ if (isset($_SESSION['Researcher_email'])) {
 
             //Execute the last query
             $only_repeating_mutations = odbc_exec($conn, $repeating_mutations);
-
-
-            //Counting the rows on the 3rd query
-            $mutation_count_query = "SELECT COUNT(*) AS mutation_count FROM ($repeating_mutations)";
-            $mutation_count = odbc_result(odbc_exec($conn, $mutation_count_query), 'mutation_count');
             ?>
 
 
@@ -259,8 +255,11 @@ if (isset($_SESSION['Researcher_email'])) {
                         </thead>
                         <tbody class="center-aligned" id="tbody2">
                             <?php
-                            for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
-                                $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
+
+                            $mutation_no = 1;
+                            $mutation_row = odbc_fetch_array($only_repeating_mutations);
+                            while ($mutation_row != false) {
+
                                 echo '<tr>';
                                 echo '<td>' . $mutation_row['mutationID'] . '</td>';
                                 echo ' ';
@@ -268,6 +267,9 @@ if (isset($_SESSION['Researcher_email'])) {
                                 echo '<td>' . $mutation_row['FirstName'] . '</td>';
                                 echo '<td>' . $mutation_row['LastName'] . '</td>';
                                 echo '</tr>';
+
+                                $mutation_row = odbc_fetch_array($only_repeating_mutations);
+                                $mutation_no++;
                             }
 
                             ?>
@@ -357,11 +359,6 @@ if (isset($_SESSION['Researcher_email'])) {
 
             // Executes 3rd query
             $only_repeating_genes = odbc_exec($conn, $repeating_affected_genes);
-
-
-            // Counts rows in the resulting table
-            $gene_count_query = "SELECT COUNT(*) AS gene_count FROM ($repeating_affected_genes)";
-            $gene_count = odbc_result(odbc_exec($conn, $gene_count_query), 'gene_count');
             ?>
 
 
@@ -402,8 +399,10 @@ if (isset($_SESSION['Researcher_email'])) {
                         </thead>
                         <tbody class="center-aligned" id="tbody3">
                             <?php
-                            for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
-                                $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
+                            $gene_no = 1;
+                            $gene_row = odbc_fetch_array($only_repeating_genes);
+                            while ($gene_row != false) {
+
                                 echo '<tr>';
                                 echo '<td>' . $gene_row['gene_affected'] . '</td>';
                                 echo ' ';
@@ -411,6 +410,9 @@ if (isset($_SESSION['Researcher_email'])) {
                                 echo '<td>' . $gene_row['FirstName'] . '</td>';
                                 echo '<td>' . $gene_row['LastName'] . '</td>';
                                 echo '</tr>';
+
+                                $gene_row = odbc_fetch_array($only_repeating_genes);
+                                $gene_no++;
                             }
 
                             ?>
