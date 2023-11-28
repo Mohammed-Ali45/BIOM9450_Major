@@ -85,6 +85,7 @@ if (isset($_SESSION['Researcher_email'])) {
                     <br />
                     <br />
                     <p>something</p>
+                    <button id="newmut">Add a new mutation</button>
                 </div>
             </div>
 
@@ -123,7 +124,6 @@ if (isset($_SESSION['Researcher_email'])) {
                         </select>
                     </form>
                     <button class="collapsable more-narrowed-margin" id="newpatient">Add a new patient</button>
-                    <button id="newmut">Add a new mutation</button>
                     <table class="tablestyle normal-table collapsable" id="tbl1">
                         <thead>
                             <tr>

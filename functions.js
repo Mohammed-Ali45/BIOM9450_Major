@@ -101,6 +101,13 @@ document.getElementById("newpatient").addEventListener("click", function () {
   window.location.href = "newpatient.php";
 });
 
+//register button
+// JavaScript code to handle the button click event
+document.getElementById("newmut").addEventListener("click", function () {
+  // Redirect to a new page
+  window.location.href = "newmut.php";
+});
+
 // Moey: hiding and showing consequence table
 function toggle_conseq_row(objectID) {
   var mut_row = objectID.slice(7);
@@ -116,6 +123,7 @@ function toggle_conseq_row(objectID) {
   }
 }
 
+//Moey: hiding and showing entire tables
 function show_hide_table(object) {
   //Gets the parent element and its styling
   var parentObject = object.parentElement;

@@ -237,3 +237,42 @@ ADD CONSTRAINT FK_StaffID_Users FOREIGN KEY (StaffID) REFERENCES Staff (StaffID)
 /* Adds icgc_specimen_id as a FK for icgc_specimen_id in specimens table */
 ALTER TABLE Patient
 ADD CONSTRAINT FK_patient_specimenid_specimens FOREIGN KEY (icgc_specimen_id) REFERENCES Specimens (icgc_specimen_id);
+
+
+
+/* Normalisation of Treatment and Report data starts here
+
+
+
+
+
+
+
+*/
+/* Adding FK to treatment referencing PatientID from Patient */
+ALTER TABLE Treatment
+ADD CONSTRAINT FK_treatment_patientID FOREIGN KEY (PatientID) REFERENCES Patient (PatientID);
+
+
+
+/* Adding FK to treatment referencing StaffID from Staff */
+ALTER TABLE Treatment
+ADD CONSTRAINT FK_treatment_staffID FOREIGN KEY (StaffID) REFERENCES Staff (StaffID);
+
+
+
+/* Adding FK to SideEffects referencing TreatmentID from Treatment */
+ALTER TABLE SideEffects
+ADD CONSTRAINT FK_sideeffects_treatmentID FOREIGN KEY (TreatmentID) REFERENCES Treatment (TreatmentID);
+
+
+
+/* Adding FK to Report referencing PatientID from Patient */
+ALTER TABLE Report
+ADD CONSTRAINT FK_report_patientID FOREIGN KEY (PatientID) REFERENCES Patient (PatientID);
+
+
+
+/* Adding FK to Report referencing StaffID from Staff */
+ALTER TABLE Report
+ADD CONSTRAINT FK_report_staffID FOREIGN KEY (StaffID) REFERENCES Staff (StaffID);
