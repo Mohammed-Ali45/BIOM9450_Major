@@ -12,15 +12,13 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
 
 
-    // Vic's db connection
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+    include 'conn_string.php';
+    $conn = conn_string();
 
 
-    //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
-    
     include_once 'header.php'
 
         ?>
@@ -41,7 +39,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                     <ul>
                         <li><a href="researcher.php">Database</a></li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
+                        <li><a href="includes/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
                 </nav>
             </div>
@@ -96,22 +94,22 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <select id="consequnce" style="width:95%">
 
 
-                                <?php 
-                                //Consequence query
-                                $consequence = "SELECT distinct consequence_type FROM Consequence;";
-                                $consequence_data = odbc_exec($conn, $consequence);
-                                $consequence_type = odbc_fetch_array($consequence_data);
-                                while ($consequence_type != false) {
-                                    echo '<option value="' . $consequence_type['consequence_type'] . '">' . $consequence_type['consequence_type'] . '</option>';
+                                    <?php
+                                    //Consequence query
+                                    $consequence = "SELECT distinct consequence_type FROM Consequence;";
+                                    $consequence_data = odbc_exec($conn, $consequence);
                                     $consequence_type = odbc_fetch_array($consequence_data);
-                                }
-                                
-            
-                                ?>
+                                    while ($consequence_type != false) {
+                                        echo '<option value="' . $consequence_type['consequence_type'] . '">' . $consequence_type['consequence_type'] . '</option>';
+                                        $consequence_type = odbc_fetch_array($consequence_data);
+                                    }
+
+
+                                    ?>
 
                                 </select>
                             </div>
-                            
+
 
 
 

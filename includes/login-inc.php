@@ -6,12 +6,14 @@ if (isset($_POST["submit"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    /* Connects to database
-    1 of the 2 code blocks below should be uncommented according to who is currently running */
+
+    //Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+    include '../conn_string.php';
+    $conn = conn_string();
 
     //Victoria
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey
     //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);

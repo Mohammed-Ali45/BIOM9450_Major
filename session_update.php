@@ -2,12 +2,10 @@
 
 session_start();
 
-//Victoria
-//$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC);
-$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+//Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+include 'conn_string.php';
+$conn = conn_string();
 
-//Moey's db connection
-//$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 //Gets PatientID from URL

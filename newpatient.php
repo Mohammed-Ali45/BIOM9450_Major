@@ -12,12 +12,9 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
 
 
-    // Vic's db connection
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
-
-
-    //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+    include 'conn_string.php';
+    $conn = conn_string();
 
 
 
@@ -43,7 +40,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                     <ul>
                         <li><a href="researcher.php">Database</a></li>
                         <li><a href="profile.php">Profile</a></li>
-                        <li><a href="login/logout-inc.php" class="dropbtn">Logout</a></li>
+                        <li><a href="includes/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
                 </nav>
             </div>
@@ -71,14 +68,12 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="age">Age</label>
-                                <input class="input-type-text" id="age" name="age" type="number"
-                                    placeholder="50...">
+                                <input class="input-type-text" id="age" name="age" type="number" placeholder="50...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="dob">Date of Birth</label>
-                                <input class="input-type-text" id="dob" name="dob" type="text"
-                                    placeholder="dd/mm/yyyy...">
+                                <input class="input-type-text" id="dob" name="dob" type="text" placeholder="dd/mm/yyyy...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
@@ -99,25 +94,24 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="street-name">Street Name</label>
+                                <label for="street-name">Street Name</label>
                                 <input class="input-type-text" id="street-name" name="street-name" type="text"
                                     placeholder="John St...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="city">City</label>
-                                <input class="input-type-text" id="city" name="city" type="text"
-                                    placeholder="Mulberry...">
+                                <label for="city">City</label>
+                                <input class="input-type-text" id="city" name="city" type="text" placeholder="Mulberry...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="postcode">Postcode</label>
+                                <label for="postcode">Postcode</label>
                                 <input class="input-type-text" id="postcode" name="postcode" type="number"
                                     placeholder="2175...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="country">Country</label>
+                                <label for="country">Country</label>
                                 <input class="input-type-text" id="country" name="country" type="text"
                                     placeholder="Australia...">
                                 <div class="error"></div>
@@ -129,19 +123,18 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
                             <h2 style="text-align:center">Diagnosis</h2>
                             <div class="input-control">
-                            <label for="icgc_specimen_ID">ICGC Specimen ID</label>
-                                <input class="input-type-text" id="city" name="city" type="text"
-                                    placeholder="Mulberry...">
+                                <label for="icgc_specimen_ID">ICGC Specimen ID</label>
+                                <input class="input-type-text" id="city" name="city" type="text" placeholder="Mulberry...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="cancer">Cancer Type</label>
+                                <label for="cancer">Cancer Type</label>
                                 <input class="input-type-text" id="cancer" name="cancer" type="text"
                                     placeholder="Breast...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                            <label for="treatment">Treatment</label>
+                                <label for="treatment">Treatment</label>
                                 <input class="input-type-text" id="treatment" name="treatment" type="text"
                                     placeholder="Chemotherapy...">
                                 <div class="error"></div>
@@ -158,8 +151,8 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="password">Password</label>
-                                <input class="input-type-text" id="password" name="password" type="password" 
-                                placeholder="Password...">
+                                <input class="input-type-text" id="password" name="password" type="password"
+                                    placeholder="Password...">
                                 <div class="error"></div>
                             </div>
 
