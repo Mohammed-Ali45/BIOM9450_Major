@@ -8,10 +8,10 @@ if (isset($_SESSION['Researcher_email'])) {
 
     // Victoria's db connection
     //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
+    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
     //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
 
 
 
@@ -91,16 +91,30 @@ if (isset($_SESSION['Researcher_email'])) {
 
 
 
+
+
+
+
+
             <!--Patient list table-->
             <div class="card-single">
                 <div class="card">
-                    <h1 class="more-narrowed-padding">Patient Database</h1>
+                    <h1 class="show-hide more-narrowed-padding" onclick="show_hide_table(this)"><img class="table-arrow"
+                            src="../images/right_arrow.png" />Patient Database</h1>
+                    <p class="more-narrowed-padding collapsable">This table lists all Patients currently logged in the
+                        Cancerictive
+                        Database. All data within the
+                        PatientID and ICGC Specimen ID columns consist of hyperlinks that will navigate you to Patient
+                        Profiles and their Mutational Profiles respectively.
+                        <br />
+                        <br />
+                    </p>
                     <form>
                         <!-- search bar -->
-                        <input class="input-type-text bottom-margin more-narrowed-margin" type="text" id="searchbar"
-                            placeholder="Search Here..." style="width:30%">
+                        <input class="input-type-text bottom-margin more-narrowed-margin collapsable" type="text"
+                            id="searchbar" placeholder="Search Here..." style="width:30%">
                         <!-- category filter -->
-                        <select class="select-id-category more-narrowed-margin" id="category" style="width:30%">
+                        <select class="select-id-category more-narrowed-margin collapsable" id="category" style="width:30%">
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Patient ID</option>
                             <option value="2">ICGC Specimen ID</option>
@@ -108,8 +122,8 @@ if (isset($_SESSION['Researcher_email'])) {
                             <option value="4">Last Name</option>
                         </select>
                     </form>
-                    <button id="newpatient">Add a new patient</button>
-                    <table class="tablestyle normal-table" id="tbl1">
+                    <button class="collapsable more-narrowed-margin" id="newpatient">Add a new patient</button>
+                    <table class="tablestyle normal-table collapsable" id="tbl1">
                         <thead>
                             <tr>
                                 <th style="width:15%">Patient ID</th>
@@ -135,6 +149,10 @@ if (isset($_SESSION['Researcher_email'])) {
                     </table>
                 </div>
             </div>
+
+
+
+
 
 
 
@@ -219,12 +237,20 @@ if (isset($_SESSION['Researcher_email'])) {
             <!--Building the mutations table-->
             <div class="card-single">
                 <div class="card">
-                    <h1 class="more-narrowed-padding">Mutations</h1>
+                    <h1 class="show-hide more-narrowed-padding" onclick="show_hide_table(this)"><img class="table-arrow"
+                            src="../images/right_arrow.png" />Mutations in >1 Patient</h1>
+                    <p class="more-narrowed-padding collapsable">This table lists all mutations stored in the Cancerictive
+                        database that appear in more than one patient. It is sorted in numerical order of mutationID, and
+                        can be filtered by specific mutationID in the search bar below.
+                        <br />
+                        <br />
+                    </p>
+
                     <!-- search bar -->
-                    <input class="input-type-text bottom-margin more-narrowed-margin" type="text" id="searchbar_mutation"
-                        placeholder="Search Mutation ID..." style="width:30%">
+                    <input class="input-type-text bottom-margin more-narrowed-margin collapsable" type="text"
+                        id="searchbar_mutation" placeholder="Search Mutation ID..." style="width:30%">
                     <!--Now printing the table produced by the above 3 queries-->
-                    <table class="tablestyle normal-table" id="tbl2">
+                    <table class="tablestyle normal-table collapsable" id="tbl2">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
@@ -233,7 +259,7 @@ if (isset($_SESSION['Researcher_email'])) {
                                 <th>Last Name</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody2">
+                        <tbody class="center-aligned" id="tbody2">
                             <?php
                             for ($mutation_no = 1; $mutation_no <= $mutation_count; $mutation_no++) {
                                 $mutation_row = odbc_fetch_array($only_repeating_mutations, $mutation_no);
@@ -340,14 +366,34 @@ if (isset($_SESSION['Researcher_email'])) {
             $gene_count = odbc_result(odbc_exec($conn, $gene_count_query), 'gene_count');
             ?>
 
+
+
+
+
+
+
+
+
             <div class="card-single">
                 <div class="card">
-                    <h1>Affected Genes</h1>
+                    <h1 class="show-hide more-narrowed-padding" onclick="show_hide_table(this)"><img class="table-arrow"
+                            src="../images/right_arrow.png" />Affected Genes in >1 Patient</h1>
+                    <p class="more-narrowed-padding collapsable">This table lists all affected genes stored in the
+                        Cancerictive
+                        database that appear in more than one patient. It is sorted in numerical order of the ID of the
+                        affected gene, and
+                        can be filtered by specific geneID in the search bar below.
+                        <br />
+                        Mutations occurring in intergenic regions are omitted.
+                        <br />
+                        <br />
+                    </p>
+
                     <!-- search bar for genes table -->
-                    <input class="input-type-text bottom-margin" type="text" id="searchbar_gene"
-                        placeholder="Search Here..." style="width:100%">
+                    <input class="input-type-text bottom-margin more-narrowed-margin collapsable" type="text"
+                        id="searchbar_gene" placeholder="Search Here..." style="width:30%">
                     <!--Prints the table produced in the above 3 queries for repeating affected genes-->
-                    <table class="tablestyle normal-table" id="tbl1">
+                    <table class="tablestyle normal-table collapsable" id="tbl1">
                         <thead>
                             <tr>
                                 <th style="width:15%">Gene Involved</th>
@@ -356,7 +402,7 @@ if (isset($_SESSION['Researcher_email'])) {
                                 <th>Last Name</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody3">
+                        <tbody class="center-aligned" id="tbody3">
                             <?php
                             for ($gene_no = 1; $gene_no <= $gene_count; $gene_no++) {
                                 $gene_row = odbc_fetch_array($only_repeating_genes, $gene_no);
@@ -385,13 +431,6 @@ if (isset($_SESSION['Researcher_email'])) {
             $delete_TT_pat_affgenes = odbc_exec($conn, "DROP TABLE TT_pat_affgenes;");
             $delete_TT_rep_genes = odbc_exec($conn, "DROP TABLE TT_rep_genes;");
             ?>
-
-
-
-
-
-
-
 
 
 

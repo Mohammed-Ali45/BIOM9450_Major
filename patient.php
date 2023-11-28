@@ -118,7 +118,15 @@ if (isset($_SESSION['Patient_email'])) {
                         the
                         biopsy of your cancer. You may filter this information by the ID of the mutation, the chromosome in
                         which the mutation appears, the location within the affected chromosome, and the affected gene
-                        (where applicable)</p>
+                        (where applicable)
+                        <br />
+                        <br />
+                        Clicking on the body of any given row will cause it to expand and display the characterisation of
+                        the
+                        genetic consequence of the given mutation. For example, if the consequence type is labelled as
+                        "intergenic region", then the mutation will affect DNA in a region between genes.
+                    </p>
+
                     <br />
                     <br />
                     <form>
@@ -183,9 +191,10 @@ if (isset($_SESSION['Patient_email'])) {
 
                                 // Prints all consequence types
                                 echo '<tr id="conseq-row' . $mut_counter . '" class="collapsable-row">';
-                                echo '<td colspan="3">';
+                                echo '<td colspan="5">';
+                                echo '<h3>Consequences of this mutation</h3>';
                                 while ($consequence_types_list != false) {
-                                    echo $consequence_types_list['consequence_type'];
+                                    echo '- ' . $consequence_types_list['consequence_type'];
                                     echo '<br/>';
                                     $consequence_types_list = odbc_fetch_array($consequence_types);
                                 }

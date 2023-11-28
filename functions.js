@@ -100,9 +100,8 @@ document.getElementById("newpatient").addEventListener("click", function () {
   window.location.href = "newpatient.php";
 });
 
-// hiding and showing consequence table
+// Moey: hiding and showing consequence table
 function toggle_conseq_row(objectID) {
-  var ID_length = objectID.length;
   var mut_row = objectID.slice(7);
   var conseq_rowID = "conseq-row" + mut_row;
   var conseq_row = document.getElementById(conseq_rowID);
@@ -113,5 +112,68 @@ function toggle_conseq_row(objectID) {
     conseq_row.style.display = "table-row";
   } else {
     conseq_row.style.display = "none";
+  }
+}
+
+function show_hide_table(object) {
+  //Gets the parent element and its styling
+  var parentObject = object.parentElement;
+  var tableObject = parentObject.getElementsByTagName("table");
+  var tableStyle = tableObject[0].style;
+
+  //Gets the search bar
+  var searchbarObject = parentObject.getElementsByTagName("input");
+  var searchbarStyle = searchbarObject[0].style;
+
+  //Gets the orange arrow for displaying whether table is expanded or not
+  var tableArrow = parentObject.getElementsByClassName("table-arrow");
+
+  //Gets the descriptive text above table
+  var text = parentObject.getElementsByTagName("p");
+  var textStyle = text[0].style;
+
+  //Gets dropdown if applicable
+  var dropdown = parentObject.getElementsByTagName("select");
+  if (dropdown.length != 0) {
+    var dropdownStyle = dropdown[0].style;
+  }
+
+  //Gets button if applicable
+  var button = parentObject.getElementsByTagName("button");
+  if (button.length != 0) {
+    var buttonStyle = button[0].style;
+  }
+
+  // This if statement will update all elements to show or hide
+  if (tableStyle.display == "none" || tableStyle.display == "") {
+    tableStyle.display = "table";
+    searchbarStyle.display = "inline-block";
+    tableArrow[0].src = "../images/down_arrow.png";
+    textStyle.display = "block";
+
+    //Only tries to change style if dropdown exists
+    if (dropdown.length != 0) {
+      dropdownStyle.display = "inline-block";
+    }
+
+    //Only tries to change style if button exists
+    if (button.length != 0) {
+      buttonStyle.display = "inline-block";
+    }
+  } else {
+    tableStyle.display = "none";
+    searchbarStyle.display = "none";
+    tableArrow[0].src = "../images/right_arrow.png";
+    textStyle.display = "none";
+
+    //Only tries to change style if button exists
+    if (dropdown.length != 0) {
+      dropdownStyle.display = "none";
+    }
+
+    //Only tries to change style if button exists
+    if (button.length != 0) {
+      buttonStyle.display = "none";
+    }
   }
 }

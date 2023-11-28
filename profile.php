@@ -91,7 +91,7 @@ if (isset($_SESSION['Patient_email'])) {
                                     <tr>
                                         <td class="label-cells">Phone No.:</td>
                                         <td>
-                                            <?php echo odbc_result($patient_data, 'PhoneNo'); ?>
+                                            <?php echo '0' . odbc_result($patient_data, 'PhoneNo'); ?>
                                         </td>
                                     </tr>
                                     <tr>
