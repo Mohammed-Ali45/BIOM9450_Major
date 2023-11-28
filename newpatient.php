@@ -58,14 +58,14 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                     <div class="card-body">
                         <form id="form" onsubmit="return validateForm()" action="includes/newpatient-inc.php" method="post">
                             <div class="input-control">
-                                <label for="Fname">First Name</label>
-                                <input class="input-type-text" id="Fname" name="Fname" type="text"
+                                <label for="fname">First Name</label>
+                                <input class="input-type-text" id="fname" name="fname" type="text"
                                     placeholder="First Name Here...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
-                                <label for="Lname">Last Name</label>
-                                <input class="input-type-text" id="Lname" name="Lname" type="text"
+                                <label for="lname">Last Name</label>
+                                <input class="input-type-text" id="lname" name="lname" type="text"
                                     placeholder="Last Name Here...">
                                 <div class="error"></div>
                             </div>
