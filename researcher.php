@@ -6,13 +6,10 @@ if (isset($_SESSION['Researcher_email'])) {
     $email = $_SESSION['Researcher_email'];
 
 
-    // Victoria's db connection
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
-    //Moey's db connection
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
-
+    //Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+    include 'conn_string.php';
+    $conn = conn_string();
 
 
 
@@ -123,7 +120,7 @@ if (isset($_SESSION['Researcher_email'])) {
                             <option value="4">Last Name</option>
                         </select>
                     </form>
-                    <button class="collapsable more-narrowed-margin" id="newpatient">Add a new patient</button>
+                    <button class="btn collapsable more-narrowed-margin" id="newpatient">Add a new patient</button>
                     <table class="tablestyle normal-table collapsable" id="tbl1">
                         <thead>
                             <tr>

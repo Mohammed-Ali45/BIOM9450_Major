@@ -5,12 +5,10 @@ session_start();
 if (isset($_SESSION['Patient_email'])) {
     $email = $_SESSION['Patient_email'];
 
-    // Victoria's db connection
-    //$conn = odbc_connect('z5259813', '', '', SQL_CUR_USE_ODBC); 
-    $conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\User\Downloads\UNSW\Current\BIOM9450\Mutation.accdb", "", "", SQL_CUR_USE_DRIVER);
 
-    //Moey's db connection
-    //$conn = odbc_connect("Driver= {Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\dev\Mutation.accdb", '', '', SQL_CUR_USE_ODBC);
+    //Connection string for allowing workflow to switch between Victoria and Moey's db filepath
+    include 'conn_string.php';
+    $conn = conn_string();
 
 
 
@@ -42,6 +40,8 @@ if (isset($_SESSION['Patient_email'])) {
                                     Mutation.chromosome_start,
                                     Mutation.chromosome_end,
                                     Mutation.gene_affected,
+                                    Mutation.mutated_from_allele,
+                                    Mutation.mutated_to_allele,
                                     Patient.PatientID
                                 FROM
                                     (
@@ -121,10 +121,10 @@ if (isset($_SESSION['Patient_email'])) {
                         (where applicable)
                         <br />
                         <br />
-                        Clicking on the body of any given row will cause it to expand and display the characterisation of
-                        the
-                        genetic consequence of the given mutation. For example, if the consequence type is labelled as
-                        "intergenic region", then the mutation will affect DNA in a region between genes.
+                        Clicking on the body of any given row will cause it to expand and display further information
+                        relevant to the mutation,
+                        such as the characterisation of the consequence of the mutation, the mutation type, and the base
+                        pairs involved.
                     </p>
 
                     <br />
@@ -144,11 +144,11 @@ if (isset($_SESSION['Patient_email'])) {
                     </form>
 
                     <table class="tablestyle collapsable-table" id="tbl1">
-                        <!-- <col width="5%">
-                        <col width="5%">
                         <col width="20%">
                         <col width="20%">
-                        <col width="50%"> -->
+                        <col width="20%">
+                        <col width="20%">
+                        <col width="20%">
                         <thead>
                             <tr>
                                 <th style="width:15%">Mutation ID</th>
@@ -191,7 +191,7 @@ if (isset($_SESSION['Patient_email'])) {
 
                                 // Prints all consequence types
                                 echo '<tr id="conseq-row' . $mut_counter . '" class="collapsable-row">';
-                                echo '<td colspan="5">';
+                                echo '<td colspan="2">';
                                 echo '<h3>Consequences of this mutation</h3>';
                                 while ($consequence_types_list != false) {
                                     echo '- ' . $consequence_types_list['consequence_type'];
@@ -199,7 +199,19 @@ if (isset($_SESSION['Patient_email'])) {
                                     $consequence_types_list = odbc_fetch_array($consequence_types);
                                 }
 
+                                $from_allele = $mutation_row['mutated_from_allele'];
+                                $to_allele = $mutation_row['mutated_to_allele'];
+
+                                // Query for retrieving mutation type from mutation
+                                $mut_type_query = "SELECT mutation_type
+                                FROM MutationType
+                                WHERE mutated_from_allele ='$from_allele' AND mutated_to_allele ='$to_allele'";
+                                $mut_type = odbc_exec($conn, $mut_type_query);
+
                                 echo '</td>';
+                                echo '<td><h3>Mutated From Allele</h3>' . $mutation_row['mutated_from_allele'] . '</td>';
+                                echo '<td><h3>Mutated To Allele</h3>' . $mutation_row['mutated_to_allele'] . '</td>';
+                                echo '<td><h3>Mutation Type</h3>' . odbc_fetch_array($mut_type)['mutation_type'] . '</td>';
                                 echo '</tr>';
 
                                 $mutation_row = odbc_fetch_array($mutation_profile);
