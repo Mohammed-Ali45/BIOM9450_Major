@@ -16,13 +16,14 @@ function Search() {
 
   let filteredrows = ""; //initialize filtered rows as empty
   let catno = Number(category.value) - 1; //index of array starts from 0
-  let searchtext = searchbar.value.toLowerCase(); //case sensitive search
+  let searchtext = searchbar.value.toLowerCase(); //case insensitive search
 
   for (let i = 0; i < rows.length; i++) {
     const currentrowtext = rows[i].children[catno].innerText.toLowerCase(); //assigning table row's cell according to the category selected
     if (currentrowtext.indexOf(searchtext) > -1) {
       //if text is found will return index and will return filtered row
       filteredrows += rows[i].outerHTML; //current row
+      filteredrows += rows[i + 1].outerHTML;
     }
   }
   tbody.innerHTML = filteredrows; //filtered data will go into the tbody
@@ -96,7 +97,7 @@ searchbar_gene.addEventListener("input", Search_gene);
 //register button
 // JavaScript code to handle the button click event
 document.getElementById("newpatient").addEventListener("click", function () {
-  // Redirect to a new page (replace 'new-page.html' with the desired URL)
+  // Redirect to a new page
   window.location.href = "newpatient.php";
 });
 

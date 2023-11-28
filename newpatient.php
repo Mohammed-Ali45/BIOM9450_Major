@@ -71,7 +71,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="age">Age</label>
-                                <input class="input-type-text" id="age" name="age" type="text"
+                                <input class="input-type-text" id="age" name="age" type="number"
                                     placeholder="50...">
                                 <div class="error"></div>
                             </div>
@@ -83,7 +83,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="phone-no">Phone Number</label>
-                                <input class="input-type-text" id="phone-no" name="phone-no" type="text"
+                                <input class="input-type-text" id="phone-no" name="phone-no" type="number"
                                     placeholder="04 1234 5678">
                                 <div class="error"></div>
                             </div>
@@ -94,7 +94,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             <h2 style="text-align:center">Address</h2>
                             <div class="input-control">
                                 <label for="street-no">Street Number</label>
-                                <input class="input-type-text" id="street-no" name="street-no" type="text"
+                                <input class="input-type-text" id="street-no" name="street-no" type="number"
                                     placeholder="6...">
                                 <div class="error"></div>
                             </div>
@@ -112,7 +112,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                             <label for="postcode">Postcode</label>
-                                <input class="input-type-text" id="postcode" name="postcode" type="text"
+                                <input class="input-type-text" id="postcode" name="postcode" type="number"
                                     placeholder="2175...">
                                 <div class="error"></div>
                             </div>
@@ -147,6 +147,8 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <div class="error"></div>
                             </div>
 
+
+
                             <h2 style="text-align:center">Login Information</h2>
                             <div class="input-control">
                                 <label for="email">Email</label>
@@ -169,7 +171,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             <div class="card-footer">
                                 <input type="reset" button class="btn btn-outline" value="Clear">
                                 <!--clears all input fields-->
-                                <input type="submit" button class="btn" value="Login"> <!--submit button-->
+                                <input type="submit" button class="btn" value="Register"> <!--submit button-->
                             </div>
                         </form>
                     </div>
