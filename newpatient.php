@@ -129,10 +129,16 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <div class="error"></div> --><!--A specimen ID will be auto made for new patient, no need for this -->
                     </div>
                     <div class="input-control">
-                        <label for="cancer">Cancer Type</label>
-                        <input class="input-type-text" id="cancer" name="cancer" type="text" placeholder="Breast...">
-                        <div class="error"></div>
-                    </div>
+                                <label for="consequence">Cancer type</label>
+                                <select id="consequnce" style="width:95%">
+                                    <option>Blood</option>
+                                    <option>Brain</option>
+                                    <option>Breast</option>
+                                    <option>Liver</option>
+                                    <option>Pancreas</option>
+                                    <option>Prostate</option>
+                                </select>
+                            </div>
                     <!-- <div class="input-control">
                         <label for="treatment">Treatment</label>
                         <input class="input-type-text" id="treatment" name="treatment" type="text"
