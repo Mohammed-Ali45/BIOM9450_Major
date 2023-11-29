@@ -113,6 +113,15 @@ var postcodechar = /^[0-9]{4,}$/;
 
 var countrychar = /^[a-zA-Z\s]{4,28}$/;
 
+//Regex for newmut.php
+var chromosomechar = /^(?:[1-9]|1[0-9]|2[0-2]|X|Y|MT)$/;
+
+var chromosomelocation = /^[0-9]+$/;
+
+var allelechar = /^[ATCG]+$/;
+
+var genechar = /^[0-9]{1,11}$/;
+
 /* End of regex for newpatient.php */
 
 /* End regular expressions */
@@ -442,26 +451,123 @@ if (formNewpat !== null) {
     }
   });
 }
-/*
 
 
 
 
+//Begin validation for newmut.php
 
+//Are we on login page?
+const formNewmut = document.getElementById("form_newmut");
 
+//Runs all validation and adds event listerns only if we're in the form on newmut.php
+if (formNewmut !==null) {
+  //grabbing references from the html file
+  const chromosome = document.getElementById("chromosome");
+  const chromosome_start = document.getElementById("chromosome_start");
+  const chromosome_end = document.getElementById("chromosome_end");
+  const mutated_from = document.getElementById("mutated_from");
+  const mutated_to = document.getElementById("mutated_to");
+  const gene = document.getElementById("gene_affected");
 
+  //validating chromosome function
+  const validateChromosome = () => {
+    const chromosomeValue = chromosome.value.trim();
+    if (chromosomeValue === "") {
+      setError(chromosome, "Chromosome is required");
+    } else if (chromosome.value.match(chromosomechar)) {
+      setSuccess(chromosome);
+    } else {
+      setError(chromosome, "Chromosome should be between 1-22 or X, Y, or MT");
+    }
+  };
 
+  //validating the chromostome start function
+  const validateChromoStart = () => {
+    const chromoStartValue = chromosome_start.value.trim();
+    if (chromoStartValue === "") {
+      setError(chromosome_start, "Starting chromosome is required");
+    } else if (chromosome_start.value.match(chromosomelocation)) {
+      setSuccess(chromosome_start);
+    } else {
+      setError(chromosome_start, "Chromosome start location should be values 0 to 9");
+    }
+  };
 
+  //validating the chromosme end function
+  const validateChromoEnd = () => {
+    const chromoEndValue = chromosome_end.value.trim();
+    if (chromoEndValue === "") {
+      setError(chromosome_end, "Ending chromosome is required");
+    } else if (chromosome_end.value.match(chromosomelocation)) {
+      setSuccess(chromosome_end);
+    } else {
+      setError(chromosome_end, "Chromosome end location should be values 0 to 9");
+    }
+  };
 
+  //validating the mutated from allele function
+  const validateMutatedFrom = () => {
+    const mutatedfromValue = mutated_from.value.trim();
+    if (mutatedfromValue === "") {
+      setError(mutated_from, "Starting mutation is required");
+    } else if (mutated_from.value.match(allelechar)) {
+      setSuccess(mutated_from);
+    } else {
+      setError(mutated_from, "Starting mutation should only include DNA bases A, T, C, G");
+    }
+  };
 
+  //validating the mutated to allele function
+  const validateMutatedTo = () => {
+    const mutatedtoValue = mutated_to.value.trim();
+    if (mutatedtoValue === "") {
+      setError(mutated_to, "Ending mutation is required");
+    } else if (mutated_to.value.match(allelechar)) {
+      setSuccess(mutated_to);
+    } else {
+      setError(mutated_to, "Ending mutation should only include DNA bases A, T, C, G");
+    }
+  };
 
+  //validating the mutated from allele function
+  const validateGene = () => {
+    const geneValue = gene.value.trim();
+    if (geneValue === "") {
+      setSuccess(gene);
+    } else if (gene.value.match(genechar)) {
+      setSuccess(gene);
+    } else {
+      setError(gene, "Gene affected should be numbers (ESNG0xxx will be appended)");
+    }
+  };
 
+  //add event listeners using validation function to immediately validate field
+  chromosome.addEventListener("change", validateChromosome);
+  chromosome_start.addEventListener("change",validateChromoStart);
+  chromosome_end.addEventListener("change", validateChromoEnd);
+  mutated_from.addEventListener("change",validateMutatedFrom);
+  mutated_to.addEventListener("change",validateMutatedTo);
+  gene.addEventListener("change",validateGene);
 
-*/
-/* Not sure what this code does, it is not utilised in this script
- */
-//getting the references
-// var searchbar = document.getElementById("searchbar");
-// var category = document.getElementById("category");
-// var tbody = document.getElementById("tbody1");
-// var orignaltabledata = tbody.innerHTML;
+  //Add event listerns for when submit button is clicked
+  formNewmut.addEventListener("submit", (l) => {
+    l.preventDefault(); //prevent the form submitting before validating the input, will show error message
+
+    //validate input functions
+    validateChromosome();
+    validateChromoStart();
+    validateChromoEnd();
+    validateMutatedTo();
+    validateMutatedFrom();
+    validateGene;
+
+    if (document.querySelectorAll(".success").length === 6) {
+      //ensuring all fields are successful
+      //submit the form
+      formNewmut.submit();
+    }
+  }
+  )
+
+}

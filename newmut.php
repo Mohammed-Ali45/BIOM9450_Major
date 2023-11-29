@@ -52,7 +52,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                 <div class="card1" style="width:70%">
                     <div class="card-header">Mutation Form</div>
                     <div class="card-body">
-                        <form id="form" onsubmit="return validateForm()" action="includes/newmut-inc.php" method="post">
+                        <form id="form_newmut" action="includes/newmut-inc.php" method="post">
                             <div class="input-control">
                                 <label for="chromosome">Chromosome</label>
                                 <input class="input-type-text" id="chromosome" name="chromosome" type="text"
@@ -93,7 +93,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <label for="consequence">Consequence/s</label>
                                 <select id="consequnce" style="width:95%">
 
-
+                                    
                                     <?php
                                     //Consequence query
                                     $consequence = "SELECT distinct consequence_type FROM Consequence;";
