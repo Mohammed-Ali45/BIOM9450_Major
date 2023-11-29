@@ -56,19 +56,19 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                         <form id="form-newpat" action="includes/newpatient-inc.php" method="post">
                             <div class="input-control">
                                 <label for="Fname">First Name</label>
-                                <input class="input-type-text" id="Fname" name="firstname" type="text"
+                                <input class="input-type-text" id="Fname" name="Fname" type="text"
                                     placeholder="First Name Here...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="Lname">Last Name</label>
-                                <input class="input-type-text" id="Lname" name="lastname" type="text"
+                                <input class="input-type-text" id="Lname" name="Lname" type="text"
                                     placeholder="Last Name Here...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="age">Age</label>
-                                <input class="input-type-text" id="age" name="age" type="number" placeholder="50...">
+                                <input class="input-type-text" id="Age" name="age" type="text" placeholder="50...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
@@ -78,7 +78,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="phone-no">Phone Number</label>
-                                <input class="input-type-text" id="phone-no" name="phone-no" type="number"
+                                <input class="input-type-text" id="phone-no" name="phone-no" type="text"
                                     placeholder="04 1234 5678">
                                 <div class="error"></div>
                             </div>
@@ -89,7 +89,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             <h2 style="text-align:center">Address</h2>
                             <div class="input-control">
                                 <label for="street-no">Street Number</label>
-                                <input class="input-type-text" id="street-no" name="street-no" type="number"
+                                <input class="input-type-text" id="street-no" name="street-no" type="text"
                                     placeholder="6...">
                                 <div class="error"></div>
                             </div>
@@ -106,7 +106,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="postcode">Postcode</label>
-                                <input class="input-type-text" id="postcode" name="postcode" type="number"
+                                <input class="input-type-text" id="postcode" name="postcode" type="text"
                                     placeholder="2175...">
                                 <div class="error"></div>
                             </div>
@@ -122,59 +122,58 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
 
                             <h2 style="text-align:center">Diagnosis</h2>
-                            <div class="input-control">
+                            <!-- <div class="input-control">
                                 <label for="icgc_specimen_ID">ICGC Specimen ID</label>
-                                <input class="input-type-text" id="city" name="city" type="text" placeholder="Mulberry...">
-                                <div class="error"></div>
-                            </div>
-                            <div class="input-control">
-                                <label for="cancer">Cancer Type</label>
-                                <input class="input-type-text" id="cancer" name="cancer" type="text"
-                                    placeholder="Breast...">
-                                <div class="error"></div>
-                            </div>
-                            <div class="input-control">
-                                <label for="treatment">Treatment</label>
-                                <input class="input-type-text" id="treatment" name="treatment" type="text"
-                                    placeholder="Chemotherapy...">
-                                <div class="error"></div>
-                            </div>
-
-
-
-                            <h2 style="text-align:center">Login Information</h2>
-                            <div class="input-control">
-                                <label for="email">Email</label>
-                                <input class="input-type-text" id="email" name="email" type="text"
-                                    placeholder="example@gmail.com">
-                                <div class="error"></div>
-                            </div>
-                            <div class="input-control">
-                                <label for="password">Password</label>
-                                <input class="input-type-text" id="password" name="password" type="password"
-                                    placeholder="Password...">
-                                <div class="error"></div>
-                            </div>
-
-
-
-
-
-
-                            <div class="card-footer">
-                                <input type="reset" button class="btn btn-outline" value="Clear">
-                                <!--clears all input fields-->
-                                <input type="submit" button class="btn" value="Register"> <!--submit button-->
-                            </div>
-                        </form>
+                                <input class="input-type-text" id="icgc-specimen-id" name="icgc-specimen-id" type="text"
+                                    placeholder="Mulberry...">
+                                <div class="error"></div> --><!--A specimen ID will be auto made for new patient, no need for this -->
                     </div>
+                    <div class="input-control">
+                        <label for="cancer">Cancer Type</label>
+                        <input class="input-type-text" id="cancer" name="cancer" type="text" placeholder="Breast...">
+                        <div class="error"></div>
+                    </div>
+                    <!-- <div class="input-control">
+                        <label for="treatment">Treatment</label>
+                        <input class="input-type-text" id="treatment" name="treatment" type="text"
+                            placeholder="Chemotherapy...">
+                        <div class="error"></div>
+                    </div> -->
+
+
+
+                    <h2 style="text-align:center">Login Information</h2>
+                    <div class="input-control">
+                        <label for="email">Email</label>
+                        <input class="input-type-text" id="email" name="email" type="text" placeholder="example@gmail.com">
+                        <div class="error"></div>
+                    </div>
+                    <div class="input-control">
+                        <label for="password">Password</label>
+                        <input class="input-type-text" id="password" name="password" type="password"
+                            placeholder="Password...">
+                        <div class="error"></div>
+                    </div>
+
+
+
+
+
+
+                    <div class="card-footer">
+                        <input type="reset" button class="btn btn-outline" value="Clear">
+                        <!--clears all input fields-->
+                        <input type="submit" button class="btn" value="Register"> <!--submit button-->
+                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-            <?php
-            include_once 'footer.php'
-                ?>
-            <?php
+        <?php
+        include_once 'footer.php'
+            ?>
+        <?php
 
 } else {
 
