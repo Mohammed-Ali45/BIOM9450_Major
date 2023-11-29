@@ -11,12 +11,9 @@
     <!--linking css files-->
     <link rel="resetsheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <!--linking js file-->
+    <!--linking js files-->
     <script defer src="validation.js"></script>
     <script defer src="functions.js"></script>
-    <script defer src="valid.js"></script>
-    <!--linking jquery-->
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!--inputting fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">

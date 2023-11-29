@@ -31,13 +31,13 @@ include_once 'header.php'
             <div class="card1">
                 <div class="card-header">Login</div>
                 <?php $current_url = $_SERVER['REQUEST_URI'];
-                if ($_SERVER['REQUEST_URI'] == '/login.php?error=invalidcredentials') {
+                if ($_SERVER['REQUEST_URI'] == '/BIOM9450_Major/login.php?error=invalidcredentials') {
                     echo '<p class="invalid_creds">Invalid credentials. Please try again.</p>';
                 }
 
                 ?>
                 <div class="card-body">
-                    <form id="form" onsubmit="return validateForm()" action="includes/login-inc.php" method="post">
+                    <form id="formLogin" action="includes/login-inc.php" method="post">
                         <div class="input-control">
                             <label for="email">Email</label>
                             <input class="input-type-text" id="email" name="email" type="text"
@@ -52,7 +52,7 @@ include_once 'header.php'
                         <div class="card-footer">
                             <input type="reset" button class="btn btn-outline" value="Clear">
                             <!--clears all input fields-->
-                            <input type="submit" button class="btn" value="Login" name="submit">
+                            <input type="submit" button class="btn" value="Login" name="btnsubmit">
                             <!--submit button-->
                         </div>
                         <p>Don't have an account? <a class="hyperlink" href="signup.php">Sign up here!</a></p>
