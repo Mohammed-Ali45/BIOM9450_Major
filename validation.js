@@ -452,16 +452,13 @@ if (formNewpat !== null) {
   });
 }
 
-
-
-
 //Begin validation for newmut.php
 
 //Are we on login page?
 const formNewmut = document.getElementById("form_newmut");
 
 //Runs all validation and adds event listerns only if we're in the form on newmut.php
-if (formNewmut !==null) {
+if (formNewmut !== null) {
   //grabbing references from the html file
   const chromosome = document.getElementById("chromosome");
   const chromosome_start = document.getElementById("chromosome_start");
@@ -490,7 +487,10 @@ if (formNewmut !==null) {
     } else if (chromosome_start.value.match(chromosomelocation)) {
       setSuccess(chromosome_start);
     } else {
-      setError(chromosome_start, "Chromosome start location should be values 0 to 9");
+      setError(
+        chromosome_start,
+        "Chromosome start location should be values 0 to 9"
+      );
     }
   };
 
@@ -499,10 +499,16 @@ if (formNewmut !==null) {
     const chromoEndValue = chromosome_end.value.trim();
     if (chromoEndValue === "") {
       setError(chromosome_end, "Ending chromosome is required");
-    } else if (chromosome_end.value.match(chromosomelocation)) {
+    } else if (
+      chromosome_end.value.match(chromosomelocation) &&
+      Number(chromoEndValue) >= Number(chromosome_start.value)
+    ) {
       setSuccess(chromosome_end);
     } else {
-      setError(chromosome_end, "Chromosome end location should be values 0 to 9");
+      setError(
+        chromosome_end,
+        "Chromosome end location should be values 0 to 9"
+      );
     }
   };
 
@@ -514,7 +520,10 @@ if (formNewmut !==null) {
     } else if (mutated_from.value.match(allelechar)) {
       setSuccess(mutated_from);
     } else {
-      setError(mutated_from, "Starting mutation should only include DNA bases A, T, C, G");
+      setError(
+        mutated_from,
+        "Starting mutation should only include DNA bases A, T, C, G"
+      );
     }
   };
 
@@ -523,10 +532,16 @@ if (formNewmut !==null) {
     const mutatedtoValue = mutated_to.value.trim();
     if (mutatedtoValue === "") {
       setError(mutated_to, "Ending mutation is required");
-    } else if (mutated_to.value.match(allelechar)) {
+    } else if (
+      mutated_to.value.match(allelechar) &&
+      mutatedtoValue <= mutated_from.value.trim()
+    ) {
       setSuccess(mutated_to);
     } else {
-      setError(mutated_to, "Ending mutation should only include DNA bases A, T, C, G");
+      setError(
+        mutated_to,
+        "Ending mutation should only include DNA bases A, T, C, G"
+      );
     }
   };
 
@@ -538,17 +553,20 @@ if (formNewmut !==null) {
     } else if (gene.value.match(genechar)) {
       setSuccess(gene);
     } else {
-      setError(gene, "Gene affected should be numbers (ESNG0xxx will be appended)");
+      setError(
+        gene,
+        "Gene affected should be numbers (ESNG0xxx will be appended)"
+      );
     }
   };
 
   //add event listeners using validation function to immediately validate field
   chromosome.addEventListener("change", validateChromosome);
-  chromosome_start.addEventListener("change",validateChromoStart);
+  chromosome_start.addEventListener("change", validateChromoStart);
   chromosome_end.addEventListener("change", validateChromoEnd);
-  mutated_from.addEventListener("change",validateMutatedFrom);
-  mutated_to.addEventListener("change",validateMutatedTo);
-  gene.addEventListener("change",validateGene);
+  mutated_from.addEventListener("change", validateMutatedFrom);
+  mutated_to.addEventListener("change", validateMutatedTo);
+  gene.addEventListener("change", validateGene);
 
   //Add event listerns for when submit button is clicked
   formNewmut.addEventListener("submit", (l) => {
@@ -567,7 +585,5 @@ if (formNewmut !==null) {
       //submit the form
       formNewmut.submit();
     }
-  }
-  )
-
+  });
 }
