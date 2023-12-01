@@ -368,7 +368,7 @@ if (isset($_SESSION['Researcher_email'])) {
 
 
 
-
+            <!-- genes table -->
             <div class="card-single">
                 <div class="card">
                     <h1 class="show-hide more-narrowed-padding" onclick="show_hide_table(this)"><img class="table-arrow"
