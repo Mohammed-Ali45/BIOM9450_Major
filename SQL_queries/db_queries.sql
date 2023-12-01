@@ -170,3 +170,37 @@ SELECT
 FROM
     TT_pat_affgenes
     INNER JOIN TT_rep_genes ON TT_pat_affgenes.gene_affected = TT_rep_genes.gene_affected;
+
+
+
+/* Inserts the details of a new patient into the Patient table of the database */
+INSERT INTO
+    Patient (
+        FirstName,
+        LastName,
+        age,
+        DOB,
+        sex,
+        PhoneNo,
+        Email,
+        StreetNumber,
+        StreetName,
+        City,
+        Postcode,
+        country
+    )
+VALUES
+    (
+        '$Fname',
+        '$Lname',
+        '$age',
+        '$dob',
+        '$sex',
+        '$phone_no',
+        '$email',
+        '$street_no',
+        '$street_name',
+        '$city',
+        '$postcode',
+        '$country'
+    );
