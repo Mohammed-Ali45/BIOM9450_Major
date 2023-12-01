@@ -78,7 +78,7 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="phone-no">Phone Number</label>
-                                <input class="input-type-text" id="phone-no" name="phone-no" type="text"
+                                <input class="input-type-text" id="phone-no" name="phone_no" type="text"
                                     placeholder="04 1234 5678">
                                 <div class="error"></div>
                             </div>
@@ -89,13 +89,13 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             <h2 style="text-align:center">Address</h2>
                             <div class="input-control">
                                 <label for="street-no">Street Number</label>
-                                <input class="input-type-text" id="street-no" name="street-no" type="text"
+                                <input class="input-type-text" id="street-no" name="street_no" type="text"
                                     placeholder="6...">
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
                                 <label for="street-name">Street Name</label>
-                                <input class="input-type-text" id="street-name" name="street-name" type="text"
+                                <input class="input-type-text" id="street-name" name="street_name" type="text"
                                     placeholder="John St...">
                                 <div class="error"></div>
                             </div>

@@ -105,7 +105,35 @@ if (isset($_SESSION['Patient_email'])) {
                             </tr>
                             <tr>
                                 <td class="label-cells">Treatment Plan</td>
-                                <td>Antibiotics, Chemotherapy</td>
+                                <td>
+                                        <?php
+                                        
+                                            // treatment query
+                                            $treatment_query = "SELECT * FROM Treatment WHERE PatientID = $patientID";
+                                            $treatment_data = odbc_exec($conn, $treatment_query);
+
+                                            // Fetching date and time separately
+                                            $dateOfTreatment = odbc_result($treatment_data, 'DateOfTreatment');
+                                            $timeOfTreatment = odbc_result($treatment_data, 'TimeofTreatment');
+
+                                            // echoing information
+                                            echo odbc_result($treatment_data, 'TreatmentType') . ' with administered drug ' . odbc_result($treatment_data, 'AdministeredDrug') . ' prescribed on ' . date('Y-m-d', strtotime($dateOfTreatment)) . ' at ' . date('H:i:s', strtotime($timeOfTreatment));
+                                            ?>
+                                        
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label-cells">Expected outcome</td>
+                                <td>
+                                    <?php
+                                    echo odbc_result($treatment_data, 'Outcome');
+
+
+
+
+                                    ?>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
