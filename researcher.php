@@ -133,8 +133,8 @@ if (isset($_SESSION['Researcher_email'])) {
                             while ($patient_row != false) {
 
                                 echo '<tr>';
-                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=profile>' . $patient_row['PatientID'] . '</a></td>';
-                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . "$patient_no" . ' href=session_update.php?patientid=' . $patient_no . '&destination=patient>' . $patient_row['icgc_specimen_id'] . '</a></td>';
+                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . $patient_row['PatientID'] . ' href=session_update.php?patientid=' . $patient_row['PatientID'] . '&destination=profile>' . $patient_row['PatientID'] . '</a></td>';
+                                echo '<td class="center-aligned"><a target="_blank" class="table-hyperlink" id=' . $patient_row['PatientID'] . ' href=session_update.php?patientid=' . $patient_row['PatientID'] . '&destination=patient>' . $patient_row['icgc_specimen_id'] . '</a></td>';
                                 echo '<td class="center-aligned">' . $patient_row['FirstName'] . '</td>';
                                 echo '<td class="center-aligned">' . $patient_row['LastName'] . '</td>';
                                 echo '</tr>';

@@ -65,4 +65,4 @@ VALUES
 
 $insert_patient = odbc_exec($conn, $insert_patient_query);
 
-//header("location: ../researcher.php");
+header("location: ../researcher.php");
