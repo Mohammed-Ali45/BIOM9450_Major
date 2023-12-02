@@ -19,7 +19,7 @@ include_once 'header.php'
           <li><a href="index.php">Home</a></li>
           <li><a href="about.php">About</a></li>
           <li><a href="database.php">Database</a></li>
-          <li><a class="dropbtn" href ="loging.php">Login</a></li>
+          <li><a class="dropbtn" href ="login.php">Login</a></li>
         </ul>
       </nav>
     </div>
