@@ -106,20 +106,20 @@ if (isset($_SESSION['Patient_email'])) {
                             <tr>
                                 <td class="label-cells">Treatment Plan</td>
                                 <td>
-                                        <?php
-                                        
-                                            // treatment query
-                                            $treatment_query = "SELECT * FROM Treatment WHERE PatientID = $patientID";
-                                            $treatment_data = odbc_exec($conn, $treatment_query);
+                                    <?php
 
-                                            // Fetching date and time separately
-                                            $dateOfTreatment = odbc_result($treatment_data, 'DateOfTreatment');
-                                            $timeOfTreatment = odbc_result($treatment_data, 'TimeofTreatment');
+                                    // treatment query
+                                    $treatment_query = "SELECT * FROM Treatment WHERE PatientID = $patientID";
+                                    $treatment_data = odbc_exec($conn, $treatment_query);
 
-                                            // echoing information
-                                            echo odbc_result($treatment_data, 'TreatmentType') . ' with administered drug ' . odbc_result($treatment_data, 'AdministeredDrug') . ' prescribed on ' . date('Y-m-d', strtotime($dateOfTreatment)) . ' at ' . date('H:i:s', strtotime($timeOfTreatment));
-                                            ?>
-                                        
+                                    // Fetching date and time separately
+                                    $dateOfTreatment = odbc_result($treatment_data, 'DateOfTreatment');
+                                    $timeOfTreatment = odbc_result($treatment_data, 'TimeofTreatment');
+
+                                    // echoing information
+                                    echo odbc_result($treatment_data, 'TreatmentType') . ' with administered drug ' . odbc_result($treatment_data, 'AdministeredDrug') . ' prescribed on ' . date('Y-m-d', strtotime($dateOfTreatment)) . ' at ' . date('H:i:s', strtotime($timeOfTreatment));
+                                    ?>
+
 
                                 </td>
                             </tr>
@@ -186,7 +186,7 @@ if (isset($_SESSION['Patient_email'])) {
                                 <th>Gene Affected</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody1" class="center-aligned">
+                        <tbody id="tbody1" class="center-aligned mutation-profile">
                             <?php
 
                             // Printing all rows of the resulting table

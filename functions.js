@@ -23,7 +23,9 @@ function Search() {
     if (currentrowtext.indexOf(searchtext) > -1) {
       //if text is found will return index and will return filtered row
       filteredrows += rows[i].outerHTML; //current row
-      filteredrows += rows[i + 1].outerHTML;
+      if (tbody.className.includes("mutation-profile")) {
+        filteredrows += rows[i + 1].outerHTML;
+      }
     }
   }
   tbody.innerHTML = filteredrows; //filtered data will go into the tbody
