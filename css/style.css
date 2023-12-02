@@ -194,8 +194,6 @@ nav a:hover {
   margin: 0 auto;
 }
 
-/* These two classes replace the above one to avoid the issue of misplaced 
-error messages on login page */
 .input-type-text {
   width: 95%;
   padding: 15px;
@@ -228,15 +226,6 @@ input[type="password"] {
   border: none;
   background: #f1f1f1;
 }
-
-/* select[id="category"] {
-  width: 95%;
-  padding: 15px;
-  margin: 5px 0 20px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-} */
 
 .select-id-category {
   width: 95%;

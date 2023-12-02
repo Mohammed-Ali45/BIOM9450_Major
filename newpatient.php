@@ -77,6 +77,14 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                                 <div class="error"></div>
                             </div>
                             <div class="input-control">
+                                <label for="sex">Sex</label>
+                                <select class="select-id-category" id="sex" name="sex" style="width: 20%">
+                                    <option value="" selected disabled hidden>Select an option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div class="input-control">
                                 <label for="phone-no">Phone Number</label>
                                 <input class="input-type-text" id="phone-no" name="phone_no" type="text"
                                     placeholder="04 1234 5678">
@@ -122,29 +130,20 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
 
 
                             <h2 style="text-align:center">Diagnosis</h2>
-                            <!-- <div class="input-control">
-                                <label for="icgc_specimen_ID">ICGC Specimen ID</label>
-                                <input class="input-type-text" id="icgc-specimen-id" name="icgc-specimen-id" type="text"
-                                    placeholder="Mulberry...">
-                                <div class="error"></div> --><!--A specimen ID will be auto made for new patient, no need for this -->
+
                     </div>
                     <div class="input-control">
-                                <label for="consequence">Cancer type</label>
-                                <select id="consequnce" style="width:95%">
-                                    <option>Blood</option>
-                                    <option>Brain</option>
-                                    <option>Breast</option>
-                                    <option>Liver</option>
-                                    <option>Pancreas</option>
-                                    <option>Prostate</option>
-                                </select>
-                            </div>
-                    <!-- <div class="input-control">
-                        <label for="treatment">Treatment</label>
-                        <input class="input-type-text" id="treatment" name="treatment" type="text"
-                            placeholder="Chemotherapy...">
-                        <div class="error"></div>
-                    </div> -->
+                        <label for="cancer-type">Cancer type</label>
+                        <select class="select-id-category" id="cancer-type" name="cancer-type" style="width: 20%">
+                            <option value="" selected disabled hidden>Select an option</option>
+                            <option value="Blood">Blood</option>
+                            <option value="Brain">Brain</option>
+                            <option value="Breat">Breast</option>
+                            <option value="Liver">Liver</option>
+                            <option value="Pancreas">Pancreas</option>
+                            <option value="Prostate">Prostate</option>
+                        </select>
+                    </div>
 
 
 
