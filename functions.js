@@ -3,11 +3,11 @@
 var searchbar = document.getElementById("searchbar");
 var category = document.getElementById("category");
 var tbody = document.getElementById("tbody1");
-var originaltabledata = tbody.innerHTML; //storing original html content
+var originaltabledata = tbody.innerHTML; //storing table content
 
 //search function
 function Search() {
-  tbody.innerHTML = originaltabledata; //restoring original table when unfiltered
+  tbody.innerHTML = originaltabledata; //all table rows when unfiltered
   let rows = tbody.children; //all of the table rows tags
 
   if (searchbar.value.length < 1 || category.value == "0") {
@@ -23,87 +23,89 @@ function Search() {
     if (currentrowtext.indexOf(searchtext) > -1) {
       //if text is found will return index and will return filtered row
       filteredrows += rows[i].outerHTML; //current row
+      //if search is performed onthe mutations patient.php table then add the row beneath it (this is hidden until clicked)
       if (tbody.className.includes("mutation-profile")) {
         filteredrows += rows[i + 1].outerHTML;
       }
     }
   }
-  tbody.innerHTML = filteredrows; //filtered data will go into the tbody
+  tbody.innerHTML = filteredrows; //add filtred table rows to the table
 }
+//add eventListener for when user inputs something into the search bar. run the search function
 searchbar.addEventListener("input", Search);
 
 // Search function for mutation table
 // Getting the references
 var searchbar_mutation = document.getElementById("searchbar_mutation");
 var tbody_mutation = document.getElementById("tbody2");
-var originaltabledata_mut = tbody_mutation.innerHTML; // Storing original html content
+var originaltabledata_mut = tbody_mutation.innerHTML; //storing table content
 
 // Search function
 function Search_mutation() {
-  tbody_mutation.innerHTML = originaltabledata_mut; // Restoring original table when unfiltered
-  let rows_mut = tbody_mutation.children; // All of the table rows tags
+  tbody_mutation.innerHTML = originaltabledata_mut; //all table rows when unfiltered
+  let rows_mut = tbody_mutation.children; //all of the table rows tags
 
   if (searchbar_mutation.value.length < 1) {
-    return; // Do not filter if you have no inputs
+    return; //do not filter if you have no inputs
   }
 
-  let filteredrows_mut = ""; // Initialize filtered rows as empty
-  let searchtext_mut = searchbar_mutation.value.toLowerCase(); // Case-sensitive search
+  let filteredrows_mut = ""; //initialize filtered rows as empty
+  let searchtext_mut = searchbar_mutation.value.toLowerCase(); //case insensitive search
 
   for (let i = 0; i < rows_mut.length; i++) {
     const mutationID_col = rows_mut[i]
       .querySelector("td:nth-child(1)")
-      .innerText.toLowerCase(); // Mutation ID column text content
-    if (mutationID_col === searchtext_mut) {
-      // If Mutation ID matches, add the entire row to filtered rows
+      .innerText.toLowerCase(); //selecting to search only in the first column = mutationID column
+    if (mutationID_col === searchtext_mut) { 
+      //if mutationID matches exactly then add to filtred rows
       filteredrows_mut += rows_mut[i].outerHTML;
     }
   }
-  tbody_mutation.innerHTML = filteredrows_mut; // Filtered data will go into the tbody
+  tbody_mutation.innerHTML = filteredrows_mut; //add filtred table rows to the table
 }
-
+//add eventListener for when user inputs something into the search bar. run the search function
 searchbar_mutation.addEventListener("input", Search_mutation);
 
 //search function for genes table
 //grabbing references
 var searchbar_gene = document.getElementById("searchbar_gene");
 var tbody_gene = document.getElementById("tbody3");
-var originaltabledata_gene = tbody_gene.innerHTML; // Storing original html content
+var originaltabledata_gene = tbody_gene.innerHTML; //storing table content
 
 // Search function
 function Search_gene() {
-  tbody_gene.innerHTML = originaltabledata_gene; // Restoring original table when unfiltered
-  let rows_gene = tbody_gene.children; // All of the table rows tags
+  tbody_gene.innerHTML = originaltabledata_gene; //all table rows when unfiltered
+  let rows_gene = tbody_gene.children; //all of the table rows tags
 
   if (searchbar_gene.value.length < 1) {
-    return; // Do not filter if you have no inputs
+    return; //do not filter if you have no inputs
   }
 
-  let filteredrows_gene = ""; // Initialize filtered rows as empty
-  let searchtext_gene = searchbar_gene.value.toLowerCase(); // Case-sensitive search
+  let filteredrows_gene = ""; //initialize filtered rows as empty
+  let searchtext_gene = searchbar_gene.value.toLowerCase(); //case insensitive search
 
   for (let i = 0; i < rows_gene.length; i++) {
     const gene_affected_col = rows_gene[i]
       .querySelector("td:nth-child(1)")
-      .innerText.toLowerCase(); // taking text from gene column
+      .innerText.toLowerCase(); //selecting to check only the gene column
     if (gene_affected_col === searchtext_gene) {
-      // If text is found, add the entire row to filtered rows
+      //if entered text matches exactly then add to filtered row
       filteredrows_gene += rows_gene[i].outerHTML;
     }
   }
-  tbody_gene.innerHTML = filteredrows_gene; // Filtered data will go into the tbody
+  tbody_gene.innerHTML = filteredrows_gene; //add filtred table rows to the table
 }
-
+//add eventListener for when user inputs something into the search bar. run the search function
 searchbar_gene.addEventListener("input", Search_gene);
 
-//register button
+//new patient button
 // JavaScript code to handle the button click event
 document.getElementById("newpatient").addEventListener("click", function () {
   // Redirect to a new page
   window.location.href = "newpatient.php";
 });
 
-//register button
+//new mutation button
 // JavaScript code to handle the button click event
 document.getElementById("newmut").addEventListener("click", function () {
   // Redirect to a new page
