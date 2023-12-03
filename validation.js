@@ -122,7 +122,6 @@ var allelechar = /^[ATCG]+$/;
 
 var genechar = /^[0-9]{1,11}$/;
 
-/* End of regex for newpatient.php */
 
 /* End regular expressions */
 

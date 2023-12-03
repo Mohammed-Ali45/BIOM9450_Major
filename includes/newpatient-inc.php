@@ -16,7 +16,7 @@ $dob = $_POST["dob"];
 $sex = $_POST["sex"];
 $phone_no = $_POST["phone_no"];
 $email = $_POST["email"];
-//$email = 'mohammedyeacom';
+
 $street_no = $_POST["street_no"];
 $street_name = $_POST["street_name"];
 $city = $_POST["city"];
@@ -28,10 +28,7 @@ $cancer_type = $_POST["cancer-type"];
 $password = $_POST["password"];
 
 
-$count_patient_query = "SELECT COUNT(PatientID)
-FROM Patient;";
-$patient_count = odbc_exec($conn, $count_patient_query);
-
+//insert patient query 
 $insert_patient_query = "INSERT INTO
 Patient (
     FirstName,
@@ -65,4 +62,29 @@ VALUES
 
 $insert_patient = odbc_exec($conn, $insert_patient_query);
 
+$count_patient_query = "SELECT COUNT(PatientID)
+FROM Patient;";
+$patient_count = odbc_exec($conn, $count_patient_query);
+$patient_num = odbc_result($patient_count);
+
+//insert user information query
+$insert_user_query = "INSERT INTO
+Users (
+    Email,
+    PatientID,
+    Password
+    )
+    VALUES
+    (
+        '$email',
+        '$patient_num',
+        '$password'
+        
+        
+    );";
+
+$insert_user = odbc_exec($conn, $insert_user_query);
+
+
+//after finishing return to researcher.php
 header("location: ../researcher.php");

@@ -91,15 +91,18 @@ if (isset($_SESSION['Researcher_email']) || isset($_SESSION['Oncologist_email'])
                             </div>
                             <div class="input-control">
                                 <label for="consequence">Consequence/s</label>
-                                <select id="consequnce" style="width:95%">
+                                <select id="consequnce" style="width:95%" name="consequence">
 
                                     
                                     <?php
                                     //Consequence query
                                     $consequence = "SELECT distinct consequence_type FROM Consequence;";
+                                    //executing query
                                     $consequence_data = odbc_exec($conn, $consequence);
+                                    //gathering the content from the rows
                                     $consequence_type = odbc_fetch_array($consequence_data);
                                     while ($consequence_type != false) {
+                                        //echoing consequence type options into the select list and naming them accordingly
                                         echo '<option value="' . $consequence_type['consequence_type'] . '">' . $consequence_type['consequence_type'] . '</option>';
                                         $consequence_type = odbc_fetch_array($consequence_data);
                                     }

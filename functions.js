@@ -1,3 +1,6 @@
+
+
+
 //search and filter function
 //getting the references
 var searchbar = document.getElementById("searchbar");
