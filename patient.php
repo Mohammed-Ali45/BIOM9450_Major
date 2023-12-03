@@ -18,7 +18,7 @@ if (isset($_SESSION['Patient_email'])) {
     $patient_data_query = "SELECT * FROM Patient WHERE Email = '$email'";
     $patient_data = odbc_exec($conn, $patient_data_query);
     $patientID = odbc_result($patient_data, 'PatientID');
-
+    // echo $patientID;
     //grabbing cancer type for select patient
     $cancertype_query = "SELECT
         Patient.icgc_specimen_id,

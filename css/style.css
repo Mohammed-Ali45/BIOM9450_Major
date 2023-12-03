@@ -95,7 +95,7 @@ label.logo {
   line-height: 2.5rem;
 }
 
-/* nav bar stuff */
+/* styling the navigation bar */
 nav ul {
   float: right;
   margin: 0;
@@ -208,7 +208,7 @@ nav a:hover {
   margin-bottom: 20px;
 }
 /* End of input type text fix */
-
+/* input field type styling */
 input[type="email"] {
   width: 95%;
   padding: 15px;
@@ -341,7 +341,7 @@ input[type="password"] {
   background-color: #003366;
   color: #fff;
 }
-
+/* adding gradients to interchanging rows */
 .normal-table tr:nth-child(even) {
   background: linear-gradient(to right, #ecf0f1, #bdc3c7);
 }

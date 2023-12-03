@@ -62,10 +62,10 @@ VALUES
 
 $insert_patient = odbc_exec($conn, $insert_patient_query);
 
-$count_patient_query = "SELECT COUNT(PatientID)
+$count_patient_query = "SELECT COUNT(PatientID) AS patientID_count
 FROM Patient;";
 $patient_count = odbc_exec($conn, $count_patient_query);
-$patient_num = odbc_result($patient_count);
+$patient_num = odbc_result($patient_count, 'patientID_count');
 
 //insert user information query
 $insert_user_query = "INSERT INTO

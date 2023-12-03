@@ -40,10 +40,10 @@ VALUES
 
 $insert_mut = odbc_exec($conn,$insert_new_mut);
 
-$count_mutation_query = "SELECT COUNT(mutationID)
+$count_mutation_query = "SELECT COUNT(mutationID) AS mutationID_count
 FROM Mutation;";
 $mutation_count = odbc_exec($conn, $count_mutation_query);
-$mutation_num = odbc_result($mutation_count);
+$mutation_num = odbc_result($mutation_count, 'mutationID_count');
 
 //insert consequence
 $insert_consequence_query = "INSERT INTO
