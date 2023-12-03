@@ -9,7 +9,7 @@ This project had been build on the foundation of 4 specific languages, namely ph
 
 
 ## A User Manual
-When loading the index.php page, users are greeted with the home page. At the top, users will find a navigation bar to right of the website. There a login button highlighted in green is
+When loading the index.php page, users are greeted with the home page. At the top, users will find a navigation bar to right of the website. There is a login button highlighted in green is
 apparent and users will be able to use login via this link to view their information. By implementing login functions and session variables we are able to track which users who are currently logged in and bar specific users from accessing locations of the website that they do not have permission to.
 
 ## Patient View
