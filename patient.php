@@ -112,12 +112,13 @@ if (isset($_SESSION['Patient_email'])) {
                                     $treatment_query = "SELECT * FROM Treatment WHERE PatientID = $patientID";
                                     $treatment_data = odbc_exec($conn, $treatment_query);
 
-                                    // Fetching date and time separately
-                                    $dateOfTreatment = odbc_result($treatment_data, 'DateOfTreatment');
-                                    $timeOfTreatment = odbc_result($treatment_data, 'TimeofTreatment');
+                                    //definining time and date separately so that we can edit them
+                                    $date = odbc_result($treatment_data, 'DateOfTreatment');
+                                    $time = odbc_result($treatment_data, 'TimeofTreatment');
 
-                                    // echoing information
-                                    echo odbc_result($treatment_data, 'TreatmentType') . ' with administered drug ' . odbc_result($treatment_data, 'AdministeredDrug') . ' prescribed on ' . date('Y-m-d', strtotime($dateOfTreatment)) . ' at ' . date('H:i:s', strtotime($timeOfTreatment));
+                                    //into the table row
+                                    echo odbc_result($treatment_data, 'TreatmentType') . ' with administered drug '; echo odbc_result($treatment_data, 'AdministeredDrug') . ' prescribed on ' . 
+                                    date('Y-m-d', strtotime($date)) . ' at ' . date('H:i:s', strtotime($time));
                                     ?>
 
 
@@ -165,9 +166,10 @@ if (isset($_SESSION['Patient_email'])) {
                         <select class="select-id-category more-narrowed-margin" id="category" style="width:30%">
                             <option value="0" selected hidden>Select Category</option>
                             <option value="1">Mutation ID</option>
-                            <option value="2">Gene Involved</option>
-                            <option value="3">Chromosome</option>
-                            <option value="4">Potential Impact</option>
+                            <option value="2">Chromosome</option>
+                            <option value="3">Start location</option>
+                            <option value="4">End location</option>
+                            <option value="5">Gene Affected</option>
                         </select>
                     </form>
 
