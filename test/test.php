@@ -1,3 +1,6 @@
+<!-- This is a test file to test functions and if something doesnt work -->
+
+
 <?php
 
 session_start();

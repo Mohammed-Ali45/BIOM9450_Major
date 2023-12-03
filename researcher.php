@@ -38,7 +38,7 @@ if (isset($_SESSION['Researcher_email'])) {
                 <nav>
                     <ul>
                         <li><a href="researcher.php">Database</a></li>
-                        <li><a href="profile.php">Profile</a></li>
+                        <li><a href="profile-r.php">Profile</a></li>
                         <li><a href="includes/logout-inc.php" class="dropbtn">Logout</a></li>
                     </ul>
                 </nav>
