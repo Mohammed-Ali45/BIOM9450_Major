@@ -86,5 +86,11 @@ Users (
 $insert_user = odbc_exec($conn, $insert_user_query);
 
 
-//after finishing return to researcher.php
-header("location: ../researcher.php");
+// Returns staff member to their respective dashboard
+if (isset($_SESSION['Researcher_email'])) {
+    header("location: ../researcher.php");
+} else if (isset($_SESSION['Oncologist_email'])) {
+    header("location: ../oncologist.php");
+} else {
+    header("location: ../login.php");
+}

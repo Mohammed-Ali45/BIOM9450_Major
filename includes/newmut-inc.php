@@ -38,7 +38,7 @@ VALUES
     '$gene_affected'
 );";
 
-$insert_mut = odbc_exec($conn,$insert_new_mut);
+$insert_mut = odbc_exec($conn, $insert_new_mut);
 
 $count_mutation_query = "SELECT COUNT(mutationID) AS mutationID_count
 FROM Mutation;";
@@ -63,5 +63,11 @@ $insert_conseq = odbc_exec($conn, $insert_consequence_query);
 
 
 
-
-header("location: ../researcher.php");
+// Returns staff member to their respective dashboard
+if (isset($_SESSION['Researcher_email'])) {
+    header("location: ../researcher.php");
+} else if (isset($_SESSION['Oncologist_email'])) {
+    header("location: ../oncologist.php");
+} else {
+    header("location: ../login.php");
+}

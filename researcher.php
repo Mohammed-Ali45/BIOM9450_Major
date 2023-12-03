@@ -76,7 +76,6 @@ if (isset($_SESSION['Researcher_email'])) {
                     </p>
                     <br />
                     <br />
-                    <p>something</p>
                     <button id="newmut" class="btn">Add a new mutation</button>
                 </div>
             </div>
